@@ -1,4 +1,4 @@
-export class CreateProgrammeDto {
+export class CreateAdditionalProgrammeDto {
     name: string;
     price: number;
     runTimeInSeconds: number;

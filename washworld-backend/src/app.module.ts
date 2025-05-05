@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { dbConfig } from 'data.source';
 import { ProgrammesModule } from './programmes/programmes.module';
+import { AdditionalProgrammesModule } from './additional_programmes/additional_programmes.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { ProgrammesModule } from './programmes/programmes.module';
     }),
     TypeOrmModule.forRoot(dbConfig),
     ProgrammesModule,
+    AdditionalProgrammesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
