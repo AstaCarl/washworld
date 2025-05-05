@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { dbConfig } from 'data.source';
 import { ProgrammesModule } from './programmes/programmes.module';
 import { AdditionalProgrammesModule } from './additional_programmes/additional_programmes.module';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './authentication/auth.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { AdditionalProgrammesModule } from './additional_programmes/additional_p
     TypeOrmModule.forRoot(dbConfig),
     ProgrammesModule,
     AdditionalProgrammesModule,
+    UsersModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
