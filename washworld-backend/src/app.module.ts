@@ -8,6 +8,7 @@ import { ProgrammesModule } from './programmes/programmes.module';
 import { AdditionalProgrammesModule } from './additional_programmes/additional_programmes.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './authentication/auth.module';
+import { MembershipsModule } from './memberships/memberships.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthModule } from './authentication/auth.module';
     AdditionalProgrammesModule,
     UsersModule,
     AuthModule,
+    MembershipsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

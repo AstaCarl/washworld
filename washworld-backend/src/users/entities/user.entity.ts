@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Membership } from "src/memberships/entities/membership.entity";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -20,8 +21,11 @@ export class User {
     @Column()
     license: string;
 
-    @Column()
-    membership: number;
+    // @Column()
+    // membership: number;
+
+    @ManyToOne(() => Membership, (membership) => membership.users)
+    membership: Membership;
 
     @Column()
     primaryLocation: number;

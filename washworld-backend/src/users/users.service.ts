@@ -41,13 +41,13 @@ export class UsersService {
   //   return this.userRepository.save(user); // Saving the updated user obj. into database
   // }
 
-  async findUserById(id: number): Promise<User> {
-    const user = await this.userRepository.findOne({ where: { id: id } });
-    if (!user) {
-      throw new Error(`User with id ${id} not found`);
-    }
-    return user;
-  }
+  // async findUserById(id: number): Promise<User> {
+  //   const user = await this.userRepository.findOne({ where: { id: id } });
+  //   if (!user) {
+  //     throw new Error(`User with id ${id} not found`);
+  //   }
+  //   return user;
+  // }
 
   async findOne(email: string): Promise<User | null> {
     const result = await this.userRepository.findOne({
@@ -81,6 +81,7 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const newUser = this.userRepository.create(createUserDto); // Create a new user instance
+    console.log("new user", newUser);
     return this.userRepository.save(newUser); // Never save passwords in clear text!
   }
 
