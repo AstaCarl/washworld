@@ -21,11 +21,16 @@ export const TabsNavigation = () => {
       screenOptions={{
         headerShown: false,
         tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: "#000000",
+          height: 85,
+          paddingTop: 14,
+        }
       }}
     >
       <Tab.Screen
       options={{
-        tabBarIcon: () => <HomeIcon />,
+        tabBarIcon: ({ focused }) => <HomeIcon color={focused ? "#0CE578" : "white"} />,
 
       }}
         name="Home"
@@ -33,14 +38,14 @@ export const TabsNavigation = () => {
       />
       <Tab.Screen
         options={{
-          tabBarIcon: () => <MapIcon />,
+          tabBarIcon: ({ focused }) => <MapIcon color={focused ? "#0CE578" : "white"} />,
         }}
         name="Map"
         component={MapScreen}
       />
       <Tab.Screen
       options={{
-        tabBarIcon: () => <ProfileIcon/>
+        tabBarIcon: ({ focused }) => <ProfileIcon color={focused ? "#0CE578" : "white"}/>
       }}
         name="Profile"
         component={ProfileScreen}
