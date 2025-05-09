@@ -1,22 +1,28 @@
 import { Text } from "@react-navigation/elements";
 import { StyleSheet, TouchableOpacity } from "react-native";
+import ChevronIcon from "../icons/ChevronIcon";
 
 type ButtonProps = {
   buttonText: string;
-  variant: "primary" | "secondary" | "danger" | "tertiary";
+  variant:
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "iconButtonGreen"
+    | "iconButtonBlack";
+    onPress?: () => void;
 };
 
-export default function Button({ buttonText, variant }: ButtonProps) {
+export default function Button({ buttonText, variant, onPress }: ButtonProps) {
   return (
     <TouchableOpacity
+    onPress={onPress}
       style={[
         variant === "primary" && styles.primaryButton,
         variant === "secondary" && styles.secondaryButton,
         variant === "danger" && styles.dangerButton,
-        // variant === "tertiary" && [
-        //   styles.subtitleGreen,
-        //   styles.subtitleGreenCapital,
-        // ],
+        variant === "iconButtonGreen" && styles.iconButtonGreen,
+        variant === "iconButtonBlack" && styles.iconButtonBlack,
       ]}
     >
       <Text
@@ -24,14 +30,24 @@ export default function Button({ buttonText, variant }: ButtonProps) {
           variant === "primary" && styles.whiteButtonText,
           variant === "secondary" && styles.whiteButtonText,
           variant === "danger" && styles.whiteButtonText,
-          // variant === "tertiary" && [
-          //   styles.subtitleGreen,
-          //   styles.subtitleGreenCapital,
-          // ],
+          variant === "iconButtonGreen" && styles.whiteButtonText,
+          variant === "iconButtonBlack" && styles.whiteButtonText,
         ]}
       >
         {buttonText}
       </Text>
+      {variant === "iconButtonGreen" || variant === "iconButtonBlack" ? (
+        <ChevronIcon
+          style={
+            variant === "iconButtonGreen"
+              ? styles.nextIcon
+              : variant === "iconButtonBlack"
+              ? styles.previousIcon
+              : {}
+          }
+          color="white"
+        />
+      ) : null}
     </TouchableOpacity>
   );
 }
@@ -62,29 +78,42 @@ const styles = StyleSheet.create({
     borderBottomColor: "#484848",
     borderBottomWidth: 4,
   },
-    dangerButton: {
-        backgroundColor: "#FF6B06",
-        height: 60,
-        width: "100%",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        borderBottomColor: "#CA5302",
-        borderBottomWidth: 4,
-    },
-  // subtitleBlack: {
-  //   color: "#000000",
-  //   fontWeight: "bold",
-  // },
-  // subtitleLight: {
-  //   color: "#000000",
-  // },
-  // subtitleGreen: {
-  //   color: "#06C167",
-  //   fontWeight: "bold",
-  // },
-  // subtitleGreenCapital: {
-  //   fontSize: 18,
-  //   textTransform: "uppercase",
-  // },
+  dangerButton: {
+    backgroundColor: "#FF6B06",
+    height: 60,
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderBottomColor: "#CA5302",
+    borderBottomWidth: 4,
+  },
+  nextIcon: {
+    transform: [{ rotate: "-90deg" }],
+  },
+  previousIcon: {
+    transform: [{ rotate: "90deg" }],
+  },
+  iconButtonGreen: {
+    backgroundColor: "#06c167",
+    width: "50%",
+    height: 50,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10,
+    borderBottomColor: "#02AD5b",
+    borderBottomWidth: 4,
+  },
+  iconButtonBlack: {
+    backgroundColor: "#000000",
+    display: "flex",
+    height: 50,
+    flexDirection: "row-reverse",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "50%",
+    gap: 10,
+  },
 });
