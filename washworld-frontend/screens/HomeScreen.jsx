@@ -2,6 +2,7 @@ import { Text } from "@react-navigation/elements";
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import Button from "../components/atoms/Button";
+import AdditionalProgramme from "../components/AdditonalProgramme";
 
 export default function HomeScreen() {
   return (
