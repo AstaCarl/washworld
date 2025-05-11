@@ -1,14 +1,16 @@
 import { Label } from "@react-navigation/elements";
 import { View } from "react-native";
 import { StyleSheet, TextInput } from "react-native";
-import PasswordIcon from "./icons/PasswordIcon";
+import PasswordIcon from "../icons/PasswordIcon";
 import React from "react";
+import Paragraf from "./Paragraf";
 
 type inputProps = {
-  labelText: string;
+  labelText?: string;
   placeholderText: string;
   value?: string;
   password?: boolean;
+  paragraf?: string;
   onChangeText?: (text: string) => void;
 };
 
@@ -18,13 +20,14 @@ export default function CustomTextInput({
   value,
   onChangeText,
   password,
+  paragraf,
 }: inputProps) {
-    const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
-
+  const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
   return (
     <View style={styles.inputGroup}>
-      <Label style={styles.label}>{labelText}</Label>
+      {labelText ? <Label style={styles.label}>{labelText}</Label> : null}
+      {paragraf ? <Paragraf text={paragraf} variant="label" /> : null}
       <TextInput
         style={styles.input}
         placeholder={placeholderText}
@@ -35,10 +38,10 @@ export default function CustomTextInput({
       />{" "}
       {password ? (
         <View style={styles.icon}>
-        <PasswordIcon
-          color="#666666"
-          onPress={() => setIsPasswordVisible(!isPasswordVisible)}
-        />
+          <PasswordIcon
+            color="#666666"
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+          />
         </View>
       ) : null}
     </View>
@@ -69,7 +72,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     position: "absolute",
-    right: 12, 
-    top: 45, 
-  }
+    right: 12,
+    top: 45,
+  },
 });

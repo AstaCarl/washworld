@@ -3,16 +3,17 @@ import { StyleSheet } from "react-native";
 
 type subtitleProps = {
   title: string;
-  variant?: "blackBold" | "blackLight" | "green" | "greenCapital";
+  variant?: "blackBold" | "blackLight" | "green" | "greenCapital" | "greyLight";
 };
 
-export default function Subitle({ title, variant }: subtitleProps) {
+export default function Subtitle({ title, variant }: subtitleProps) {
   return (
     <Text
       style={[
         styles.subtitle,
         variant === "blackBold" && styles.subtitleBlack,
         variant === "blackLight" && styles.subtitleLight,
+        variant === "greyLight" && styles.subtitleGreyLight,
         variant === "green" && styles.subtitleGreen,
         variant === "greenCapital" && [
           styles.subtitleGreen,
@@ -35,6 +36,10 @@ const styles = StyleSheet.create({
   },
   subtitleLight: {
     color: "#000000",
+  },
+    subtitleGreyLight: {
+    color: "#666666",
+    fontSize: 16,
   },
   subtitleGreen: {
     color: "#06C167",

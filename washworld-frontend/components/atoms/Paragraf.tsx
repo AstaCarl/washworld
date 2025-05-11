@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 type paragrafProps = {
   text: string;
-  variant?: "primary" | "bold" | "white";
+  variant?: "primary" | "bold" | "white" | "label";
 };
 
 export default function Paragraf({ text, variant }: paragrafProps) {
@@ -13,6 +13,7 @@ export default function Paragraf({ text, variant }: paragrafProps) {
         variant === "primary" && styles.paragrafPrimary,
         variant === "bold" && styles.paragrafBold,
         variant === "white" && styles.paragrafWhite,
+        variant === "label" && styles.paragrafLabel,
       ]}
     >
       {text}
@@ -30,5 +31,9 @@ const styles = StyleSheet.create({
   },
   paragrafWhite: {
     color: "#ffffff",
+  },
+  paragrafLabel: {
+    fontSize: 12,
+    color: "#666666",
   },
 });

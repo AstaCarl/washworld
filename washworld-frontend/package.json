@@ -19,7 +19,8 @@
     "react-native-select-dropdown": "^4.0.1",
     "react-native-svg": "^15.11.2",
     "react-native-svg-transformer": "^1.5.1",
-    "use-latest-callback": "^0.2.3"
+    "use-latest-callback": "^0.2.3",
+    "expo-checkbox": "~4.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
