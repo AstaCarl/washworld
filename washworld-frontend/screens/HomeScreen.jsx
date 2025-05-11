@@ -2,6 +2,7 @@ import { Text } from "@react-navigation/elements";
 import { StyleSheet, View } from "react-native";
 import React from "react";
 import Button from "../components/atoms/Button";
+import EcoCard from "../components/EcoCard";
 
 export default function HomeScreen() {
   return (
@@ -14,6 +15,7 @@ export default function HomeScreen() {
         <Button variant="iconButtonBlack" buttonText="Previous" />
         <Button variant="iconButtonGreen" buttonText="Next" />
       </View>
+      <EcoCard/>
     </View>
   );
 }
@@ -23,9 +25,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#F7F7F7",
     width: "100%",
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
   },
   container2: {
     display: "flex",
