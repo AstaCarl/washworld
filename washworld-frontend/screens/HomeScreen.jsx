@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import React from "react";
 import Button from "../components/atoms/Button";
 import EcoCard from "../components/EcoCard";
+import CustomTextInput from "../components/atoms/TextInput";
 
 export default function HomeScreen() {
   return (

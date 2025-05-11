@@ -4,6 +4,7 @@ import { StyleSheet, TextInput } from "react-native";
 import PasswordIcon from "../icons/PasswordIcon";
 import React from "react";
 import Paragraf from "./Paragraf";
+import SearchIcon from "../icons/SearchIcon";
 
 type inputProps = {
   labelText?: string;
@@ -11,6 +12,7 @@ type inputProps = {
   value?: string;
   password?: boolean;
   paragraf?: string;
+  search?: boolean;
   onChangeText?: (text: string) => void;
 };
 
@@ -21,6 +23,7 @@ export default function CustomTextInput({
   onChangeText,
   password,
   paragraf,
+  search,
 }: inputProps) {
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
@@ -41,6 +44,14 @@ export default function CustomTextInput({
           <PasswordIcon
             color="#666666"
             onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+          />
+        </View>
+      ) : null}
+            {search ? (
+        <View style={styles.icon}>
+          <SearchIcon
+            color="#666666"
+            // onPress={() => setIsPasswordVisible(!isPasswordVisible)}
           />
         </View>
       ) : null}
