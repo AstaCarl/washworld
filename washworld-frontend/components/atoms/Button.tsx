@@ -9,7 +9,8 @@ type ButtonProps = {
     | "secondary"
     | "danger"
     | "iconButtonGreen"
-    | "iconButtonBlack";
+    | "iconButtonBlack"
+    | "greenLink";
     onPress?: () => void;
 };
 
@@ -23,6 +24,7 @@ export default function Button({ buttonText, variant, onPress }: ButtonProps) {
         variant === "danger" && styles.dangerButton,
         variant === "iconButtonGreen" && styles.iconButtonGreen,
         variant === "iconButtonBlack" && styles.iconButtonBlack,
+        variant === "greenLink" && styles.greenLink,
       ]}
     >
       <Text
@@ -32,6 +34,7 @@ export default function Button({ buttonText, variant, onPress }: ButtonProps) {
           variant === "danger" && styles.whiteButtonText,
           variant === "iconButtonGreen" && styles.whiteButtonText,
           variant === "iconButtonBlack" && styles.whiteButtonText,
+          variant === "greenLink" && styles.greenLinkText,
         ]}
       >
         {buttonText}
@@ -116,4 +119,12 @@ const styles = StyleSheet.create({
     width: "50%",
     gap: 10,
   },
+  greenLink: {
+    // backgroundColor: "#000",
+  },
+  greenLinkText: {
+    color: "#06c167",
+    fontSize: 16,
+    fontWeight: "bold",
+  }
 });

@@ -3,13 +3,14 @@ import { View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 import React from "react";
 import SelectDropdown from "react-native-select-dropdown";
-import ChevronIcon from "./icons/ChevronIcon";
+import ChevronIcon from "../icons/ChevronIcon";
 
 type selectInputProps = {
   labelText: string;
+  placeholderText?: string;
 };
 
-export default function SelectInput({ labelText }: selectInputProps) {
+export default function SelectInput({ labelText, placeholderText }: selectInputProps) {
   const testData = [
     { id: "1", name: "Item 1" },
     { id: "2", name: "Item 2" },
@@ -29,7 +30,7 @@ export default function SelectInput({ labelText }: selectInputProps) {
           return (
             <View style={styles.input}>
               <Text style={styles.dropdownButtonTxtStyle}>
-                {selectedItem ? selectedItem.name : "select a location"}
+                {selectedItem ? selectedItem.name : placeholderText}
               </Text>
             </View>
           );
