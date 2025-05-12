@@ -9,7 +9,7 @@ export default function HomeScreen() {
       <Text>Home</Text>
       <Button variant="primary" buttonText="Hello rikke mus" />
       <Button variant="secondary" buttonText="Hello rikke mis" />
-      <Button variant="danger" buttonText="AHHHHHHHHHHHHH" />
+      <Button variant="danger" buttonText="Emergency stop" />
       <View style={styles.container2}>
         <Button variant="iconButtonBlack" buttonText="Previous" />
         <Button variant="iconButtonGreen" buttonText="Next" />
