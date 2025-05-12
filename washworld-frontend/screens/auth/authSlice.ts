@@ -48,6 +48,7 @@ export const authSlice = createSlice({
         console.log("signup rejected", action.payload);
         state.errormessage = action.error.message || "Unknown error";
       });
+      // Handle the case when the user is already logged in
     builder.addCase(reloadJwtFromStorage.fulfilled, (state, action) => {
       state.token = action.payload;
     });
