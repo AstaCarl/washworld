@@ -6,6 +6,8 @@ import EcoCard from "../components/EcoCard";
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from "../store/store";
 import { reloadJwtFromStorage } from "../screens/auth/authSlice";
+import Title from "../components/atoms/Title";
+import StartWash from "../components/StartWash";
 
 export default function HomeScreen() {
 const token = useSelector((state) => state.token || null);
@@ -17,14 +19,8 @@ const dispatch = useDispatch();
 
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
-      <Button variant="primary" buttonText="Hello rikke mus" />
-      <Button variant="secondary" buttonText="Hello rikke mis" />
-      <Button variant="danger" buttonText="AHHHHHHHHHHHHH" />
-      <View style={styles.container2}>
-        <Button variant="iconButtonBlack" buttonText="Previous" />
-        <Button variant="iconButtonGreen" buttonText="Next" />
-      </View>
+      <Title title="Welcome Back" variant="green"/>
+      <StartWash/>
       <EcoCard/>
     </View>
   );
@@ -34,7 +30,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    // alignItems: "center",
     backgroundColor: "#F7F7F7",
     width: "100%",
     paddingHorizontal: 20,
