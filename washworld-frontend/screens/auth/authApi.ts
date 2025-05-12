@@ -4,9 +4,11 @@ import { baseUrl } from "../../constants";
 
 export class AuthApi {
     static baseUrl = baseUrl;
+    static baseUrl = "http://192.168.0.19:3000";
 
 
     static async signup(userDto: UserDto) {
+        console.log("calling", AuthApi.baseUrl + "/auth/signup");
         console.log("request payload", userDto);
         const response = await fetch(AuthApi.baseUrl + "/auth/signup", {
             method: "POST",

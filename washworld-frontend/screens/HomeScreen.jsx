@@ -1,10 +1,20 @@
 import { Text } from "@react-navigation/elements";
 import { StyleSheet, View } from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
 import Button from "../components/atoms/Button";
 import EcoCard from "../components/EcoCard";
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from "../store/store";
+import { reloadJwtFromStorage } from "../screens/auth/authSlice";
 
 export default function HomeScreen() {
+const token = useSelector((state) => state.token || null);
+const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(reloadJwtFromStorage());
+  }, [dispatch]);
+
   return (
     <View style={styles.container}>
       <Text>Home</Text>

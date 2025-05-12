@@ -5,9 +5,8 @@ import MapScreen from "../screens/map/MapScreen";
 import MapIcon from "../components/icons/MapIcon";
 import HomeIcon from "../components/icons/HomeIcon";
 import ProfileIcon from "../components/icons/ProfileIcon";
-import SignupScreen from "../screens/auth/SignupScreen";
-import LoginScreen from "../screens/auth/LoginScreen";
 
+// Define the types for the tab navigator
 export type RootTabParamList = {
   navigate(arg0: string): void;
   Profile: undefined;
@@ -17,8 +16,10 @@ export type RootTabParamList = {
   Login: undefined;
 };
 
+// Create the tab navigator
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
+// Create the TabsNavigation component
 export const TabsNavigation = () => {
   return (
     <Tab.Navigator
@@ -58,24 +59,6 @@ export const TabsNavigation = () => {
         }}
         name="Profile"
         component={ProfileScreen}
-      />
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <ProfileIcon color={focused ? "#0CE578" : "white"} />
-          ),
-        }}
-        name="Signup"
-        component={SignupScreen}
-      />
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({ focused }) => (
-            <ProfileIcon color={focused ? "#0CE578" : "white"} />
-          ),
-        }}
-        name="Login"
-        component={LoginScreen}
       />
     </Tab.Navigator>
   );

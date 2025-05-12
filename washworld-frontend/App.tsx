@@ -3,14 +3,13 @@ import { StyleSheet } from 'react-native';
 import { TabsNavigation } from './navigation/TabsNavigation';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import NavigationWrapper from './navigation/NavigationWrapper';
 
 
 export default function App() {
   return (
     <Provider store={store}>
-    <NavigationContainer>
-      <TabsNavigation />
-    </NavigationContainer>
+      <NavigationWrapper />
     </Provider>
   );
 }

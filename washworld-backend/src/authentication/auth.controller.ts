@@ -29,7 +29,6 @@ import {
     @Post('auth/signup')
     async signup(@Request2() req) {
       console.log("body", req.body);
-      
       return this.authService.signup(req.body);
     }
   }

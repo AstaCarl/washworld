@@ -35,12 +35,21 @@ export class AuthService {
     createUserDto.primaryLocation = user.primaryLocation;
     createUserDto.currentLocation = user.currentLocation;
 
-    return this.usersService.create(createUserDto);
+    const createdUser = await this.usersService.create(createUserDto);
+
+    const payload = {
+      email: createdUser.email,
+      id: createdUser.id,
+    };
+
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(email);
-    
+
     if (user && user.password === pass) {
       const { password, ...result } = user;
 
