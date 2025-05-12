@@ -34,13 +34,13 @@ export default function SignupScreen() {
         <CustomTextInput
           labelText="4. Your E-mail"
           placeholderText="E-mail address"
-        />{" "}
+        />
         <View style={styles.nameGroup}>
           <CustomTextInput
             labelText="5. Your Name"
             placeholderText="Firstname"
-          />{" "}
-          <CustomTextInput placeholderText="Lastname" />{" "}
+          />
+          <CustomTextInput placeholderText="Lastname" />
         </View>
         <CustomTextInput
           labelText="6. Choose a password"

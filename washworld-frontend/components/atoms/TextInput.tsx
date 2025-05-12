@@ -38,7 +38,7 @@ export default function CustomTextInput({
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={!isPasswordVisible}
-      />{" "}
+      />
       {password ? (
         <View style={styles.icon}>
           <PasswordIcon

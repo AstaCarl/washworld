@@ -1,5 +1,4 @@
-import { Text } from "@react-navigation/elements";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import ChevronIcon from "../icons/ChevronIcon";
 
 type ButtonProps = {
