@@ -5,8 +5,8 @@ import MapScreen from "../screens/map/MapScreen";
 import MapIcon from "../components/icons/MapIcon";
 import HomeIcon from "../components/icons/HomeIcon";
 import ProfileIcon from "../components/icons/ProfileIcon";
-import SignupScreen from "../screens/signup/SignupScreen";
-import LoginScreen from "../screens/login/LoginScreen";
+import SignupScreen from "../screens/auth/SignupScreen";
+import LoginScreen from "../screens/auth/LoginScreen";
 
 export type RootTabParamList = {
   navigate(arg0: string): void;
