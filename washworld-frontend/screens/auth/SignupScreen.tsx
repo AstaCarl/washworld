@@ -17,7 +17,7 @@ export default function SignupScreen() {
   const [password, setPassword] = React.useState("");
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
-  const [membership, setMembership] = React.useState("");
+  const [membership, setMembership] = React.useState(0);
   const navigation = useNavigation<RootTabParamList>();
   const dispatch = useDispatch<AppDispatch>();
 

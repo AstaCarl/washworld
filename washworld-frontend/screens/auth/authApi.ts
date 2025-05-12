@@ -1,9 +1,7 @@
 import { UserDto } from "./userDto";
-import { baseUrl } from "../../constants";
 
 
 export class AuthApi {
-    static baseUrl = baseUrl;
     static baseUrl = "http://192.168.0.19:3000";
 
 
