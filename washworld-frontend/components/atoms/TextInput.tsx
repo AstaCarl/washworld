@@ -37,7 +37,7 @@ export default function CustomTextInput({
         placeholderTextColor="#666666"
         value={value}
         onChangeText={onChangeText}
-        secureTextEntry={!isPasswordVisible} // Show password if isPasswordVisible is true
+        secureTextEntry={!isPasswordVisible}
       />{" "}
       {password ? (
         <View style={styles.icon}>
@@ -51,7 +51,6 @@ export default function CustomTextInput({
         <View style={styles.icon}>
           <SearchIcon
             color="#666666"
-            // onPress={() => setIsPasswordVisible(!isPasswordVisible)}
           />
         </View>
       ) : null}

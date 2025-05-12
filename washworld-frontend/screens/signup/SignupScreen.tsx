@@ -1,7 +1,6 @@
 import { ScrollView, StyleSheet, View } from "react-native";
 import React from "react";
 import Title from "../../components/atoms/Title";
-import Subtitle from "../../components/atoms/Subtitle";
 import CustomTextInput from "../../components/atoms/TextInput";
 import SelectInput from "../../components/atoms/SelectInput";
 import Button from "../../components/atoms/Button";

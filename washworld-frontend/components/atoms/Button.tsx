@@ -24,7 +24,6 @@ export default function Button({ buttonText, variant, onPress }: ButtonProps) {
         variant === "danger" && styles.dangerButton,
         variant === "iconButtonGreen" && styles.iconButtonGreen,
         variant === "iconButtonBlack" && styles.iconButtonBlack,
-        variant === "greenLink" && styles.greenLink,
       ]}
     >
       <Text
@@ -118,9 +117,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "50%",
     gap: 10,
-  },
-  greenLink: {
-    // backgroundColor: "#000",
   },
   greenLinkText: {
     color: "#06c167",
