@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
 import React from "react";
 import Title from "../../components/atoms/Title";
 import CustomTextInput from "../../components/atoms/TextInput";
@@ -17,8 +17,15 @@ export default function SignupScreen() {
   const [password, setPassword] = React.useState("");
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
+  const [membership, setMembership] = React.useState("");
   const navigation = useNavigation<RootTabParamList>();
   const dispatch = useDispatch<AppDispatch>();
+
+  const membershipData = [
+    { id: 1, name: "Gold" },
+    { id: 3, name: "Premium" },
+    { id: 4, name: "Brilliant/ All Inclusive" },
+  ];
 
   const handleSignup = async () => {
     const newUser = {
@@ -27,7 +34,7 @@ export default function SignupScreen() {
       password: password,
       firstname: firstName,
       lastname: lastName,
-      membership: 1,
+      membership: membership,
       primaryLocation: 1,
       currentLocation: 1,
       createdAt: new Date(),
@@ -37,62 +44,76 @@ export default function SignupScreen() {
   };
 
   return (
-    <ScrollView style={styles.container}>
-      <Title variant="green" title="Become a member and wash anytime" />
-      <View style={styles.loginGroup}>
-        <Paragraf variant="primary" text="Already a member?" />
-        <Button
-          variant="greenLink"
-          buttonText="Login now"
-          onPress={() => {
-            navigation.navigate("Login");
-          }}
-        />
-      </View>
-      <View style={styles.signupForm}>
-        <CustomTextInput
-          labelText="1. Your Car"
-          placeholderText="AB12345"
-          paragraf="Your membership applies to this car"
-          onChangeText={(text: string) => setLicense(text)}
-          value={license}
-        />
-        <SelectInput
-          placeholderText="Choose a primary wash location"
-          labelText="2. Where do you want to wash?"
-        />
-        <SelectInput
-          placeholderText="Select a membership"
-          labelText="3. Which membership suits you?"
-        />
-        <CustomTextInput
-          labelText="4. Your E-mail"
-          placeholderText="E-mail address"
-          onChangeText={(text: string) => setEmail(text)}
-          value={email}
-        />
-        <View style={styles.nameGroup}>
-          <CustomTextInput
-            labelText="5. Your Name"
-            placeholderText="Firstname"
-            onChangeText={(text: string) => setFirstName(text)}
-            value={firstName}
-          />
-          <CustomTextInput
-            placeholderText="Lastname"
-            onChangeText={(text: string) => setLastName(text)}
-            value={lastName}
+    <KeyboardAvoidingView
+    style={{ flex: 1 }}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <ScrollView style={styles.container}>
+        <Title variant="green" title="Become a member and wash anytime" />
+        <View style={styles.loginGroup}>
+          <Paragraf variant="primary" text="Already a member?" />
+          <Button
+            variant="greenLink"
+            buttonText="Login now"
+            onPress={() => {
+              navigation.navigate("Login");
+            }}
           />
         </View>
-        <CustomTextInput
-          labelText="6. Choose a password"
-          placeholderText="Password"
-          onChangeText={(text: string) => setPassword(text)}
-          value={password}
-        />
-        <Button onPress={handleSignup} variant="primary" buttonText="Sign up" />
-      </View>
-    </ScrollView>
+        <View style={styles.signupForm}>
+          <CustomTextInput
+            labelText="1. Your Car"
+            placeholderText="AB12345"
+            paragraf="Your membership applies to this car"
+            onChangeText={(text: string) => setLicense(text)}
+            value={license}
+          />
+          <SelectInput
+            placeholderText="Choose a primary wash location"
+            labelText="2. Where do you want to wash?"
+            data={membershipData}
+          />
+          <SelectInput
+            placeholderText="Select a membership"
+            labelText="3. Which membership suits you?"
+            data={membershipData}
+            value={membership}
+            onSelect={(selectedItem) => setMembership(selectedItem.id)}
+          />
+          <CustomTextInput
+            labelText="4. Your E-mail"
+            placeholderText="E-mail address"
+            onChangeText={(text: string) => setEmail(text)}
+            value={email}
+          />
+          <View style={styles.nameGroup}>
+            <CustomTextInput
+              labelText="5. Your Name"
+              placeholderText="Firstname"
+              onChangeText={(text: string) => setFirstName(text)}
+              value={firstName}
+            />
+            <CustomTextInput
+              placeholderText="Lastname"
+              onChangeText={(text: string) => setLastName(text)}
+              value={lastName}
+            />
+          </View>
+          <CustomTextInput
+            labelText="6. Choose a password"
+            placeholderText="Password"
+            onChangeText={(text: string) => setPassword(text)}
+            value={password}
+            password={true}
+          />
+          <Button
+            onPress={handleSignup}
+            variant="primary"
+            buttonText="Sign up"
+          />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 

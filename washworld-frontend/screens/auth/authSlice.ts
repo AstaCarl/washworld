@@ -3,6 +3,7 @@ import { UserDto } from "./userDto";
 import { AuthApi } from "./authApi";
 
 export const signup = createAsyncThunk("auth/signup", async (userDto: UserDto, thunkAPI) => {
+    console.log("calling signup thunk");
     return await AuthApi.signup(userDto);
 });
 

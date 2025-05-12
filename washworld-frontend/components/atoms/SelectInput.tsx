@@ -8,26 +8,28 @@ import ChevronIcon from "../icons/ChevronIcon";
 type selectInputProps = {
   labelText: string;
   placeholderText?: string;
+  data: any[];
+  value?: string;
+  onSelect?: (selectedItem: any) => void;
 };
 
 export default function SelectInput({
   labelText,
   placeholderText,
+  data,
+  value,
+  onSelect,
 }: selectInputProps) {
-  const testData = [
-    { id: "1", name: "Item 1" },
-    { id: "2", name: "Item 2" },
-    { id: "3", name: "Item 3" },
-    { id: "4", name: "Item 4" },
-  ];
+
 
   return (
     <View style={styles.inputGroup}>
       <Label style={styles.label}>{labelText}</Label>
       <SelectDropdown
-        data={testData}
+        data={data}
         onSelect={(selectedItem) => {
           console.log("Selected item:", selectedItem);
+          onSelect && onSelect(selectedItem);
         }}
         renderButton={(selectedItem) => {
           return (

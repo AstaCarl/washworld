@@ -18,7 +18,7 @@ export class MembershipsService {
   }
 
   findAll() {
-    return `This action returns all memberships`;
+    return this.membershipRepository.find();
   }
 
   findOne(id: number) {

@@ -37,7 +37,7 @@ export default function CustomTextInput({
         placeholderTextColor="#666666"
         value={value}
         onChangeText={onChangeText}
-        secureTextEntry={!isPasswordVisible}
+        secureTextEntry={password ? !isPasswordVisible : false}
       />
       {password ? (
         <View style={styles.icon}>

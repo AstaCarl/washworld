@@ -1,10 +1,13 @@
 import { UserDto } from "./userDto";
+import { baseUrl } from "../../constants";
 
 
 export class AuthApi {
-    static baseUrl = process.env.EXPO_PUBLIC_API_URL;
+    static baseUrl = baseUrl;
+
 
     static async signup(userDto: UserDto) {
+        console.log("request payload", userDto);
         const response = await fetch(AuthApi.baseUrl + "/auth/signup", {
             method: "POST",
             headers: {
