@@ -30,7 +30,6 @@ export class UserApi {
   }
 
   static async getMemberships() {
-    console.log("calling", UserApi.baseUrl);
     const response = await fetch(UserApi.baseUrl + "/memberships", {
       method: "GET",
       headers: {
