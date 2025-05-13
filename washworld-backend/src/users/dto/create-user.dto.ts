@@ -1,3 +1,4 @@
+import { Location } from "src/locations/entities/location.entity";
 import { Membership } from "src/memberships/entities/membership.entity";
 
 export class CreateUserDto {
@@ -7,7 +8,7 @@ export class CreateUserDto {
     password: string;
     license: string;
     membership: Membership;
-    primaryLocation: number;
+    location: Location;
     currentLocation: number;
     createdAt: Date;
 }

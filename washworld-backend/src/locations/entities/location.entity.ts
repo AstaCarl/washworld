@@ -1,5 +1,6 @@
 import { Coordinate } from 'src/coordinates/entities/coordinate.entity';
 import { OpeningHour } from 'src/opening_hours/entities/opening_hour.entity';
+import { User } from 'src/users/entities/user.entity';
 import {
   Column,
   Entity,
@@ -27,4 +28,7 @@ export class Location {
   @OneToOne(() => Coordinate, (coordinate) => coordinate.location, {})
   @JoinColumn()
   coordinate: Coordinate;
+
+  @OneToMany(() => User, (user) => user.location)
+  users: User[];
 }

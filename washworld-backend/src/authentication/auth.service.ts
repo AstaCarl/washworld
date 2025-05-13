@@ -32,7 +32,7 @@ export class AuthService {
     createUserDto.password = user.password;
     createUserDto.license = user.license;
     createUserDto.membership = user.membership;
-    createUserDto.primaryLocation = user.primaryLocation;
+    createUserDto.location = user.location;
     createUserDto.currentLocation = user.currentLocation;
 
     const createdUser = await this.usersService.create(createUserDto);
