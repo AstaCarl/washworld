@@ -10,6 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AppDispatch } from "../../store/store";
 import { useDispatch } from "react-redux";
 import { signup } from "./authSlice";
+import { useGetMemberships } from "./userQuery";
 
 export default function SignupScreen() {
   const [license, setLicense] = React.useState("");
@@ -20,6 +21,7 @@ export default function SignupScreen() {
   const [membership, setMembership] = React.useState(0);
   const navigation = useNavigation<RootTabParamList>();
   const dispatch = useDispatch<AppDispatch>();
+    const { data: memberships, isLoading, isError, error } = useGetMemberships();
 
   const membershipData = [
     { id: 1, name: "Gold" },
@@ -76,7 +78,7 @@ export default function SignupScreen() {
           <SelectInput
             placeholderText="Select a membership"
             labelText="3. Which membership suits you?"
-            data={membershipData}
+            data={memberships}
             value={membership}
             onSelect={(selectedItem) => setMembership(selectedItem.id)}
           />

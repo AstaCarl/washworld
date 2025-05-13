@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserDto } from "./userDto";
-import { AuthApi } from "./authApi";
+import { UserApi } from "./userApi";
 import * as SecureStore from "expo-secure-store";
 import { stat } from "fs";
 
@@ -14,14 +14,14 @@ export const signup = createAsyncThunk(
   "auth/signup",
   async (userDto: UserDto, thunkAPI) => {
     console.log("calling signup thunk");
-    return await AuthApi.signup(userDto);
+    return await UserApi.signup(userDto);
   }
 );
 
 export const login = createAsyncThunk(
   "auth/login",
   async (loginParams: LoginParams, thunkAPI) => {
-    return await AuthApi.login(loginParams.username, loginParams.password);
+    return await UserApi.login(loginParams.username, loginParams.password);
   }
 );
 
