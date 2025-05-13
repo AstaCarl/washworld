@@ -9,13 +9,12 @@ import { CoordinatesService } from 'src/coordinates/coordinates.service';
 
 @Injectable()
 export class LocationsService {
-        constructor(
-          @InjectRepository(Location)
-          private locationRepository: Repository<Location>,
-          @InjectRepository(Coordinate)
-          private coordinateRepository: Repository<Coordinate>,
-          
-        ) {}
+  constructor(
+    @InjectRepository(Location)
+    private locationRepository: Repository<Location>,
+    @InjectRepository(Coordinate)
+    private coordinateRepository: Repository<Coordinate>,
+  ) {}
 
   async create(createLocationDto: CreateLocationDto) {
     const { coordinates, ...locationData } = createLocationDto;
@@ -32,7 +31,7 @@ export class LocationsService {
   }
 
   findAll() {
-    return `This action returns all locations`;
+    return this.locationRepository.find();
   }
 
   findOne(id: number) {

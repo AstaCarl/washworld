@@ -5,10 +5,11 @@ export class Coordinate {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  // Added double precision to the latitude and longitude columns to accurately store the coordinates
+  @Column('double precision')
   latitude: number;
 
-  @Column()
+  @Column('double precision')
   longitude: number;
 
   @OneToOne(() => Location, (location) => location.coordinate, {})
