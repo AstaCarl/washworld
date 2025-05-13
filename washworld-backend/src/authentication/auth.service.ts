@@ -18,22 +18,23 @@ export class AuthService {
   //   return this.usersService.upgrade(userId)
   // }
 
-  async signup(user: any) {
-    const existingUser = await this.usersService.findOne(user.email);
+  async signup(createUserDto: CreateUserDto) {
+    const existingUser = await this.usersService.findOne(createUserDto.email);
     if (existingUser) {
       throw new ConflictException('User already exists');
     }
 
-    // Map the incoming user data to the CreateUserDto
-    const createUserDto = new CreateUserDto();
-    createUserDto.firstname = user.firstname;
-    createUserDto.lastname = user.lastname;
-    createUserDto.email = user.email;
-    createUserDto.password = user.password;
-    createUserDto.license = user.license;
-    createUserDto.membership = user.membership;
-    createUserDto.location = user.location;
-    createUserDto.currentLocation = user.currentLocation;
+    // // Map the incoming user data to the CreateUserDto
+    // const createUserDto = new CreateUserDto();
+    // createUserDto.firstname = user.firstname;
+    // createUserDto.lastname = user.lastname;
+    // createUserDto.email = user.email;
+    // createUserDto.password = user.password;
+    // createUserDto.license = user.license;
+    // createUserDto.membership = user.membership;
+    // createUserDto.location = user.location;
+    // createUserDto.currentLocation = user.currentLocation;
+
 
     const createdUser = await this.usersService.create(createUserDto);
 

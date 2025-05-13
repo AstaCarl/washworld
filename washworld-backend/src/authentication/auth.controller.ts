@@ -3,10 +3,13 @@ import {
     Post,
     UseGuards,
     Request as Request2,
+    Body,
   } from '@nestjs/common';
   import { AuthService } from './auth.service';
   import { LocalAuthGuard } from './local-auth.guard';
   import { JwtAuthGuard } from './jwt-auth.guard';
+import { create } from 'domain';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
   
   @Controller()
   export class AuthController {
@@ -27,8 +30,9 @@ import {
     }
     
     @Post('auth/signup')
-    async signup(@Request2() req) {
-      console.log("body", req.body);
-      return this.authService.signup(req.body);
+    async signup(@Body() createUserDto: CreateUserDto) {
+      // console.log("body", req.body);
+      console.log("createUserDto", createUserDto);
+      return this.authService.signup(createUserDto);
     }
   }
