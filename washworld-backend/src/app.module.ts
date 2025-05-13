@@ -10,6 +10,8 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './authentication/auth.module';
 import { MembershipsModule } from './memberships/memberships.module';
 import { OpeningHoursModule } from './opening_hours/opening_hours.module';
+import { CoordinatesModule } from './coordinates/coordinates.module';
+import { LocationsModule } from './locations/locations.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { OpeningHoursModule } from './opening_hours/opening_hours.module';
     AuthModule,
     MembershipsModule,
     OpeningHoursModule,
+    CoordinatesModule,
+    LocationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
