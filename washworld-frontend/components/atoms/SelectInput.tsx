@@ -9,7 +9,7 @@ type selectInputProps = {
   labelText: string;
   placeholderText?: string;
   data: any[];
-  value?: string;
+  value?: any;
   onSelect?: (selectedItem: any) => void;
 };
 

@@ -2,7 +2,7 @@ import { UserDto } from "./userDto";
 
 
 export class AuthApi {
-    static baseUrl = "http://192.168.0.19:3000";
+    static baseUrl = "http://10.59.137.70:3000";
 
 
     static async signup(userDto: UserDto) {
@@ -15,6 +15,18 @@ export class AuthApi {
             }, body: JSON.stringify(userDto),
         });
         const data = await response.json();
+        return data;
+    }
+
+    static async login(username: string, password: string) {
+        const respone = await fetch(AuthApi.baseUrl + "/auth/login", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+        });
+        const data = await respone.json();
         return data;
     }
 }
