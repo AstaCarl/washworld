@@ -9,6 +9,7 @@ import { AdditionalProgrammesModule } from './additional_programmes/additional_p
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './authentication/auth.module';
 import { MembershipsModule } from './memberships/memberships.module';
+import { OpeningHoursModule } from './opening_hours/opening_hours.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { MembershipsModule } from './memberships/memberships.module';
     UsersModule,
     AuthModule,
     MembershipsModule,
+    OpeningHoursModule,
   ],
   controllers: [AppController],
   providers: [AppService],
