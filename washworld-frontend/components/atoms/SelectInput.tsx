@@ -11,6 +11,8 @@ type selectInputProps = {
   data: any[];
   value?: any;
   onSelect?: (selectedItem: any) => void;
+  error?: boolean;
+  errorText?: string;
 };
 
 export default function SelectInput({
@@ -19,6 +21,8 @@ export default function SelectInput({
   data,
   value,
   onSelect,
+  error,
+  errorText,
 }: selectInputProps) {
 
 
@@ -33,8 +37,8 @@ export default function SelectInput({
         }}
         renderButton={(selectedItem) => {
           return (
-            <View style={styles.input}>
-              <Text style={styles.dropdownButtonTxtStyle}>
+            <View style={error ? styles.inputError : styles.input}>
+              <Text style={error ? styles.dropdownButtonTxtStyleError : styles.dropdownButtonTxtStyle}>
                 {selectedItem ? selectedItem.name : placeholderText}
               </Text>
             </View>
@@ -55,8 +59,10 @@ export default function SelectInput({
         showsVerticalScrollIndicator={false}
         dropdownStyle={styles.dropdownMenuStyle}
       />
+            {error ? <Label style={styles.errorLabel}>{errorText}</Label> : null}
+
       <View style={styles.icon}>
-        <ChevronIcon color="#06C167" />
+        <ChevronIcon color={`${error ? "#FF6B06" : "#06C167"}`} />
       </View>
     </View>
   );
@@ -67,6 +73,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
     color: "#000",
+  },
+  errorLabel: {
+    fontSize: 12,
+    color: "#FF6B06",
+    fontWeight: "bold", 
   },
   inputGroup: {
     display: "flex",
@@ -85,9 +96,22 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     justifyContent: "center",
   },
+  inputError: {
+    width: "100%",
+    height: 60,
+    backgroundColor: "#F7F7F7",
+    borderColor: "#FF6B06",
+    borderWidth: 2,
+    paddingHorizontal: 12,
+    justifyContent: "center",
+  },
   dropdownButtonTxtStyle: {
     fontSize: 14,
     color: "#666666",
+  },
+  dropdownButtonTxtStyleError: {
+    fontSize: 14,
+    color: "#FF6B06",
   },
   dropdownMenuStyle: {
     backgroundColor: "#f7f7f7",

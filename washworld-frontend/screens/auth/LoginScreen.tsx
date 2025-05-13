@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import React from "react";
 import Title from "../../components/atoms/Title";
 import CustomTextInput from "../../components/atoms/TextInput";
@@ -21,7 +21,23 @@ export default function LoginScreen() {
       password: password,
     };
     const response = await dispatch(login(user));
-    console.log(response);
+ if (response.meta.requestStatus === "rejected") {
+      const payload = response.payload;
+
+      // Check for specific error (409 Conflict) user already exists
+      if (
+        payload?.statusCode === 401 &&
+        payload?.message === "Unauthorized"
+      ) {
+        Alert.alert(
+          "Login failed",
+          "Invalid email or password. Please try again.",
+          [{ text: "OK" }]
+        );
+      }
+    } else {
+      console.log("Signup successful:", response.payload);
+    }
   };
 
   return (
@@ -45,11 +61,7 @@ export default function LoginScreen() {
           <Button buttonText="Forgot password?" variant="greenLink" />
         </View>
         <View style={styles.buttonGroup}>
-          <Button
-            buttonText="Login"
-            variant="primary"
-            onPress={handleLogin}
-          />
+          <Button buttonText="Login" variant="primary" onPress={handleLogin} />
           <Button
             onPress={() => navigation.navigate("Signup")}
             buttonText="Become a member"

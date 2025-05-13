@@ -5,8 +5,8 @@ export class UserDto {
     public email: string,
     public password: string,
     public license: string,
-    public membership: number,
-    public location: number,
+    public membership: number | null,
+    public location: number | null,
     public currentLocation: number,
     public createdAt: Date
   ) {}

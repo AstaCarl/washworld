@@ -18,6 +18,7 @@ import { AppDispatch, RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "./authSlice";
 import { useGetLocations, useGetMemberships } from "./userQuery";
+import { error } from "console";
 
 export default function SignupScreen() {
   const [license, setLicense] = React.useState("");
@@ -25,10 +26,12 @@ export default function SignupScreen() {
   const [password, setPassword] = React.useState("");
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
-  const [membership, setMembership] = React.useState(0);
-  const [location, setLocation] = React.useState(0);
+  const [membership, setMembership] = React.useState(null);
+  const [location, setLocation] = React.useState(null);
   const navigation = useNavigation<RootTabParamList>();
   const dispatch = useDispatch<AppDispatch>();
+
+  const errormessage = useSelector((state: RootState) => state.auth.errors);
 
   const { data: memberships } = useGetMemberships();
   const { data: locations } = useGetLocations();
@@ -60,13 +63,6 @@ export default function SignupScreen() {
           "User already exists. Please try a different email.",
           [{ text: "OK" }]
         );
-      } else {
-        // Handle other errors
-        Alert.alert(
-          "Sign up failed",
-          payload?.message || "An unknown error occurred.",
-          [{ text: "OK" }]
-        );
       }
     } else {
       console.log("Signup successful:", response.payload);
@@ -92,6 +88,8 @@ export default function SignupScreen() {
         </View>
         <View style={styles.signupForm}>
           <CustomTextInput
+            error={!!errormessage.license}
+            errorText={errormessage.license}
             labelText="1. Your Car"
             placeholderText="AB12345"
             paragraf="Your membership applies to this car"
@@ -99,6 +97,8 @@ export default function SignupScreen() {
             value={license}
           />
           <SelectInput
+            error={!!errormessage.location}
+            errorText={errormessage.location}
             placeholderText="Choose a primary wash location"
             labelText="2. Where do you want to wash?"
             data={locations}
@@ -106,6 +106,8 @@ export default function SignupScreen() {
             onSelect={(selectedItem) => setLocation(selectedItem.id)}
           />
           <SelectInput
+            error={!!errormessage.membership}
+            errorText={errormessage.membership}
             placeholderText="Select a membership"
             labelText="3. Which membership suits you?"
             data={memberships}
@@ -113,6 +115,8 @@ export default function SignupScreen() {
             onSelect={(selectedItem) => setMembership(selectedItem.id)}
           />
           <CustomTextInput
+            error={!!errormessage.email}
+            errorText={errormessage.email}
             labelText="4. Your E-mail"
             placeholderText="E-mail address"
             onChangeText={(text: string) => setEmail(text)}
@@ -120,18 +124,24 @@ export default function SignupScreen() {
           />
           <View style={styles.nameGroup}>
             <CustomTextInput
+              error={!!errormessage.firstname}
+              errorText={errormessage.firstname}
               labelText="5. Your Name"
               placeholderText="Firstname"
               onChangeText={(text: string) => setFirstName(text)}
               value={firstName}
             />
             <CustomTextInput
+              error={!!errormessage.lastname}
+              errorText={errormessage.lastname}
               placeholderText="Lastname"
               onChangeText={(text: string) => setLastName(text)}
               value={lastName}
             />
           </View>
           <CustomTextInput
+            error={!!errormessage.password}
+            errorText={errormessage.password}
             labelText="6. Choose a password"
             placeholderText="Password"
             onChangeText={(text: string) => setPassword(text)}

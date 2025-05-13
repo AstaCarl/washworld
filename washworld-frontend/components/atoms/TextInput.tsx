@@ -14,6 +14,8 @@ type inputProps = {
   paragraf?: string;
   search?: boolean;
   onChangeText?: (text: string) => void;
+  error?: boolean;
+  errorText?: string;
 };
 
 export default function CustomTextInput({
@@ -24,6 +26,8 @@ export default function CustomTextInput({
   password,
   paragraf,
   search,
+  error,
+  errorText,
 }: inputProps) {
   const [isPasswordVisible, setIsPasswordVisible] = React.useState(false);
 
@@ -32,13 +36,15 @@ export default function CustomTextInput({
       {labelText ? <Label style={styles.label}>{labelText}</Label> : null}
       {paragraf ? <Paragraf text={paragraf} variant="label" /> : null}
       <TextInput
-        style={styles.input}
+        style={error ? styles.inputError : styles.input}
         placeholder={placeholderText}
-        placeholderTextColor="#666666"
+        // placeholderTextColor="#666666"
+        placeholderTextColor={`${error ? "#FF6B06" : "#666666"}`}
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={password ? !isPasswordVisible : false}
       />
+      {error ? <Label style={styles.errorLabel}>{errorText}</Label> : null}
       {password ? (
         <View style={styles.icon}>
           <PasswordIcon
@@ -79,6 +85,19 @@ const styles = StyleSheet.create({
     borderBottomColor: "#E5E5E5",
     borderBottomWidth: 2,
     paddingHorizontal: 12,
+  },
+  inputError: {
+    width: "100%",
+    height: 60,
+    backgroundColor: "#F7F7F7",
+    borderColor: "#FF6B06",
+    borderWidth: 2,
+    paddingHorizontal: 12,
+  },
+  errorLabel: {
+    fontSize: 12,
+    color: "#FF6B06",
+    fontWeight: "bold",    
   },
   icon: {
     position: "absolute",
