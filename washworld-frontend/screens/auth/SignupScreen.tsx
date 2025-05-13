@@ -1,4 +1,11 @@
-import { ScrollView, StyleSheet, View, KeyboardAvoidingView, Platform } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+} from "react-native";
 import React from "react";
 import Title from "../../components/atoms/Title";
 import CustomTextInput from "../../components/atoms/TextInput";
@@ -7,8 +14,8 @@ import Button from "../../components/atoms/Button";
 import Paragraf from "../../components/atoms/Paragraf";
 import { RootTabParamList } from "../../navigation/TabsNavigation";
 import { useNavigation } from "@react-navigation/native";
-import { AppDispatch } from "../../store/store";
-import { useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../../store/store";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "./authSlice";
 import { useGetLocations, useGetMemberships } from "./userQuery";
 
@@ -22,8 +29,9 @@ export default function SignupScreen() {
   const [location, setLocation] = React.useState(0);
   const navigation = useNavigation<RootTabParamList>();
   const dispatch = useDispatch<AppDispatch>();
-    const { data: memberships } = useGetMemberships();
-    const { data: locations } = useGetLocations();
+
+  const { data: memberships } = useGetMemberships();
+  const { data: locations } = useGetLocations();
 
   const handleSignup = async () => {
     const newUser = {
@@ -38,13 +46,37 @@ export default function SignupScreen() {
       createdAt: new Date(),
     };
     const response = await dispatch(signup(newUser));
-    console.log(response);
+    // Check if the signup action was rejected
+    if (response.meta.requestStatus === "rejected") {
+      const payload = response.payload;
+
+      // Check for specific error (409 Conflict) user already exists
+      if (
+        payload?.statusCode === 409 &&
+        payload?.message === "User already exists"
+      ) {
+        Alert.alert(
+          "Sign up failed",
+          "User already exists. Please try a different email.",
+          [{ text: "OK" }]
+        );
+      } else {
+        // Handle other errors
+        Alert.alert(
+          "Sign up failed",
+          payload?.message || "An unknown error occurred.",
+          [{ text: "OK" }]
+        );
+      }
+    } else {
+      console.log("Signup successful:", response.payload);
+    }
   };
 
   return (
     <KeyboardAvoidingView
-    style={{ flex: 1 }}
-    behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView style={styles.container}>
         <Title variant="green" title="Become a member and wash anytime" />

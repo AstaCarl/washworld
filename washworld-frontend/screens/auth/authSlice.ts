@@ -12,9 +12,16 @@ type LoginParams = {
 // Function to handle user signup
 export const signup = createAsyncThunk(
   "auth/signup",
-  async (userDto: UserDto, thunkAPI) => {
-    console.log("calling signup thunk");
-    return await UserApi.signup(userDto);
+  async (
+    userDto: UserDto,
+    thunkAPI: { rejectWithValue: (value: any) => any }
+  ) => {
+    const response = await UserApi.signup(userDto);
+
+    if (response.statusCode && response.statusCode >= 400) {
+      return thunkAPI.rejectWithValue(response);
+    }
+    return response;
   }
 );
 
@@ -52,7 +59,7 @@ export const authSlice = createSlice({
       console.log("logout");
       SecureStore.deleteItemAsync("jwt");
       state.token = "";
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(signup.fulfilled, (state, action) => {
