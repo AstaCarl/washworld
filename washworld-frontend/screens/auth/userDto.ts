@@ -6,7 +6,7 @@ export class UserDto {
     public password: string,
     public license: string,
     public membership: number,
-    public primaryLocation: number,
+    public location: number,
     public currentLocation: number,
     public createdAt: Date
   ) {}

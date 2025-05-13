@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AppDispatch } from "../../store/store";
 import { useDispatch } from "react-redux";
 import { signup } from "./authSlice";
-import { useGetMemberships } from "./userQuery";
+import { useGetLocations, useGetMemberships } from "./userQuery";
 
 export default function SignupScreen() {
   const [license, setLicense] = React.useState("");
@@ -19,15 +19,11 @@ export default function SignupScreen() {
   const [firstName, setFirstName] = React.useState("");
   const [lastName, setLastName] = React.useState("");
   const [membership, setMembership] = React.useState(0);
+  const [location, setLocation] = React.useState(0);
   const navigation = useNavigation<RootTabParamList>();
   const dispatch = useDispatch<AppDispatch>();
-    const { data: memberships, isLoading, isError, error } = useGetMemberships();
-
-  const membershipData = [
-    { id: 1, name: "Gold" },
-    { id: 3, name: "Premium" },
-    { id: 4, name: "Brilliant/ All Inclusive" },
-  ];
+    const { data: memberships } = useGetMemberships();
+    const { data: locations } = useGetLocations();
 
   const handleSignup = async () => {
     const newUser = {
@@ -37,7 +33,7 @@ export default function SignupScreen() {
       firstname: firstName,
       lastname: lastName,
       membership: membership,
-      primaryLocation: 1,
+      location: location,
       currentLocation: 1,
       createdAt: new Date(),
     };
@@ -73,7 +69,9 @@ export default function SignupScreen() {
           <SelectInput
             placeholderText="Choose a primary wash location"
             labelText="2. Where do you want to wash?"
-            data={membershipData}
+            data={locations}
+            value={location}
+            onSelect={(selectedItem) => setLocation(selectedItem.id)}
           />
           <SelectInput
             placeholderText="Select a membership"
