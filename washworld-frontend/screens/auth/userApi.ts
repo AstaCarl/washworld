@@ -1,7 +1,7 @@
 import { UserDto } from "./userDto";
 
 export class UserApi {
-  static baseUrl = "http://192.168.0.19:3000";
+  static baseUrl = `${process.env.EXPO_PUBLIC_API_URL}`;
 
   static async signup(userDto: UserDto) {
     console.log("calling", UserApi.baseUrl + "/auth/signup");
@@ -30,6 +30,7 @@ export class UserApi {
   }
 
   static async getMemberships() {
+    console.log("calling", UserApi.baseUrl);
     const response = await fetch(UserApi.baseUrl + "/memberships", {
       method: "GET",
       headers: {
