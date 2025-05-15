@@ -6,6 +6,7 @@ import { Location } from './entities/location.entity';
 import { Repository } from 'typeorm';
 import { Coordinate } from 'src/coordinates/entities/coordinate.entity';
 import { CoordinatesService } from 'src/coordinates/coordinates.service';
+import { Hall } from 'src/halls/entities/hall.entity';
 
 @Injectable()
 export class LocationsService {
@@ -14,6 +15,8 @@ export class LocationsService {
     private locationRepository: Repository<Location>,
     @InjectRepository(Coordinate)
     private coordinateRepository: Repository<Coordinate>,
+    @InjectRepository(Hall)
+    private hallRepository: Repository<Hall>,
   ) {}
 
   async create(createLocationDto: CreateLocationDto) {
@@ -34,8 +37,15 @@ export class LocationsService {
     return this.locationRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} location`;
+  async findOne(id: number) {
+    const location = await this.locationRepository.findOneBy({ id });
+
+    const halls = await this.hallRepository.find({
+      where: { location: { id } },
+      relations: ['washes'],
+    });
+
+    return { location, halls };
   }
 
   update(id: number, updateLocationDto: UpdateLocationDto) {

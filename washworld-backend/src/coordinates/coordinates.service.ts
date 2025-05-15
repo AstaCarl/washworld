@@ -7,17 +7,17 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class CoordinatesService {
-      constructor(
-        @InjectRepository(Coordinate)
-        private coordinateRepository: Repository<Coordinate>,
-      ) {}
+  constructor(
+    @InjectRepository(Coordinate)
+    private coordinateRepository: Repository<Coordinate>,
+  ) {}
 
   create(createCoordinateDto: CreateCoordinateDto) {
     return this.coordinateRepository.save(createCoordinateDto);
   }
 
   findAll() {
-    return `This action returns all coordinates`;
+    return this.coordinateRepository.find({ relations: ['location'] });
   }
 
   findOne(id: number) {

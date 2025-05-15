@@ -20,7 +20,10 @@ export class HallsService {
   }
 
   findOne(id: number) {
-    return this.hallRepository.findOne({ where: { id } });
+    return this.hallRepository.findOne({
+      where: { id },
+      relations: ['location', 'washes'],
+    });
   }
 
   update(id: number, updateHallDto: UpdateHallDto) {
