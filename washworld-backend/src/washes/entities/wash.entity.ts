@@ -3,8 +3,10 @@ import { Programme } from '../../programmes/entities/programme.entity';
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from 'src/users/entities/user.entity';
@@ -23,13 +25,12 @@ export class Wash {
   @ManyToOne(
     () => AdditionalProgramme,
     (additionalProgramme) => additionalProgramme.washes,
-    {},
-  )
+    { nullable: true })
   additionalProgramme: AdditionalProgramme;
 
-  @OneToMany(() => User, (user) => user.wash, {})
-  users: User[];
+  @ManyToOne(() => User, (user) => user.washes, {})
+  user: User;
 
-  @OneToMany(() => Hall, (hall) => hall.wash, {})
-  halls: Hall[];
+  @ManyToOne(() => Hall, (hall) => hall.washes, {})
+  hall: Hall;
 }

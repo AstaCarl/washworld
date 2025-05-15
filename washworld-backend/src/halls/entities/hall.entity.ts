@@ -1,18 +1,25 @@
-import { Location } from "src/locations/entities/location.entity";
-import { Wash } from "src/washes/entities/wash.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Location } from 'src/locations/entities/location.entity';
+import { Wash } from 'src/washes/entities/wash.entity';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Hall {
-    @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @ManyToOne(() => Location, (location) => location.halls, {})
-    location: Location;
+  @ManyToOne(() => Location, (location) => location.halls, {})
+  location: Location;
 
-    @ManyToOne(() => Wash, (wash) => wash.halls, {})
-    wash: Wash;
+  @OneToMany(() => Wash, (wash) => wash.hall, { nullable: true })
+  washes: Wash;
 
-    @Column()
-    operationalStatus: boolean; // true = operational, false = not operational
+  @Column()
+  operationalStatus: boolean; // true = operational, false = not operational
 }
