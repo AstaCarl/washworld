@@ -1,4 +1,5 @@
 import { Coordinate } from 'src/coordinates/entities/coordinate.entity';
+import { Hall } from 'src/halls/entities/hall.entity';
 import { OpeningHour } from 'src/opening_hours/entities/opening_hour.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
@@ -31,4 +32,7 @@ export class Location {
 
   @OneToMany(() => User, (user) => user.location)
   users: User[];
+
+  @OneToMany(() => Hall, (hall) => hall.location)
+  halls: Hall[];
 }

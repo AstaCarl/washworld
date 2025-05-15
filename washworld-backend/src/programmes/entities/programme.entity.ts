@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Wash } from "src/washes/entities/wash.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Programme {
@@ -13,4 +14,7 @@ export class Programme {
 
     @Column()
     runTimeInSeconds: number;
+
+    @OneToMany(() => Wash, (wash) => wash.programme, {})
+    washes: Wash[];
 }

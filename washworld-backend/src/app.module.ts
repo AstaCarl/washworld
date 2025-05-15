@@ -12,6 +12,8 @@ import { MembershipsModule } from './memberships/memberships.module';
 import { OpeningHoursModule } from './opening_hours/opening_hours.module';
 import { CoordinatesModule } from './coordinates/coordinates.module';
 import { LocationsModule } from './locations/locations.module';
+import { WashesModule } from './washes/washes.module';
+import { HallsModule } from './halls/halls.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { LocationsModule } from './locations/locations.module';
     OpeningHoursModule,
     CoordinatesModule,
     LocationsModule,
+    WashesModule,
+    HallsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

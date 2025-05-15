@@ -1,6 +1,7 @@
 import { Membership } from "src/memberships/entities/membership.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Location } from "src/locations/entities/location.entity";
+import { Wash } from "src/washes/entities/wash.entity";
 
 @Entity()
 export class User {
@@ -27,6 +28,9 @@ export class User {
 
     @ManyToOne(() => Location, (location) => location.users)
     location: Location;
+
+    @ManyToOne(() => Wash, (wash) => wash.users)
+    wash: Wash;
 
     @Column()
     currentLocation: number;
