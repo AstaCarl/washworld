@@ -42,7 +42,7 @@ export class LocationsService {
 
     const halls = await this.hallRepository.find({
       where: { location: { id } },
-      relations: ['washes'],
+      relations: ['washes', 'washes.programme', 'washes.additionalProgramme'],
     });
 
     return { location, halls };

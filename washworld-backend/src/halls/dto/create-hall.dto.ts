@@ -3,6 +3,6 @@ import { Wash } from "src/washes/entities/wash.entity";
 
 export class CreateHallDto {
     location: Location;
-    wash: Wash
+    // wash: Wash
     operationalStatus: boolean; // true = operational, false = not operational
 }
