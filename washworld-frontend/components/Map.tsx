@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Keyboard, StyleSheet, Text, View } from "react-native";
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import LocationInfo from "./LocationInfo";
 
@@ -9,14 +9,14 @@ type mapProps = {
   mapData: any[];
 };
 
-export default function Map({ mapData = [] }: mapProps) {
+export default function Map({ mapData = []}: mapProps) {
   const [selectedLocation, setSelectedLocation] = React.useState(null);
   const initialRegion = {
-    latitude: 55.6761, // Latitude of Copenhagen
-    longitude: 10.5683, // Longitude of Copenhagen
+    latitude: 55.6761,
+    longitude: 10.5683,
     latitudeDelta: 6, // Zoom level
     longitudeDelta: 6, // Zoom level
-  }; // ✅ This will now run on every render
+  }; 
 
   return (
     <View style={styles.container}>
@@ -36,30 +36,35 @@ export default function Map({ mapData = [] }: mapProps) {
                 latitude: data.coordinate.latitude,
                 longitude: data.coordinate.longitude,
               }}
-              onPress={() => {
+              onPress={(e) => {
+                // Prevent default behavior of marker press
+                e.stopPropagation?.();
                 setSelectedLocation(data);
-                console.log("Selected location:", data);
+                Keyboard.dismiss();
               }}
+              tracksViewChanges={false}
             />
           ))}
       </MapView>
+      {selectedLocation && (
+        <View style={styles.callout}>
+          <LocationInfo selectedLocation={selectedLocation} />
+        </View>
+      )}
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
   map: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 1,
     width: width,
-    height: height,
+    height: height - 85,
   },
-
+  callout: {
+    alignItems: "center",
+  },
 });

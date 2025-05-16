@@ -4,9 +4,10 @@ import { StyleSheet } from "react-native";
 type subtitleProps = {
   title: string;
   variant?: "blackBold" | "blackLight" | "green" | "greenCapital" | "greyLight" | "whiteCapital";
+  style?: any;
 };
 
-export default function Subtitle({ title, variant }: subtitleProps) {
+export default function Subtitle({ title, variant, style }: subtitleProps) {
   return (
     <Text
       style={[
@@ -20,6 +21,7 @@ export default function Subtitle({ title, variant }: subtitleProps) {
           styles.subtitleGreen,
           styles.subtitleGreenCapital,
         ],
+        style
       ]}
     >
       {title}

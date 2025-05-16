@@ -48,7 +48,7 @@ export default function CustomTextInput({
         </View>
       ) : null}
             {search ? (
-        <View style={styles.icon}>
+        <View style={styles.searchIcon}>
           <SearchIcon
             color="#666666"
           />
@@ -84,5 +84,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     right: 12,
     top: 45,
+  },
+    searchIcon: {
+    position: "absolute",
+    right: 12,
+    top: 20,
   },
 });

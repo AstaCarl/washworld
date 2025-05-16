@@ -34,13 +34,13 @@ export class LocationsService {
   }
 
   findAll() {
-    return this.locationRepository.find({relations: ['coordinate']});
+    return this.locationRepository.find({relations: ['coordinate', 'openingHours', 'halls.washes.programme', 'halls.washes.additionalProgramme']});
   }
 
   async findOne(id: number) {
     const location = await this.locationRepository.findOne({
       where: { id },
-      relations: ['coordinate'],
+      relations: ['coordinate', 'openingHours'],
     });
 
     const halls = await this.hallRepository.find({
