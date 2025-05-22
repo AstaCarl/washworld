@@ -28,7 +28,8 @@ export const signup = createAsyncThunk(
 export const login = createAsyncThunk(
   "auth/login",
   async (loginParams: LoginParams, thunkAPI) => {
-    return await UserApi.login(loginParams.username, loginParams.password);
+    const response = await UserApi.login(loginParams.username, loginParams.password)
+    return response;
   }
 );
 
