@@ -5,12 +5,14 @@ import MapScreen from "../screens/map/MapScreen";
 import MapIcon from "../components/icons/MapIcon";
 import HomeIcon from "../components/icons/HomeIcon";
 import ProfileIcon from "../components/icons/ProfileIcon";
+import ProgrammeScreen from "../screens/Programme/ProgrammeScreen";
 
 export type RootTabParamList = {
   navigate(arg0: string): void;
   Profile: undefined;
   Map: undefined;
   Home: undefined;
+  Programme: undefined;
 };
 
 const Tab = createBottomTabNavigator<RootTabParamList>();
@@ -25,28 +27,42 @@ export const TabsNavigation = () => {
           backgroundColor: "#000000",
           height: 85,
           paddingTop: 14,
-        }
+        },
       }}
     >
       <Tab.Screen
-      options={{
-        tabBarIcon: ({ focused }) => <HomeIcon color={focused ? "#0CE578" : "white"} />,
-
-      }}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <HomeIcon color={focused ? "#0CE578" : "white"} />
+          ),
+        }}
         name="Home"
         component={HomeScreen}
       />
       <Tab.Screen
         options={{
-          tabBarIcon: ({ focused }) => <MapIcon color={focused ? "#0CE578" : "white"} />,
+          tabBarIcon: ({ focused }) => (
+            <HomeIcon color={focused ? "#0CE578" : "white"} />
+          ),
+        }}
+        name="Programme"
+        component={ProgrammeScreen}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <MapIcon color={focused ? "#0CE578" : "white"} />
+          ),
         }}
         name="Map"
         component={MapScreen}
       />
       <Tab.Screen
-      options={{
-        tabBarIcon: ({ focused }) => <ProfileIcon color={focused ? "#0CE578" : "white"}/>
-      }}
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <ProfileIcon color={focused ? "#0CE578" : "white"} />
+          ),
+        }}
         name="Profile"
         component={ProfileScreen}
       />

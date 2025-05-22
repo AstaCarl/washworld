@@ -2,7 +2,7 @@ import { Text } from "react-native";
 import { StyleSheet } from "react-native";
 
 type paragrafProps = {
-  text: string;
+  text: string | number;
   variant?: "primary" | "bold" | "white";
 };
 

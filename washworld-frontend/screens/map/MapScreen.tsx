@@ -1,12 +1,10 @@
-import { Text } from "@react-navigation/elements";
 import { View, StyleSheet } from "react-native";
 import React from "react";
-import ProgrammeComponent from "../../components/ProgrammeComponent";
 
 export default function MapScreen() {
   return (
     <View style={styles.container}>
-      <ProgrammeComponent />
+      
     </View>
   );
 }

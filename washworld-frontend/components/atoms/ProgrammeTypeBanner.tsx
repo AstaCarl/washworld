@@ -1,25 +1,24 @@
 import { View, StyleSheet } from "react-native";
 import Paragraf from "./Paragraf";
 
-
 type ProgrammeTypeBannerProps = {
-  buttonText: string;
-  variant:
-    | "primary"
-    | "secondary"
-    | "danger"
-    | "iconButtonGreen"
-    | "iconButtonBlack";
+  bannerTextLeft: string;
+  bannerTextRight: number;
 };
 
-export default function ProgrammeTypeBanner() {
+export default function ProgrammeTypeBanner({
+  bannerTextLeft,
+  bannerTextRight,
+}: ProgrammeTypeBannerProps) {
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Paragraf text="Brilliant/All inclusive" variant="white" />
+        <Paragraf text={bannerTextLeft} variant="white"></Paragraf>
       </View>
       <View style={styles.right}>
-      <Paragraf text="+ 65,-" variant="white" />
+        <View style={styles.innerContainer}>
+          <Paragraf text={bannerTextRight} variant="white" />
+        </View>
       </View>
     </View>
   );
@@ -45,8 +44,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     transform: [{ skewX: "-40deg" }],
   },
-  price: {
-    color: "white",
+  innerContainer: {
+    transform: [{ skewX: "40deg" }],
+  },
+  whiteBannerText: {
+    color: "#000000",
+    fontSize: 20,
     fontWeight: "bold",
   },
 });
