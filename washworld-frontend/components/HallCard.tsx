@@ -8,19 +8,6 @@ import { useState } from "react";
 export default function HallCard({ halls }: any) {
     const [_, setRerender] = useState(false); // dummy state to force rerender
 
-  console.log("halls data:", halls);
-
-  const formattedDate = (dateString: string) => {
-    if (!dateString) return "";
-    const date = new Date(dateString);
-    // Full date and time in Danish locale
-    return date.toLocaleString("da-DK", {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    });
-  };
-
   return (
     <View style={styles.container}>
       {halls.map((hall: any, index: number) => {
