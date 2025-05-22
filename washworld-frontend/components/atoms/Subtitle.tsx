@@ -2,7 +2,7 @@ import { Text } from "react-native";
 import { StyleSheet } from "react-native";
 
 type subtitleProps = {
-  title: string;
+  title: string | number;
   variant?: "blackBold" | "blackLight" | "green" | "greenCapital" | "greyLight" | "whiteCapital" | "whiteBold";
   style?: any;
 };

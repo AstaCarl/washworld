@@ -6,7 +6,7 @@ import { useState } from "react";
 type AdditionalProgrammeProps = {
   title: string;
   text: string;
-  price: string;
+  price: string | number;
 };
 
 export default function AdditionalProgramme({
