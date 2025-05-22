@@ -1,8 +1,11 @@
 import { View, StyleSheet } from "react-native";
 import ProgrammeTypeBanner from "../../components/atoms/ProgrammeTypeBanner";
 import Button from "../../components/atoms/Button";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../../navigation/WashFlowStackScreen";
 
 export default function ProgrammeScreen() {
+  const navigation = useNavigation<RootStackParamList>();  
   const data = [
     { id: 1, name: "Brilliant/All inclusive", price: 20 },
     { id: 2, name: "Brilliant/All inclusive", price: 20 },
@@ -15,8 +18,8 @@ export default function ProgrammeScreen() {
       <ProgrammeTypeBanner key={index} bannerTextLeft={programme.name} bannerTextRight={programme.price} />
       ))}
       <View style={styles.buttonGroup}>
-      <Button variant="iconButtonBlack" buttonText="Back"/>
-      <Button variant="iconButtonGreen" buttonText="Next"/>
+      <Button variant="iconButtonBlack" buttonText="Back" onPress={() => navigation.navigate("HomeScreen")}/>
+      <Button variant="iconButtonGreen" buttonText="Next" onPress={() => navigation.navigate("AdditionalProgramme")}/>
       </View>
     </View>
   );

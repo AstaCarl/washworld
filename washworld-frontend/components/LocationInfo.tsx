@@ -5,6 +5,7 @@ import Paragraf from "./atoms/Paragraf";
 import HallCard from "./HallCard";
 import ClockIcon from "./icons/ClockIcon";
 import DirectionsIcon from "./icons/DirectionsIcon";
+import Button from "./atoms/Button";
 
 type LocationInfoProps = {
   selectedLocation?: any;
@@ -13,6 +14,7 @@ type LocationInfoProps = {
 
 export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
   console.log("Selected location:", selectedLocation);
+  
 
   if (!selectedLocation) return null;
   return (
@@ -28,6 +30,10 @@ export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
       <Paragraf text={selectedLocation.openingHours.openHours} />
       </View>
         <HallCard halls={selectedLocation.halls} />
+        <Button
+        variant="primary"
+        buttonText="Start Wash"
+        />
     </View>
   );
 }

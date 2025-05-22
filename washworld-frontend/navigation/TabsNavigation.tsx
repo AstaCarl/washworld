@@ -19,7 +19,7 @@ export type RootTabParamList = {
 };
 
 // Create the tab navigator
-const Tab = createBottomTabNavigator<RootTabParamList>();
+const Tab = createBottomTabNavigator();
 
 // Create the TabsNavigation component
 export const TabsNavigation = () => {

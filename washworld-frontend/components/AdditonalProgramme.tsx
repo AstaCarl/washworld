@@ -1,23 +1,29 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Subtitle from "./atoms/Subtitle";
 import Paragraf from "./atoms/Paragraf";
-import { useState } from "react";
 
 type AdditionalProgrammeProps = {
   title: string;
   text: string;
   price: string | number;
+  value: number;
+  onPress?: (value: number) => void;
+  selected?: boolean;
 };
 
 export default function AdditionalProgramme({
   title,
   text,
   price,
+  onPress,
+  value,
+  selected = false,
 }: AdditionalProgrammeProps) {
-  const [selected, setSelected] = useState(false);
 
   const handlePress = () => {
-    setSelected(!selected);
+    if (onPress) {
+      onPress(value);
+    }
   };
 
   return (
@@ -29,7 +35,7 @@ export default function AdditionalProgramme({
         <Subtitle title={title} variant="whiteCapital" />
         <Paragraf text={text} variant="white" />
       </View>
-      <Subtitle title={price} variant="whiteCapital" />
+      <Subtitle title={`+ ${price},-`} variant="whiteCapital" />
     </TouchableOpacity>
   );
 }

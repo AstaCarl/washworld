@@ -1,19 +1,82 @@
 import { View, StyleSheet } from "react-native";
 import Button from "../../components/atoms/Button";
 import AdditionalProgramme from "../../components/AdditonalProgramme";
+import CrossIcon from "../../components/icons/CrossIcon";
+import { useNavigation } from "@react-navigation/native";
+import { RootTabParamList } from "../../navigation/TabsNavigation";
+import { useState } from "react";
 
 export default function AdditionalProgrammeScreen() {
+  const navigation = useNavigation<RootTabParamList>();
+  const [selectedValue, setSelectedValue] = useState<number | null>(null);
+
   const data = [
-    { id: 1, name: "Foam Splash", description: "Foam wash with light effect", price: 20 },
-  ]
+    {
+      id: 1,
+      name: "Foam Splash",
+      description: "Foam wash with light effect",
+      price: 20,
+    },
+    {
+      id: 2,
+      name: "Foam Splash",
+      description: "Foam wash with light effect",
+      price: 20,
+    },
+    {
+      id: 3,
+      name: "Foam Splash",
+      description: "Foam wash with light effect",
+      price: 20,
+    },
+    {
+      id: 4,
+      name: "Foam Splash",
+      description: "Foam wash with light effect",
+      price: 20,
+    },
+    {
+      id: 5,
+      name: "Foam Splash",
+      description: "Foam wash with light effect",
+      price: 20,
+    },
+    {
+      id: 6,
+      name: "Foam Splash",
+      description: "Foam wash with light effect",
+      price: 20,
+    },
+  ];
+
+  const handleProgrammePress = (value: number) => {
+    setSelectedValue(value);
+    console.log("Selected additional programme id:", value);
+  };
+
   return (
     <View style={styles.container}>
-      {data.map((programme, index) => (
-        <AdditionalProgramme key={index} title={programme.name} text={programme.description} price={programme.price}/>
-      ))}
+      <CrossIcon onPress={() => navigation.navigate("HomeScreen")} color="#fff" />
+      <View style={styles.programmeList}>
+        {data.map((programme, index) => (
+          <AdditionalProgramme
+            key={index}
+            title={programme.name}
+            text={programme.description}
+            price={programme.price}
+            value={programme.id}
+            onPress={handleProgrammePress}
+            selected={selectedValue === programme.id}
+          />
+        ))}
+      </View>
       <View style={styles.buttonGroup}>
-      <Button variant="iconButtonBlack" buttonText="Back"/>
-      <Button variant="iconButtonGreen" buttonText="Next"/>
+        <Button
+          variant="iconButtonBlack"
+          buttonText="Previous"
+          onPress={() => navigation.navigate("Programme")}
+        />
+        <Button variant="iconButtonGreen" buttonText="Next" onPress={() => navigation.navigate("AntennaDismount")} />
       </View>
     </View>
   );
@@ -22,12 +85,13 @@ export default function AdditionalProgrammeScreen() {
 const styles = StyleSheet.create({
   container: {
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "space-between",
+    alignItems: "flex-end",
     backgroundColor: "#000",
     width: "100%",
     height: "100%",
     paddingHorizontal: 40,
+    paddingVertical: 80,
   },
   buttonGroup: {
     display: "flex",
@@ -35,5 +99,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     marginTop: 20,
+  },
+  programmeList: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
   },
 });

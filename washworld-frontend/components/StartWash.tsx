@@ -5,13 +5,44 @@ import QrIcon from "./icons/QrIcon";
 import LocationIcon from "./icons/LocationIcon";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../navigation/WashFlowStackScreen";
+import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import * as Location from "expo-location";
+import { useEffect, useState } from "react";
 
 export default function StartWash() {
   const navigation = useNavigation<RootStackParamList>();
 
+  const [region, setRegion] = useState({
+    latitude: 55.7635,
+    longitude: 12.4949,
+    latitudeDelta: 0.01,
+    longitudeDelta: 0.01,
+  });
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        return;
+      }
+      let location = await Location.getCurrentPositionAsync({});
+      setRegion((prev) => ({
+        ...prev,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      }));
+    })();
+  }, []);
 
   return (
     <View style={styles.container}>
+      <MapView
+        style={styles.map}
+        provider={PROVIDER_GOOGLE}
+        region={region}
+        showsUserLocation={true}
+      >
+      </MapView>
       <View>
         <Paragraf variant="bold" text="Is this your current location?" />
         <View style={styles.locationContainer}>
@@ -19,7 +50,11 @@ export default function StartWash() {
           <Paragraf variant="primary" text="Roskildevej 375, 2630 Taastrup" />
         </View>
       </View>
-      <Button buttonText="Start Wash" variant="primary" onPress={() => navigation.navigate("WashFlow")} />
+      <Button
+        buttonText="Start Wash"
+        variant="primary"
+        onPress={() => navigation.navigate("WashFlow")}
+      />
       <View style={styles.qrContainer}>
         <View>
           <Paragraf variant="primary" text="Not your location?" />
@@ -52,5 +87,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 10,
+  },
+  map: {
+    width: "100%",
+    height: 200,
   },
 });
