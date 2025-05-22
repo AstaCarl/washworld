@@ -6,6 +6,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Hall } from 'src/halls/entities/hall.entity';
 
+
+
 @Injectable()
 export class WashesService {
   constructor(

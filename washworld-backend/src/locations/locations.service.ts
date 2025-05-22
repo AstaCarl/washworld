@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { Coordinate } from 'src/coordinates/entities/coordinate.entity';
 import { CoordinatesService } from 'src/coordinates/coordinates.service';
 import { Hall } from 'src/halls/entities/hall.entity';
+import { finished } from 'stream';
 
 @Injectable()
 export class LocationsService {
@@ -33,8 +34,46 @@ export class LocationsService {
     return this.locationRepository.save(location);
   }
 
-  findAll() {
-    return this.locationRepository.find({relations: ['coordinate', 'openingHours', 'halls.washes.programme', 'halls.washes.additionalProgramme']});
+  async findAll() {
+    const locations = await this.locationRepository.find({
+      relations: [
+        'coordinate',
+        'openingHours',
+        'halls.washes.programme',
+        'halls.washes.additionalProgramme',
+      ],
+    });
+
+    const locationData = locations.map((location) => ({
+      ...location,
+      halls: Array.isArray(location.halls)
+        ? location.halls.map((hall) => ({
+            ...hall,
+            washes: Array.isArray(hall.washes)
+              ? hall.washes.map((wash) => {
+                  const totalRunTimeInSeconds =
+                    (wash.programme?.runTimeInSeconds || 0) +
+                    (wash.additionalProgramme?.runTimeInSeconds || 0);
+
+                  const finishedTime = wash.startedTimeDate
+                    ? new Date(
+                        new Date(wash.startedTimeDate).getTime() +
+                          totalRunTimeInSeconds * 1000,
+                      )
+                    : null;
+
+                  return {
+                    ...wash,
+                    totalRunTimeInSeconds,
+                    finishedTime,
+                  };
+                })
+              : [],
+          }))
+        : [],
+    }));
+
+    return locationData;
   }
 
   async findOne(id: number) {

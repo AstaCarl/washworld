@@ -16,7 +16,7 @@ import { Hall } from 'src/halls/entities/hall.entity';
 export class Wash {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column()
+  @Column({ default: () => 'CURRENT_TIMESTAMP' })
   startedTimeDate: Date;
 
   @ManyToOne(() => Programme, (programme) => programme.washes, {})
@@ -25,7 +25,8 @@ export class Wash {
   @ManyToOne(
     () => AdditionalProgramme,
     (additionalProgramme) => additionalProgramme.washes,
-    { nullable: true })
+    { nullable: true },
+  )
   additionalProgramme: AdditionalProgramme;
 
   @ManyToOne(() => User, (user) => user.washes, {})
