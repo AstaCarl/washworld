@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   iconButtonGreen: {
     backgroundColor: "#06c167",
-    width: "50%",
+    width: "40%",
     height: 50,
     display: "flex",
     flexDirection: "row",

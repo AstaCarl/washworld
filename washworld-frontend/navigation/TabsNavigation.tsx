@@ -1,11 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreen from "../screens/HomeScreen";
 import ProfileScreen from "../screens/profile/ProfileScreen";
 import MapScreen from "../screens/map/MapScreen";
 import MapIcon from "../components/icons/MapIcon";
 import HomeIcon from "../components/icons/HomeIcon";
 import ProfileIcon from "../components/icons/ProfileIcon";
-import ProgrammeScreen from "../screens/Programme/ProgrammeScreen";
+import HomeStackScreen from "./HomeStackScreen";
 
 // Define the types for the tab navigator
 export type RootTabParamList = {
@@ -15,6 +14,8 @@ export type RootTabParamList = {
   Home: undefined;
   Signup: undefined;
   Login: undefined;
+  Programme: undefined;
+  WashFlow: undefined;
 };
 
 // Create the tab navigator
@@ -41,7 +42,7 @@ export const TabsNavigation = () => {
           ),
         }}
         name="Home"
-        component={HomeScreen}
+        component={HomeStackScreen}
       />
       <Tab.Screen
         options={{

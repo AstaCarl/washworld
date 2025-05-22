@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 
 type subtitleProps = {
   title: string;
-  variant?: "blackBold" | "blackLight" | "green" | "greenCapital" | "greyLight" | "whiteCapital";
+  variant?: "blackBold" | "blackLight" | "green" | "greenCapital" | "greyLight" | "whiteCapital" | "whiteBold";
   style?: any;
 };
 
@@ -13,6 +13,7 @@ export default function Subtitle({ title, variant, style }: subtitleProps) {
       style={[
         styles.subtitle,
         variant === "blackBold" && styles.subtitleBlack,
+        variant === "whiteBold" && styles.subtitleWhite,
         variant === "blackLight" && styles.subtitleLight,
         variant === "greyLight" && styles.subtitleGreyLight,
         variant === "green" && styles.subtitleGreen,
@@ -32,6 +33,11 @@ export default function Subtitle({ title, variant, style }: subtitleProps) {
 const styles = StyleSheet.create({
   subtitle: {
     fontSize: 24,
+  },
+  subtitleWhite: {
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    fontSize: 20,
   },
   subtitleBlack: {
     color: "#000000",

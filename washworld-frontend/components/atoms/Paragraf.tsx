@@ -1,7 +1,7 @@
 import { StyleSheet, Text } from "react-native";
 
 type paragrafProps = {
-  text: string;
+  text: string | number;
   variant?: "primary" | "bold" | "white" | "label";
 };
 

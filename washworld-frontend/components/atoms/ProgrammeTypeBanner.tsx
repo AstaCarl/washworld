@@ -1,5 +1,6 @@
 import { View, StyleSheet } from "react-native";
 import Paragraf from "./Paragraf";
+import Subtitle from "./Subtitle";
 
 type ProgrammeTypeBannerProps = {
   bannerTextLeft: string;
@@ -13,11 +14,12 @@ export default function ProgrammeTypeBanner({
   return (
     <View style={styles.container}>
       <View style={styles.left}>
-        <Paragraf text={bannerTextLeft} variant="white"></Paragraf>
+        <Subtitle title={bannerTextLeft} variant="whiteBold"/>
+        {/* <Paragraf text={bannerTextLeft} variant="white"></Paragraf> */}
       </View>
       <View style={styles.right}>
         <View style={styles.innerContainer}>
-          <Paragraf text={bannerTextRight} variant="white" />
+          <Paragraf text={`+${bannerTextRight},-`} variant="white" />
         </View>
       </View>
     </View>
@@ -29,7 +31,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#06c167",
     flexDirection: "row",
     overflow: "hidden",
-    margin: 10,
+    height: 60,
+    marginVertical: 20,
   },
   left: {
     paddingVertical: 10,
@@ -39,7 +42,7 @@ const styles = StyleSheet.create({
   },
   right: {
     backgroundColor: "#666666",
-    flex: 2,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     transform: [{ skewX: "-40deg" }],

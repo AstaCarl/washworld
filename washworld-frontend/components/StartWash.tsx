@@ -3,8 +3,13 @@ import Paragraf from "./atoms/Paragraf";
 import Button from "./atoms/Button";
 import QrIcon from "./icons/QrIcon";
 import LocationIcon from "./icons/LocationIcon";
+import { useNavigation } from "@react-navigation/native";
+import { RootStackParamList } from "../navigation/WashFlowStackScreen";
 
 export default function StartWash() {
+  const navigation = useNavigation<RootStackParamList>();
+
+
   return (
     <View style={styles.container}>
       <View>
@@ -14,7 +19,7 @@ export default function StartWash() {
           <Paragraf variant="primary" text="Roskildevej 375, 2630 Taastrup" />
         </View>
       </View>
-      <Button buttonText="Start Wash" variant="primary" />
+      <Button buttonText="Start Wash" variant="primary" onPress={() => navigation.navigate("WashFlow")} />
       <View style={styles.qrContainer}>
         <View>
           <Paragraf variant="primary" text="Not your location?" />
