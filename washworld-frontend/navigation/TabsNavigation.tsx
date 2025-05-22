@@ -5,6 +5,7 @@ import MapScreen from "../screens/map/MapScreen";
 import MapIcon from "../components/icons/MapIcon";
 import HomeIcon from "../components/icons/HomeIcon";
 import ProfileIcon from "../components/icons/ProfileIcon";
+import ProgrammeScreen from "../screens/Programme/ProgrammeScreen";
 
 // Define the types for the tab navigator
 export type RootTabParamList = {
