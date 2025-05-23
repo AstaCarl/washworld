@@ -12,11 +12,11 @@ import {
   export class AuthController {
     constructor(private authService: AuthService) {}
   
-    // @UseGuards(JwtAuthGuard)
-    // @Post('auth/upgrade')
-    // upgrade(@Request2() req) {
-    //     return this.authService.upgrade(req.user.id)
-    // }
+    @UseGuards(JwtAuthGuard)
+    @Post('auth/upgrade')
+    upgrade(@Request2() req) {
+        return this.authService.upgrade(req.user.id)
+    }
   
   
     @UseGuards(LocalAuthGuard)
