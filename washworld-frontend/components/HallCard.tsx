@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import Subtitle from "./atoms/Subtitle";
 import CheckIcon from "./icons/CheckIcon";
 import CrossIcon from "./icons/CrossIcon";
@@ -6,7 +6,13 @@ import Counter from "./atoms/Counter";
 import { useState } from "react";
 
 export default function HallCard({ halls }: any) {
-    const [_, setRerender] = useState(false); // dummy state to force rerender
+  const [_, setRerender] = useState(false); // dummy state to force rerender
+  const [selectedIdHall, setSelectedIdHall] = useState<number | null>(null);
+
+  const handleHallPress = (id: number) => {
+    setSelectedIdHall(id)
+    console.log("Selected hall id:", id);
+  }
 
   return (
     <View style={styles.container}>
@@ -30,19 +36,25 @@ export default function HallCard({ halls }: any) {
         );
 
         return (
-          <View style={styles.column} key={index}>
-            <Subtitle title={`hall ${index + 1}`} variant="whiteCapital" />
-            {!hall.operationalStatus ? (
-              <CrossIcon color="#FF6B06" />
-            ) : isAnyWashRunning && runningWash ? (
-              <Counter
-                number={runningWash.finishedTime}
-                onFinish={() => setRerender(r => !r)}
-              />
-            ) : (
-              <CheckIcon color="#0CE578" />
-            )}
-          </View>
+          <TouchableOpacity
+            onPress={() => handleHallPress(hall.id)}
+            disabled={!hall.operationalStatus}
+            style={selectedIdHall === hall.id ? styles.boxSelected : styles.box}
+          >
+            <View style={styles.column} key={index}>
+              <Subtitle title={`hall ${index + 1}`} variant="whiteCapital" />
+              {!hall.operationalStatus ? (
+                <CrossIcon color="#FF6B06" />
+              ) : isAnyWashRunning && runningWash ? (
+                <Counter
+                  number={runningWash.finishedTime}
+                  onFinish={() => setRerender((r) => !r)}
+                />
+              ) : (
+                <CheckIcon color="#0CE578" />
+              )}
+            </View>
+          </TouchableOpacity>
         );
       })}
     </View>
@@ -52,19 +64,26 @@ export default function HallCard({ halls }: any) {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    backgroundColor: "#000",
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-    flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    gap: 40,
+    justifyContent: "space-between",
+    alignItems: "center",
   },
   column: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
     gap: 5,
+  },
+  box: {
+    backgroundColor: "#000",
+    gap: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  boxSelected: {
+    backgroundColor: "#666",
+    gap: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
 });
