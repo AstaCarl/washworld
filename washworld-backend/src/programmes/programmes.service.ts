@@ -17,7 +17,7 @@ export class ProgrammesService {
   }
 
   findAll() {
-    return `This action returns all programmes`;
+    return this.programmesRepository.find();
   }
 
   findOne(id: number) {

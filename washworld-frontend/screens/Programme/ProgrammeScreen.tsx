@@ -4,31 +4,51 @@ import Button from "../../components/atoms/Button";
 import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from "../../navigation/WashFlowStackScreen";
 import { useState } from "react";
+import { useGetProgrammes } from "./ProgrammeQuery";
+
+type Programme = {
+  id: number;
+  name: string;
+  price: number;
+};
 
 export default function ProgrammeScreen() {
-  const navigation = useNavigation<RootStackParamList>(); 
-  const [selectedprogrammeId, setSelectedProgrammeId] = useState<number | null>(null); 
-  const data = [
-    { id: 1, name: "Brilliant/All inclusive", price: 20 },
-    { id: 2, name: "Brilliant/All inclusive", price: 20 },
-    { id: 3, name: "Brilliant/All inclusive", price: 20 },
-    { id: 4, name: "Brilliant/All inclusive", price: 20 },
-  ]
+  const { data: programmes } = useGetProgrammes() as { data: Programme[] };
+  const navigation = useNavigation<RootStackParamList>();
+  const [selectedprogrammeId, setSelectedProgrammeId] = useState<number | null>(
+    null
+  );
+  console.log("Programmes data:", programmes);
 
-
-    const handleProgrammePress = (value: number) => {
+  const handleProgrammePress = (value: number) => {
     setSelectedProgrammeId(value);
     console.log("Selected additional programme id:", value);
   };
 
   return (
     <View style={styles.container}>
-      {data.map((programme, index) => (
-      <ProgrammeTypeBanner onPress={handleProgrammePress} value={programme.id} key={index} selected={selectedprogrammeId === programme.id} bannerTextLeft={programme.name} bannerTextRight={programme.price} />
-      ))}
+      {programmes &&
+        programmes.map((programme, index) => (
+          <ProgrammeTypeBanner
+            onPress={handleProgrammePress}
+            value={programme.id}
+            key={index}
+            selected={selectedprogrammeId === programme.id}
+            bannerTextLeft={programme.name}
+            bannerTextRight={programme.price}
+          />
+        ))}
       <View style={styles.buttonGroup}>
-      <Button variant="iconButtonBlack" buttonText="Back" onPress={() => navigation.navigate("HomeScreen")}/>
-      <Button variant="iconButtonGreen" buttonText="Next" onPress={() => navigation.navigate("AdditionalProgramme")}/>
+        <Button
+          variant="iconButtonBlack"
+          buttonText="Back"
+          onPress={() => navigation.navigate("MapScreen")}
+        />
+        <Button
+          variant="iconButtonGreen"
+          buttonText="Next"
+          onPress={() => navigation.navigate("AdditionalProgramme")}
+        />
       </View>
     </View>
   );

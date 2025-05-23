@@ -10,6 +10,9 @@ export class AdditionalProgramme {
         
         @Column() 
         price: number;
+
+        @Column()
+        description: string;
     
         @Column()
         runTimeInSeconds: number;

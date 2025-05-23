@@ -6,6 +6,7 @@ import Counter from "./atoms/Counter";
 import { useState } from "react";
 
 export default function HallCard({ halls }: any) {
+  
   const [_, setRerender] = useState(false); // dummy state to force rerender
   const [selectedIdHall, setSelectedIdHall] = useState<number | null>(null);
 

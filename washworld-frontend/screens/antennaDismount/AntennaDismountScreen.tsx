@@ -11,9 +11,12 @@ export default function AntennaDismountScreen() {
 
   return (
     <View style={styles.container}>
-      <CrossIcon onPress={() => navigation.navigate("HomeScreen")} color="#fff" />
+      <CrossIcon
+        onPress={() => navigation.navigate("MapScreen")}
+        color="#fff"
+      />
       <View style={styles.programmeList}>
-        <CarAlertIcon color="#FFF"/>
+        <CarAlertIcon color="#FFF" />
         <Text style={styles.title}>Remember to dismount your antenna!</Text>
       </View>
       <View style={styles.buttonGroup}>
@@ -54,11 +57,11 @@ const styles = StyleSheet.create({
     gap: 20,
     width: "100%",
   },
-    title: {
-        color: "#fff",
-        fontSize: 42,
-        fontWeight: "bold",
-        textAlign: "center",
-        width: "80%",
-    },
+  title: {
+    color: "#fff",
+    fontSize: 42,
+    fontWeight: "bold",
+    textAlign: "center",
+    width: "80%",
+  },
 });

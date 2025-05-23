@@ -5,49 +5,24 @@ import CrossIcon from "../../components/icons/CrossIcon";
 import { useNavigation } from "@react-navigation/native";
 import { RootTabParamList } from "../../navigation/TabsNavigation";
 import { useState } from "react";
+import { useGetAdditionalProgrammes } from "./AdditionalProgrammeQuery";
 
+type AdditionalProgramme = {
+  id: number;
+  name: string;
+  price: number;
+  description: string;
+};
 export default function AdditionalProgrammeScreen() {
+  const { data: additionalProgrammes } = useGetAdditionalProgrammes() as {
+    data: AdditionalProgramme[];
+  };
+  console.log("Programmes data:", additionalProgrammes);
+
   const navigation = useNavigation<RootTabParamList>();
   const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
-  const data = [
-    {
-      id: 1,
-      name: "Foam Splash",
-      description: "Foam wash with light effect",
-      price: 20,
-    },
-    {
-      id: 2,
-      name: "Foam Splash",
-      description: "Foam wash with light effect",
-      price: 20,
-    },
-    {
-      id: 3,
-      name: "Foam Splash",
-      description: "Foam wash with light effect",
-      price: 20,
-    },
-    {
-      id: 4,
-      name: "Foam Splash",
-      description: "Foam wash with light effect",
-      price: 20,
-    },
-    {
-      id: 5,
-      name: "Foam Splash",
-      description: "Foam wash with light effect",
-      price: 20,
-    },
-    {
-      id: 6,
-      name: "Foam Splash",
-      description: "Foam wash with light effect",
-      price: 20,
-    },
-  ];
+  
 
   const handleProgrammePress = (value: number) => {
     setSelectedValue(value);
@@ -56,9 +31,12 @@ export default function AdditionalProgrammeScreen() {
 
   return (
     <View style={styles.container}>
-      <CrossIcon onPress={() => navigation.navigate("HomeScreen")} color="#fff" />
+      <CrossIcon
+        onPress={() => navigation.navigate("MapScreen")}
+        color="#fff"
+      />
       <View style={styles.programmeList}>
-        {data.map((programme, index) => (
+        {additionalProgrammes && additionalProgrammes.map((programme, index) => (
           <AdditionalProgramme
             key={index}
             title={programme.name}
@@ -76,7 +54,11 @@ export default function AdditionalProgrammeScreen() {
           buttonText="Previous"
           onPress={() => navigation.navigate("Programme")}
         />
-        <Button variant="iconButtonGreen" buttonText="Next" onPress={() => navigation.navigate("AntennaDismount")} />
+        <Button
+          variant="iconButtonGreen"
+          buttonText="Next"
+          onPress={() => navigation.navigate("AntennaDismount")}
+        />
       </View>
     </View>
   );

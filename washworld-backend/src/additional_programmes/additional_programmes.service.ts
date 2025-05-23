@@ -19,7 +19,7 @@ export class AdditionalProgrammesService {
   }
 
   findAll() {
-    return `This action returns all additionalProgrammes`;
+    return this.additionalProgrammesRepository.find();
   }
 
   findOne(id: number) {

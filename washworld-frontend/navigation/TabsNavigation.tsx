@@ -4,7 +4,9 @@ import MapScreen from "../screens/map/MapScreen";
 import MapIcon from "../components/icons/MapIcon";
 import HomeIcon from "../components/icons/HomeIcon";
 import ProfileIcon from "../components/icons/ProfileIcon";
-import HomeStackScreen from "./HomeStackScreen";
+import HomeStackScreen from "./MapStackScreen";
+import HomeScreen from "../screens/HomeScreen";
+import MapStackScreen from "./MapStackScreen";
 
 // Define the types for the tab navigator
 export type RootTabParamList = {
@@ -42,7 +44,7 @@ export const TabsNavigation = () => {
           ),
         }}
         name="Home"
-        component={HomeStackScreen}
+        component={HomeScreen}
       />
       <Tab.Screen
         options={{
@@ -51,7 +53,7 @@ export const TabsNavigation = () => {
           ),
         }}
         name="Map"
-        component={MapScreen}
+        component={MapStackScreen}
       />
       <Tab.Screen
         options={{
