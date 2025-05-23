@@ -2,15 +2,31 @@ import { View, StyleSheet } from "react-native";
 import Button from "../../components/atoms/Button";
 import CrossIcon from "../../components/icons/CrossIcon";
 import { useNavigation, useRoute } from "@react-navigation/native";
+import { RootTabParamList } from "../../navigation/TabsNavigation";
 import { Text } from "@react-navigation/elements";
-import CarAlertIcon from "../../components/icons/CarAlertIcon";
+import { useCreateWash } from "./washQuery";
 
-export default function AntennaDismountScreen() {
-  const navigation = useNavigation<any>();
-    const route = useRoute();
-    const { washObject } = route.params as { washObject: any };
+export default function StartWashScreen() {
+  const navigation = useNavigation<RootTabParamList>();
+  const route = useRoute();
+  const params = route.params as any;
+  const washObject = params.washObject?.washObject || params.washObject;
+  const { mutate } = useCreateWash();
 
-    console.log("Selected wash object from antenna dismount screen:", washObject);
+
+  const handleStartWash = () => {
+    const formattedWashObject = {
+      user: { id: 1 },
+      hall: { id: washObject.hallId },
+      programme: { id: washObject.programmeId },
+      additionalProgramme: { id: washObject.additionalProgrammeId },
+    };
+    console.log("Wash object before sending", formattedWashObject);
+
+    mutate(formattedWashObject);
+  };
+
+  console.log("Selected wash object from start wash:", washObject);
 
   return (
     <View style={styles.container}>
@@ -19,24 +35,13 @@ export default function AntennaDismountScreen() {
         color="#fff"
       />
       <View style={styles.programmeList}>
-        <CarAlertIcon color="#FFF" />
-        <Text style={styles.title}>Remember to dismount your antenna!</Text>
+        <Text style={styles.title}>Start wash</Text>
       </View>
       <View style={styles.buttonGroup}>
         <Button
-          variant="iconButtonBlack"
-          buttonText="Previous"
-          onPress={() => navigation.navigate("AdditionalProgramme")}
-        />
-        <Button variant="iconButtonGreen" buttonText="Next"
-                 onPress={() =>
-            navigation.navigate("WashFlow", {
-              screen: "StartWash",
-              params: {
-                washObject: {washObject},
-              },
-            })
-          }
+          variant="primary"
+          buttonText="Start Wash"
+          onPress={handleStartWash}
         />
       </View>
     </View>

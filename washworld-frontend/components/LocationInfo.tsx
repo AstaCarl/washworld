@@ -1,22 +1,43 @@
-import { Text } from "@react-navigation/elements";
-import { Dimensions, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Subtitle from "./atoms/Subtitle";
 import Paragraf from "./atoms/Paragraf";
 import HallCard from "./HallCard";
 import ClockIcon from "./icons/ClockIcon";
 import DirectionsIcon from "./icons/DirectionsIcon";
 import Button from "./atoms/Button";
-import { RootStackParamList } from "../navigation/WashFlowStackScreen";
 import { useNavigation } from "@react-navigation/native";
+import React, { useState } from "react";
 
 type LocationInfoProps = {
   selectedLocation?: any;
 };
 
 export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<any>();
+  const [washObject, setWashObject] = useState({});
+  const [selectedHallId, setSelectedHallId] = useState<number | null>(null);
 
   console.log("Selected location:", selectedLocation);
+
+  React.useEffect(() => {
+    if (selectedLocation) {
+      setWashObject((prev) => ({
+        ...prev,
+        locationId: selectedLocation.id,
+      }));
+    }
+  }, [selectedLocation]);
+
+    React.useEffect(() => {
+    if (selectedHallId) {
+      setWashObject((prev) => ({
+        ...prev,
+        hallId: selectedHallId,
+      }));
+    }
+  }, [selectedHallId]);
+
+  console.log("Wash object:", washObject);
 
   if (!selectedLocation) return null;
   return (
@@ -35,9 +56,13 @@ export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
         <ClockIcon color="#000" />
         <Paragraf text={selectedLocation.openingHours.openHours} />
       </View>
-      <HallCard halls={selectedLocation.halls} />
+      <HallCard
+        halls={selectedLocation.halls}
+        selectedHallId={selectedHallId}
+        setSelectedHallId={setSelectedHallId}
+      />
       <Button
-        onPress={() => navigation.navigate("WashFlow")}
+        onPress={() => navigation.navigate("WashFlow", { screen: "Programme", params: { washObject, setWashObject } })}
         variant="primary"
         buttonText="Start Wash"
       />

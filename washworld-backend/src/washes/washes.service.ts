@@ -18,6 +18,8 @@ export class WashesService {
   ) {}
 
   async create(createWashDto: CreateWashDto) {
+      console.log('Received DTO:', createWashDto);
+
     return this.washRepository.save(createWashDto);
   }
 

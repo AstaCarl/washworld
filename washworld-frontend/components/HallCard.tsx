@@ -5,13 +5,13 @@ import CrossIcon from "./icons/CrossIcon";
 import Counter from "./atoms/Counter";
 import { useState } from "react";
 
-export default function HallCard({ halls }: any) {
+export default function HallCard({ halls, selectedHallId, setSelectedHallId }: any) {
   
   const [_, setRerender] = useState(false); // dummy state to force rerender
-  const [selectedIdHall, setSelectedIdHall] = useState<number | null>(null);
+  // const [selectedHallId, setSelectedHallId] = useState<number | null>(null);
 
   const handleHallPress = (id: number) => {
-    setSelectedIdHall(id)
+    setSelectedHallId(id)
     console.log("Selected hall id:", id);
   }
 
@@ -39,9 +39,9 @@ export default function HallCard({ halls }: any) {
         return (
           <TouchableOpacity
             onPress={() => handleHallPress(hall.id)}
-            disabled={!hall.operationalStatus}
+            disabled={!hall.operationalStatus || isAnyWashRunning}
             key={index}
-            style={selectedIdHall === hall.id ? styles.boxSelected : styles.box}
+            style={selectedHallId === hall.id ? styles.boxSelected : styles.box}
           >
             <View style={styles.column}>
               <Subtitle title={`hall ${index + 1}`} variant="whiteCapital" />

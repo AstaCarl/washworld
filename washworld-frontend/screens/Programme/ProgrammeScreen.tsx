@@ -1,9 +1,8 @@
 import { View, StyleSheet } from "react-native";
 import ProgrammeTypeBanner from "../../components/atoms/ProgrammeTypeBanner";
 import Button from "../../components/atoms/Button";
-import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../../navigation/WashFlowStackScreen";
-import { useState } from "react";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import React, { useState } from "react";
 import { useGetProgrammes } from "./ProgrammeQuery";
 
 type Programme = {
@@ -13,15 +12,23 @@ type Programme = {
 };
 
 export default function ProgrammeScreen() {
+  const route = useRoute();
+  const { washObject } = route.params as { washObject: any };
+  const { setWashObject } = route.params as { setWashObject: any };
   const { data: programmes } = useGetProgrammes() as { data: Programme[] };
-  const navigation = useNavigation<RootStackParamList>();
+  const navigation = useNavigation<any>();
   const [selectedprogrammeId, setSelectedProgrammeId] = useState<number | null>(
     null
   );
   console.log("Programmes data:", programmes);
+  console.log("Selected wash object from programmescreen:", washObject);
 
   const handleProgrammePress = (value: number) => {
     setSelectedProgrammeId(value);
+    setWashObject((prev: any) => ({
+      ...prev,
+      programmeId: value,
+    }));
     console.log("Selected additional programme id:", value);
   };
 
@@ -47,7 +54,16 @@ export default function ProgrammeScreen() {
         <Button
           variant="iconButtonGreen"
           buttonText="Next"
-          onPress={() => navigation.navigate("AdditionalProgramme")}
+          // onPress={() => navigation.navigate("AdditionalProgramme")}
+          onPress={() =>
+            navigation.navigate("WashFlow", {
+              screen: "AdditionalProgramme",
+              params: {
+                washObject: { ...washObject, programmeId: selectedprogrammeId },
+                setWashObject,
+              },
+            })
+          }
         />
       </View>
     </View>
