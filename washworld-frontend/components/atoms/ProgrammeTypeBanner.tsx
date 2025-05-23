@@ -1,28 +1,41 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Paragraf from "./Paragraf";
 import Subtitle from "./Subtitle";
+import { useState } from "react";
 
 type ProgrammeTypeBannerProps = {
   bannerTextLeft: string;
   bannerTextRight: number;
+  value: number;
+  onPress?: (value: number) => void;
+  selected?: boolean;
 };
 
 export default function ProgrammeTypeBanner({
   bannerTextLeft,
   bannerTextRight,
+  value,
+  onPress,
+  selected = false,
 }: ProgrammeTypeBannerProps) {
+
+    const handlePress = () => {
+    if (onPress) {
+      onPress(value);
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.left}>
-        <Subtitle title={bannerTextLeft} variant="whiteBold"/>
-        {/* <Paragraf text={bannerTextLeft} variant="white"></Paragraf> */}
-      </View>
-      <View style={styles.right}>
-        <View style={styles.innerContainer}>
-          <Paragraf text={`+${bannerTextRight},-`} variant="white" />
+      <TouchableOpacity  onPress={handlePress} style={styles.container}>
+        <View style={styles.left}>
+          <Subtitle title={bannerTextLeft} variant="whiteBold" />
         </View>
-      </View>
-    </View>
+        <View style={selected ? styles.rightSelected : styles.right}>
+          <View style={styles.innerContainer}>
+            <Paragraf text={`+ ${bannerTextRight},-`} variant="white" />
+          </View>
+        </View>
+      </TouchableOpacity>
   );
 }
 
@@ -42,6 +55,13 @@ const styles = StyleSheet.create({
   },
   right: {
     backgroundColor: "#666666",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    transform: [{ skewX: "-40deg" }],
+  },
+  rightSelected: {
+    backgroundColor: "#06c167",
     flex: 1,
     justifyContent: "center",
     alignItems: "center",

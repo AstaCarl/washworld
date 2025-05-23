@@ -39,9 +39,10 @@ export default function HallCard({ halls }: any) {
           <TouchableOpacity
             onPress={() => handleHallPress(hall.id)}
             disabled={!hall.operationalStatus}
+            key={index}
             style={selectedIdHall === hall.id ? styles.boxSelected : styles.box}
           >
-            <View style={styles.column} key={index}>
+            <View style={styles.column}>
               <Subtitle title={`hall ${index + 1}`} variant="whiteCapital" />
               {!hall.operationalStatus ? (
                 <CrossIcon color="#FF6B06" />
