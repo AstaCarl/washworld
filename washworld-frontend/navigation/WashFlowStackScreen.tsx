@@ -2,7 +2,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProgrammeScreen from "../screens/programme/ProgrammeScreen";
 import AdditionalProgrammeScreen from "../screens/additionalProgramme/AddtionalProgrammeScreen";
 import AntennaDismountScreen from "../screens/antennaDismount/AntennaDismountScreen";
-import StartWashScreen from "../screens/startWashScreen/StartWashScreen";
+import StartWashScreen from "../screens/startWash/StartWashScreen";
+import ActiveWashScreen from "../screens/startWash/ActiveWashScreen";
 
 // Define the types for the stack navigator
 export type RootStackParamList = {
@@ -11,6 +12,7 @@ export type RootStackParamList = {
     AdditionalProgramme: { washObject: any, setWashObject: any };
     AntennaDismount: { washObject: any, setWashObject: any };
     StartWash: { washObject: any, setWashObject: any };
+    ActiveWash: { washObject: any, setWashObject: any };
   };
 
   // Create the stack navigator
@@ -24,6 +26,8 @@ export const WashFlowStackScreen = () => {
       <Stack.Screen options={{ headerShown: false }}  name="AdditionalProgramme" component={AdditionalProgrammeScreen} />
       <Stack.Screen options={{ headerShown: false }}  name="AntennaDismount" component={AntennaDismountScreen} />
       <Stack.Screen options={{ headerShown: false }}  name="StartWash" component={StartWashScreen} />
+      <Stack.Screen options={{ headerShown: false }}  name="ActiveWash" component={ActiveWashScreen} />
+
     </Stack.Navigator>
   );
 };

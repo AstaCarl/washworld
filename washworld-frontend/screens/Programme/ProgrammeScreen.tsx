@@ -54,7 +54,6 @@ export default function ProgrammeScreen() {
         <Button
           variant="iconButtonGreen"
           buttonText="Next"
-          // onPress={() => navigation.navigate("AdditionalProgramme")}
           onPress={() =>
             navigation.navigate("WashFlow", {
               screen: "AdditionalProgramme",

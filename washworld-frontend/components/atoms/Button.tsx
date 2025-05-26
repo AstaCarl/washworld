@@ -3,6 +3,7 @@ import ChevronIcon from "../icons/ChevronIcon";
 
 type ButtonProps = {
   buttonText: string;
+  disabled?: boolean;
   variant:
     | "primary"
     | "secondary"
@@ -13,9 +14,10 @@ type ButtonProps = {
     onPress?: () => void;
 };
 
-export default function Button({ buttonText, variant, onPress }: ButtonProps) {
+export default function Button({ buttonText, variant, onPress, disabled }: ButtonProps) {
   return (
     <TouchableOpacity
+    disabled={disabled}
     onPress={onPress}
       style={[
         variant === "primary" && styles.primaryButton,

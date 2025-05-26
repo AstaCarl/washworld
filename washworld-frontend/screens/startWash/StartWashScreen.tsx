@@ -2,28 +2,47 @@ import { View, StyleSheet } from "react-native";
 import Button from "../../components/atoms/Button";
 import CrossIcon from "../../components/icons/CrossIcon";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { RootTabParamList } from "../../navigation/TabsNavigation";
 import { Text } from "@react-navigation/elements";
-import { useCreateWash } from "./washQuery";
+import { useCreateWash, useGetWashById } from "./washQuery";
+import React, { useEffect } from "react";
+import { reloadJwtFromStorage } from "../auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { RootState } from "../../store/store";
 
 export default function StartWashScreen() {
-  const navigation = useNavigation<RootTabParamList>();
+  const navigation = useNavigation<any>();
   const route = useRoute();
   const params = route.params as any;
   const washObject = params.washObject?.washObject || params.washObject;
-  const { mutate } = useCreateWash();
+  const [createdWashObject, setCreatedWashObject] = React.useState({});
+  const token = useSelector((state: RootState) => state.auth.token);
+  const dispatch = useDispatch<AppDispatch>();
 
+  useEffect(() => {
+    dispatch(reloadJwtFromStorage());
+  }, []);
+
+  const { mutate } = useCreateWash((data) => {
+    console.log("Wash started successfully:", data);
+    setCreatedWashObject(data);
+    navigation.navigate("WashFlow", {
+      screen: "ActiveWash",
+      params: {
+        createdWashObject: data,
+      },
+    });
+  });
 
   const handleStartWash = () => {
     const formattedWashObject = {
-      user: { id: 1 },
       hall: { id: washObject.hallId },
       programme: { id: washObject.programmeId },
       additionalProgramme: { id: washObject.additionalProgrammeId },
     };
     console.log("Wash object before sending", formattedWashObject);
 
-    mutate(formattedWashObject);
+    mutate({ washObject: formattedWashObject, token });
   };
 
   console.log("Selected wash object from start wash:", washObject);

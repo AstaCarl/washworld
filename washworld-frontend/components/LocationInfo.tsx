@@ -28,7 +28,7 @@ export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
     }
   }, [selectedLocation]);
 
-    React.useEffect(() => {
+  React.useEffect(() => {
     if (selectedHallId) {
       setWashObject((prev) => ({
         ...prev,
@@ -62,7 +62,16 @@ export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
         setSelectedHallId={setSelectedHallId}
       />
       <Button
-        onPress={() => navigation.navigate("WashFlow", { screen: "Programme", params: { washObject, setWashObject } })}
+        onPress={
+          selectedHallId
+            ? () =>
+                navigation.navigate("WashFlow", {
+                  screen: "Programme",
+                  params: { washObject, setWashObject },
+                })
+            : undefined
+        }
+        disabled={!selectedHallId}
         variant="primary"
         buttonText="Start Wash"
       />
