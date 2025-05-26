@@ -6,6 +6,7 @@ import {
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { first } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -77,6 +78,9 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload),
       id: user.id,
+      membership: userFromDb.membership,
+      firstname: userFromDb.firstname,
+      lastname: userFromDb.lastname,
     };
   }
 }
