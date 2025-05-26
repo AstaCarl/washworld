@@ -4,10 +4,9 @@ import CrossIcon from "../../components/icons/CrossIcon";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RootTabParamList } from "../../navigation/TabsNavigation";
 import { Text } from "@react-navigation/elements";
-import { useCreateWash, useGetWashById } from "./washQuery";
-import React, { use, useEffect } from "react";
+import { useGetWashById } from "./washQuery";
+import React from "react";
 import Counter from "../../components/atoms/Counter";
-import Paragraf from "../../components/atoms/Paragraf";
 import Subtitle from "../../components/atoms/Subtitle";
 
 type WashObject = {
@@ -71,7 +70,6 @@ export default function ActiveWashScreen() {
         <Button
           variant="danger"
           buttonText="EMERGENCY STOP"
-          // onPress={handleStartWash}
         />
       </View>
     </View>
