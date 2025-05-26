@@ -46,7 +46,7 @@ export default function ActiveWashScreen() {
         onPress={() => navigation.navigate("MapScreen")}
         color="#fff"
       />
-      <View style={styles.programmeList}>
+      <View style={styles.washList}>
         {wash && wash ? (
           <>
           <View style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     marginTop: 20,
   },
-  programmeList: {
+  washList: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
