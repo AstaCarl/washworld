@@ -22,6 +22,7 @@ export default function LoginScreen() {
     };
     const response = await dispatch(login(user));
     console.log(response);
+    // navigation.navigate("Home");
   };
 
   return (
@@ -45,11 +46,7 @@ export default function LoginScreen() {
           <Button buttonText="Forgot password?" variant="greenLink" />
         </View>
         <View style={styles.buttonGroup}>
-          <Button
-            buttonText="Login"
-            variant="primary"
-            onPress={handleLogin}
-          />
+          <Button buttonText="Login" variant="primary" onPress={handleLogin} />
           <Button
             onPress={() => navigation.navigate("Signup")}
             buttonText="Become a member"
