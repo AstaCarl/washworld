@@ -7,6 +7,8 @@ import { Text } from "@react-navigation/elements";
 import { useCreateWash, useGetWashById } from "./washQuery";
 import React, { use, useEffect } from "react";
 import Counter from "../../components/atoms/Counter";
+import Paragraf from "../../components/atoms/Paragraf";
+import Subtitle from "../../components/atoms/Subtitle";
 
 type WashObject = {
   id: number;
@@ -46,11 +48,17 @@ export default function ActiveWashScreen() {
         color="#fff"
       />
       <View style={styles.programmeList}>
-        {wash ? (
+        {wash && wash ? (
           <>
+          <View style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
             <Text style={styles.title}>{wash.programme.name}</Text>
-            <Text style={styles.title}>{wash.additionalProgramme.name}</Text>
+            <View style={styles.row}>
+            <Text style={styles.plus}>+</Text>
+            <Subtitle variant="whiteCapital" title={wash.additionalProgramme.name}/>
+            </View>
+            </View>
             <Counter
+            style={{fontSize: 58,}}
               number={wash.finishedTime}
               onFinish={() => navigation.navigate("Home")}
             />
@@ -78,29 +86,40 @@ const styles = StyleSheet.create({
     backgroundColor: "#000",
     width: "100%",
     height: "100%",
-    paddingHorizontal: 40,
+    paddingHorizontal: 20,
     paddingVertical: 80,
   },
   buttonGroup: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "100%",
     marginTop: 20,
   },
   programmeList: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
-    gap: 20,
+    justifyContent: "space-between",
     width: "100%",
+    height: "70%",
+    gap: 20,
   },
   title: {
     color: "#fff",
-    fontSize: 42,
+    fontSize: 38,
     fontWeight: "bold",
     textAlign: "center",
-    width: "80%",
   },
+  plus: {
+    color: "#0CE578",
+    fontSize: 30,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  row:{
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10
+  }
 });

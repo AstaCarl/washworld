@@ -4,7 +4,7 @@ import EcoCard from "../components/EcoCard";
 import { useSelector, useDispatch } from 'react-redux';
 import { reloadJwtFromStorage } from "../screens/auth/authSlice";
 import Title from "../components/atoms/Title";
-import StartWash from "../components/StartWash";
+import ViewMap from "../components/ViewMap";
 
 export default function HomeScreen() {
 const token = useSelector((state) => state.token || null);
@@ -28,7 +28,7 @@ const dispatch = useDispatch();
   return (
     <View style={styles.container}>
       <Title title="Welcome Back" variant="green"/>
-      <StartWash/>
+      <ViewMap/>
       <EcoCard/>
     </View>
   );

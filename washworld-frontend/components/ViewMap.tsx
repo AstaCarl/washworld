@@ -8,9 +8,10 @@ import { RootStackParamList } from "../navigation/WashFlowStackScreen";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
+import { RootTabParamList } from "../navigation/TabsNavigation";
 
-export default function StartWash() {
-  const navigation = useNavigation<RootStackParamList>();
+export default function ViewMap() {
+  const navigation = useNavigation<RootTabParamList>();
 
   const [region, setRegion] = useState({
     latitude: 55.7635,
@@ -51,9 +52,9 @@ export default function StartWash() {
         </View>
       </View>
       <Button
-        buttonText="Start Wash"
+        buttonText="Find Wash Location"
         variant="primary"
-        onPress={() => navigation.navigate("WashFlow")}
+        onPress={() => navigation.navigate("Map")}
       />
       <View style={styles.qrContainer}>
         <View>

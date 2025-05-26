@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { Text } from "react-native";
 import { StyleSheet } from "react-native";
 
+import { StyleProp, TextStyle } from "react-native";
+
 type counterProps = {
   number: string;
   onFinish?: () => void;
+  style?: StyleProp<TextStyle>;
 };
 
-export default function Counter({ number, onFinish }: counterProps) {
+export default function Counter({ number, onFinish, style }: counterProps) {
 
   const getTimeRemaining = (finishedTimeString: string) => {
     if (!finishedTimeString) return 0;
@@ -41,7 +44,7 @@ export default function Counter({ number, onFinish }: counterProps) {
 
   return (
     <Text
-      style={styles.subtitleWhiteCapital}
+      style={[styles.subtitleWhiteCapital, style]}
     >
       {formatted}
     </Text>
