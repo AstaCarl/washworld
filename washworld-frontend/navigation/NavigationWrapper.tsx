@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { reloadJwtFromStorage } from "../screens/auth/authSlice";
 import { AuthStackScreen } from "./AuthStackScreen";
 import { TabsNavigation } from "./TabsNavigation";
-import { WashFlowStackScreen } from "./WashFlowStackScreen";
 
 const NavigationWrapper = () => {
   const token = useSelector((state: RootState) => state.auth.token);

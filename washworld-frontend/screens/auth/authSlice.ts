@@ -28,7 +28,14 @@ export const signup = createAsyncThunk(
 export const login = createAsyncThunk(
   "auth/login",
   async (loginParams: LoginParams, thunkAPI) => {
-    const response = await UserApi.login(loginParams.username, loginParams.password)
+    const response = await UserApi.login(
+      loginParams.username,
+      loginParams.password
+    );
+    if (response.statusCode && response.statusCode >= 400) {
+      return thunkAPI.rejectWithValue(response);
+    }
+    await SecureStore.setItemAsync("jwt", response.access_token);
     return response;
   }
 );
@@ -67,6 +74,8 @@ export const authSlice = createSlice({
       console.log("signup fulfilled", action.payload);
       state.errormessage = "";
       SecureStore.setItemAsync("jwt", action.payload.access_token);
+      SecureStore.setItemAsync("userId", action.payload.user.id);
+      SecureStore.setItemAsync("membership", action.payload.user.membership);
       state.token = action.payload.access_token;
     }),
       builder.addCase(signup.rejected, (state, action) => {

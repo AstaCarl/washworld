@@ -1,10 +1,7 @@
-import { Text } from "@react-navigation/elements";
 import { StyleSheet, View } from "react-native";
 import React, {useEffect} from "react";
-import Button from "../components/atoms/Button";
 import EcoCard from "../components/EcoCard";
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from "../store/store";
 import { reloadJwtFromStorage } from "../screens/auth/authSlice";
 import Title from "../components/atoms/Title";
 import StartWash from "../components/StartWash";
@@ -12,6 +9,17 @@ import StartWash from "../components/StartWash";
 export default function HomeScreen() {
 const token = useSelector((state) => state.token || null);
 const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    const getUserInfo = async () => {
+      const id = await SecureStore.getItemAsync('userId');
+      const member = await SecureStore.getItemAsync('membership');
+      setUserId(id);
+      setMembership(member);
+    };
+    getUserInfo();
+  }, []);
 
   useEffect(() => {
     dispatch(reloadJwtFromStorage());

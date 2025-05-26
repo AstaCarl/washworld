@@ -1,13 +1,16 @@
 import { View, StyleSheet } from "react-native";
 import Button from "../../components/atoms/Button";
 import CrossIcon from "../../components/icons/CrossIcon";
-import { useNavigation } from "@react-navigation/native";
-import { RootTabParamList } from "../../navigation/TabsNavigation";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { Text } from "@react-navigation/elements";
 import CarAlertIcon from "../../components/icons/CarAlertIcon";
 
 export default function AntennaDismountScreen() {
-  const navigation = useNavigation<RootTabParamList>();
+  const navigation = useNavigation<any>();
+    const route = useRoute();
+    const { washObject } = route.params as { washObject: any };
+
+    console.log("Selected wash object from antenna dismount screen:", washObject);
 
   return (
     <View style={styles.container}>
@@ -25,7 +28,16 @@ export default function AntennaDismountScreen() {
           buttonText="Previous"
           onPress={() => navigation.navigate("AdditionalProgramme")}
         />
-        <Button variant="iconButtonGreen" buttonText="Next" />
+        <Button variant="iconButtonGreen" buttonText="Next"
+                 onPress={() =>
+            navigation.navigate("WashFlow", {
+              screen: "StartWash",
+              params: {
+                washObject: {washObject},
+              },
+            })
+          }
+        />
       </View>
     </View>
   );

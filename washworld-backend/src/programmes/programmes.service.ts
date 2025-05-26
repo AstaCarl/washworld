@@ -21,7 +21,7 @@ export class ProgrammesService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} programme`;
+    return this.programmesRepository.findOne({where: { id }});
   }
 
   update(id: number, updateProgrammeDto: UpdateProgrammeDto) {

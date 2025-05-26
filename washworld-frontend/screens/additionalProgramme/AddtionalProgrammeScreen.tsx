@@ -2,8 +2,7 @@ import { View, StyleSheet } from "react-native";
 import Button from "../../components/atoms/Button";
 import AdditionalProgramme from "../../components/AdditonalProgramme";
 import CrossIcon from "../../components/icons/CrossIcon";
-import { useNavigation } from "@react-navigation/native";
-import { RootTabParamList } from "../../navigation/TabsNavigation";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import { useGetAdditionalProgrammes } from "./AdditionalProgrammeQuery";
 
@@ -14,18 +13,28 @@ type AdditionalProgramme = {
   description: string;
 };
 export default function AdditionalProgrammeScreen() {
+  const route = useRoute();
+  const { washObject } = route.params as { washObject: any };
+  const { setWashObject } = route.params as { setWashObject: any };
   const { data: additionalProgrammes } = useGetAdditionalProgrammes() as {
     data: AdditionalProgramme[];
   };
   console.log("Programmes data:", additionalProgrammes);
 
-  const navigation = useNavigation<RootTabParamList>();
-  const [selectedValue, setSelectedValue] = useState<number | null>(null);
+  console.log(
+    "Selected wash object from additional programme screen:",
+    washObject
+  );
 
-  
+  const navigation = useNavigation<any>();
+  const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
   const handleProgrammePress = (value: number) => {
     setSelectedValue(value);
+        setWashObject((prev: any) => ({
+      ...prev,
+      additionalProgrammeId: value,
+    }));
     console.log("Selected additional programme id:", value);
   };
 
@@ -36,17 +45,18 @@ export default function AdditionalProgrammeScreen() {
         color="#fff"
       />
       <View style={styles.programmeList}>
-        {additionalProgrammes && additionalProgrammes.map((programme, index) => (
-          <AdditionalProgramme
-            key={index}
-            title={programme.name}
-            text={programme.description}
-            price={programme.price}
-            value={programme.id}
-            onPress={handleProgrammePress}
-            selected={selectedValue === programme.id}
-          />
-        ))}
+        {additionalProgrammes &&
+          additionalProgrammes.map((programme, index) => (
+            <AdditionalProgramme
+              key={index}
+              title={programme.name}
+              text={programme.description}
+              price={programme.price}
+              value={programme.id}
+              onPress={handleProgrammePress}
+              selected={selectedValue === programme.id}
+            />
+          ))}
       </View>
       <View style={styles.buttonGroup}>
         <Button
@@ -57,7 +67,15 @@ export default function AdditionalProgrammeScreen() {
         <Button
           variant="iconButtonGreen"
           buttonText="Next"
-          onPress={() => navigation.navigate("AntennaDismount")}
+          onPress={() =>
+            navigation.navigate("WashFlow", {
+              screen: "AntennaDismount",
+              params: {
+                washObject: { ...washObject, additionalProgrammeId: selectedValue },
+                setWashObject,
+              },
+            })
+          }
         />
       </View>
     </View>
