@@ -7,11 +7,15 @@ import {
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { JwtAuthGuard } from './jwt-auth.guard';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { LoginResponseDto } from 'src/users/dto/login-user.dto';
 
 @Controller()
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    
+  }
 
   @UseGuards(JwtAuthGuard)
   @Post('auth/upgrade')
@@ -21,6 +25,17 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
+  @ApiOperation({ summary: 'POST to log in' })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        username: { type: 'string' },
+        password: { type: 'string' }
+      },
+    }
+  })
+  @ApiResponse({ status: 201, description: 'login successful.', type: LoginResponseDto})
   async login(@Request2() req) {
     console.log('login', req.user);
     return this.authService.login(req.user);
@@ -28,7 +43,11 @@ export class AuthController {
 
   @Post('auth/signup')
   @ApiOperation({ summary: 'Sign up a new user' })
-  @ApiResponse({ status: 201, description: 'User created successfully.' })
+  @ApiBody({
+    type: CreateUserDto,
+    description: 'The user details for signing up',
+  })
+  @ApiResponse({ status: 201, description: 'User created successfully.', type: LoginResponseDto})
   async signup(@Request2() req) {
     console.log('body', req.body);
     return this.authService.signup(req.body);

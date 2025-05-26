@@ -1,22 +1,29 @@
-import { Wash } from "src/washes/entities/wash.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ApiProperty } from '@nestjs/swagger';
+import { Wash } from 'src/washes/entities/wash.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class AdditionalProgramme {
-        @PrimaryGeneratedColumn()
-        id: number;
-    
-        @Column()
-        name: string;
-        
-        @Column() 
-        price: number;
+  @ApiProperty() // Swagger documentation for the property
+  @PrimaryGeneratedColumn() // Auto-generated primary key
+  id: number;
 
-        @Column()
-        description: string;
-    
-        @Column()
-        runTimeInSeconds: number;
+  @ApiProperty()
+  @Column() // Column decorater for database field
+  name: string;
 
-        @OneToMany(() => Wash, (wash) => wash.additionalProgramme, {})
-        washes: Wash[];
-    }
+  @ApiProperty()
+  @Column()
+  price: number;
+
+  @ApiProperty()
+  @Column()
+  description: string;
+
+  @ApiProperty()
+  @Column()
+  runTimeInSeconds: number;
+
+  @ApiProperty()
+  @OneToMany(() => Wash, (wash) => wash.additionalProgramme, {})
+  washes: Wash[];
+}

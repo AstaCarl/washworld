@@ -3,10 +3,7 @@ import { Programme } from '../../programmes/entities/programme.entity';
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
-  OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { User } from 'src/users/entities/user.entity';
@@ -16,6 +13,7 @@ import { Hall } from 'src/halls/entities/hall.entity';
 export class Wash {
   @PrimaryGeneratedColumn()
   id: number;
+
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   startedTimeDate: Date;
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateMembershipDto } from './dto/create-membership.dto';
-import { UpdateMembershipDto } from './dto/update-membership.dto';
-import { In, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Membership } from './entities/membership.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -19,17 +18,5 @@ export class MembershipsService {
 
   findAll() {
     return this.membershipRepository.find();
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} membership`;
-  }
-
-  update(id: number, updateMembershipDto: UpdateMembershipDto) {
-    return `This action updates a #${id} membership`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} membership`;
   }
 }

@@ -1,8 +1,10 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Location } from "src/locations/entities/location.entity";
-import { Wash } from "src/washes/entities/wash.entity";
 
 export class CreateHallDto {
+    @ApiProperty({ example: {"id": 1} })
     location: Location;
-    // wash: Wash
+
+    @ApiProperty({ example: true})
     operationalStatus: boolean; // true = operational, false = not operational
 }

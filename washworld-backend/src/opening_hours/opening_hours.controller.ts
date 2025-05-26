@@ -1,34 +1,20 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+} from '@nestjs/common';
 import { OpeningHoursService } from './opening_hours.service';
 import { CreateOpeningHourDto } from './dto/create-opening_hour.dto';
-import { UpdateOpeningHourDto } from './dto/update-opening_hour.dto';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('opening-hours')
 export class OpeningHoursController {
   constructor(private readonly openingHoursService: OpeningHoursService) {}
 
   @Post()
+  @ApiOperation({ summary: 'POST opening hours' })
+  @ApiResponse({ status: 201, description: 'Open hours created successfully.' })
   create(@Body() createOpeningHourDto: CreateOpeningHourDto) {
     return this.openingHoursService.create(createOpeningHourDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.openingHoursService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.openingHoursService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOpeningHourDto: UpdateOpeningHourDto) {
-    return this.openingHoursService.update(+id, updateOpeningHourDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.openingHoursService.remove(+id);
   }
 }

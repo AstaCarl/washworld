@@ -1,34 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { MembershipsService } from './memberships.service';
 import { CreateMembershipDto } from './dto/create-membership.dto';
-import { UpdateMembershipDto } from './dto/update-membership.dto';
+import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { MembershipResponseDto } from './dto/response-membership.dto';
 
 @Controller('memberships')
 export class MembershipsController {
   constructor(private readonly membershipsService: MembershipsService) {}
 
   @Post()
+  @ApiOperation({ summary: 'POST a membership' })
+  @ApiResponse({ status: 201, description: 'Membership created successfully.' })
   create(@Body() createMembershipDto: CreateMembershipDto) {
     return this.membershipsService.create(createMembershipDto);
   }
 
   @Get()
+  @ApiOperation({ summary: 'GET all memberships' })
+  @ApiResponse({ status: 201, description: 'Memberships retrieved successfully.', type: [MembershipResponseDto] })
   findAll() {
     return this.membershipsService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.membershipsService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMembershipDto: UpdateMembershipDto) {
-    return this.membershipsService.update(+id, updateMembershipDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.membershipsService.remove(+id);
   }
 }

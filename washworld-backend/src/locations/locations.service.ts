@@ -1,13 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { CreateLocationDto } from './dto/create-location.dto';
-import { UpdateLocationDto } from './dto/update-location.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Location } from './entities/location.entity';
 import { Repository } from 'typeorm';
 import { Coordinate } from 'src/coordinates/entities/coordinate.entity';
-import { CoordinatesService } from 'src/coordinates/coordinates.service';
-import { Hall } from 'src/halls/entities/hall.entity';
-import { finished } from 'stream';
 
 @Injectable()
 export class LocationsService {
@@ -16,8 +12,6 @@ export class LocationsService {
     private locationRepository: Repository<Location>,
     @InjectRepository(Coordinate)
     private coordinateRepository: Repository<Coordinate>,
-    @InjectRepository(Hall)
-    private hallRepository: Repository<Hall>,
   ) {}
 
   async create(createLocationDto: CreateLocationDto) {
@@ -76,25 +70,17 @@ export class LocationsService {
     return locationData;
   }
 
-  async findOne(id: number) {
-    const location = await this.locationRepository.findOne({
-      where: { id },
-      relations: ['coordinate', 'openingHours'],
-    });
+  // async findOne(id: number) {
+  //   const location = await this.locationRepository.findOne({
+  //     where: { id },
+  //     relations: ['coordinate', 'openingHours'],
+  //   });
 
-    const halls = await this.hallRepository.find({
-      where: { location: { id } },
-      relations: ['washes', 'washes.programme', 'washes.additionalProgramme'],
-    });
+  //   const halls = await this.hallRepository.find({
+  //     where: { location: { id } },
+  //     relations: ['washes', 'washes.programme', 'washes.additionalProgramme'],
+  //   });
 
-    return { location, halls };
-  }
-
-  update(id: number, updateLocationDto: UpdateLocationDto) {
-    return `This action updates a #${id} location`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} location`;
-  }
+  //   return { location, halls };
+  // }
 }

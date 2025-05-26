@@ -19,24 +19,12 @@ export class UsersService {
     return this.userRepository.save(newUser); // Never save passwords in clear text!
   }
 
-  findAll() {
-    return `This action returns all users`;
-  }
-
   async findById(id: number): Promise<User> {
     const user = await this.userRepository.findOne({ where: { id: id } });
     if (!user) {
       throw new Error(`User with id ${id} not found`);
     }
     return user;
-  }
-
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 
   async upgrade(userId: number) {
@@ -53,11 +41,4 @@ export class UsersService {
     return result || null; // Return null if the user is not found
   }
 
-  // async remove(id: number) {
-  //   const user = await this.userRepository.findOne({ where: { id: id } });
-  //   if (!user) {
-  //     throw new Error(`User with id ${id} not found`);
-  //   }
-  //   return this.userRepository.remove(user); // This will remove the user from the database
-  // }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProgrammeDto } from './dto/create-programme.dto';
-import { UpdateProgrammeDto } from './dto/update-programme.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Programme } from './entities/programme.entity';
 import { Repository } from 'typeorm';
@@ -18,17 +17,5 @@ export class ProgrammesService {
 
   findAll() {
     return this.programmesRepository.find();
-  }
-
-  findOne(id: number) {
-    return this.programmesRepository.findOne({where: { id }});
-  }
-
-  update(id: number, updateProgrammeDto: UpdateProgrammeDto) {
-    return `This action updates a #${id} programme`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} programme`;
   }
 }
