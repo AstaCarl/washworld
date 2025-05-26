@@ -15,7 +15,7 @@ export class AuthService {
   ) {}
 
   async upgrade(userId: number) {
-    return this.usersService.upgrade(userId)
+    return this.usersService.upgrade(userId);
   }
 
   async signup(user: any) {
@@ -44,6 +44,10 @@ export class AuthService {
 
     return {
       access_token: this.jwtService.sign(payload),
+      user: {
+        id: createdUser.id,
+        membership: createdUser.membership,
+      },
     };
   }
 
@@ -72,6 +76,8 @@ export class AuthService {
 
     return {
       access_token: this.jwtService.sign(payload),
+      id: user.id,
+      membership: user.membership,
     };
   }
 }
