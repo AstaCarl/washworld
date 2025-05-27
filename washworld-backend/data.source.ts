@@ -13,8 +13,8 @@ export const dbConfig: TypeOrmModuleOptions = {
   database: process.env.DB_NAME,
   autoLoadEntities: true,
   synchronize: true,
-  entities: [],
-  migrations: [],
+  entities: ['dist/**/*.entity{.ts,.js}'], // Path to your entities
+  migrations: ['dist/src/migrations/*{.ts,.js}'], // Path to your migrations
 };
 
 const datasource = new DataSource(dbConfig as DataSourceOptions);

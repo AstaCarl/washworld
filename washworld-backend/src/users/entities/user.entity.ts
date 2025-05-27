@@ -33,9 +33,6 @@ export class User {
     @OneToMany(() => Wash, (wash) => wash.user)
     washes: Wash;
 
-    @Column()
-    currentLocation: number;
-
     @Column({ default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
