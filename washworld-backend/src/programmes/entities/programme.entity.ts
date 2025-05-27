@@ -21,6 +21,6 @@ export class Programme {
     runTimeInSeconds: number;
 
     @ApiProperty()
-    @OneToMany(() => Wash, (wash) => wash.programme, {})
+    @OneToMany(() => Wash, (wash) => wash.programme, {cascade: true, onDelete: 'CASCADE'})
     washes: Wash[];
 }

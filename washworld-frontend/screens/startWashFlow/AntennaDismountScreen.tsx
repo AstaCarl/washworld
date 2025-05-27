@@ -7,10 +7,13 @@ import CarAlertIcon from "../../components/icons/CarAlertIcon";
 
 export default function AntennaDismountScreen() {
   const navigation = useNavigation<any>();
-    const route = useRoute();
-    const { washObject } = route.params as { washObject: any };
+  const route = useRoute();
+  const params = route.params as any;
+  const washObject = params.washObject?.washObject ?? params.washObject;
+  const setWashObject =
+    params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
 
-    console.log("Selected wash object from antenna dismount screen:", washObject);
+  console.log("Selected wash object from antenna dismount screen:", washObject);
 
   return (
     <View style={styles.container}>
@@ -26,14 +29,31 @@ export default function AntennaDismountScreen() {
         <Button
           variant="iconButtonBlack"
           buttonText="Previous"
-          onPress={() => navigation.navigate("AdditionalProgramme")}
+          onPress={() => {
+            const {
+              additionalProgrammeId,
+              ...washObjectWithoutAdditionalProgrammeId
+            } = washObject;
+
+            navigation.navigate("WashFlow", {
+              screen: "AdditionalProgramme",
+              params: {
+                washObject: {
+                  washObject: washObjectWithoutAdditionalProgrammeId,
+                  setWashObject,
+                },
+              },
+            });
+          }}
         />
-        <Button variant="iconButtonGreen" buttonText="Next"
-                 onPress={() =>
+        <Button
+          variant="iconButtonGreen"
+          buttonText="Next"
+          onPress={() =>
             navigation.navigate("WashFlow", {
               screen: "StartWash",
               params: {
-                washObject: {washObject},
+                washObject: { washObject },
               },
             })
           }

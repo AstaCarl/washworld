@@ -1,7 +1,7 @@
 import { View, StyleSheet } from "react-native";
-import Button from "../../components/atoms/Button";
-import AdditionalProgramme from "../../components/AdditonalProgramme";
-import CrossIcon from "../../components/icons/CrossIcon";
+import Button from "../../../components/atoms/Button";
+import AdditionalProgramme from "../../../components/AdditonalProgramme";
+import CrossIcon from "../../../components/icons/CrossIcon";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import { useGetAdditionalProgrammes } from "./AdditionalProgrammeQuery";
@@ -14,8 +14,10 @@ type AdditionalProgramme = {
 };
 export default function AdditionalProgrammeScreen() {
   const route = useRoute();
-  const { washObject } = route.params as { washObject: any };
-  const { setWashObject } = route.params as { setWashObject: any };
+    const params = route.params as any;
+  const washObject = params.washObject?.washObject ?? params.washObject;
+  const setWashObject =
+    params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
   const { data: additionalProgrammes } = useGetAdditionalProgrammes() as {
     data: AdditionalProgramme[];
   };
@@ -31,7 +33,7 @@ export default function AdditionalProgrammeScreen() {
 
   const handleProgrammePress = (value: number) => {
     setSelectedValue(value);
-        setWashObject((prev: any) => ({
+    setWashObject((prev: any) => ({
       ...prev,
       additionalProgrammeId: value,
     }));
@@ -62,20 +64,40 @@ export default function AdditionalProgrammeScreen() {
         <Button
           variant="iconButtonBlack"
           buttonText="Previous"
-          onPress={() => navigation.navigate("Programme")}
+          // onPress={() => navigation.navigate("Programme")}
+          onPress={() => {
+            const { additionalProgrammeId, ...washObjectWithoutAdditionalProgrammeId } =
+              washObject;
+
+            navigation.navigate("WashFlow", {
+              screen: "Programme",
+              params: {
+                washObject: {
+                  washObject: washObjectWithoutAdditionalProgrammeId,
+                  setWashObject,
+                },
+              },
+            });
+          }}
         />
         <Button
           variant="iconButtonGreen"
           buttonText="Next"
-          onPress={() =>
-            navigation.navigate("WashFlow", {
-              screen: "AntennaDismount",
-              params: {
-                washObject: { ...washObject, additionalProgrammeId: selectedValue },
-                setWashObject,
-              },
-            })
-          }
+        onPress={
+          selectedValue
+            ? () =>
+                navigation.navigate("WashFlow", {
+                  screen: "AntennaDismount",
+                  params: {
+                    washObject: {
+                      ...washObject,
+                      additionalProgrammeId: selectedValue,
+                      setWashObject,
+                    },
+                  },
+                })
+            : undefined
+        }
         />
       </View>
     </View>

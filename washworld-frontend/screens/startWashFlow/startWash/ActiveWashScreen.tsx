@@ -1,13 +1,14 @@
 import { View, StyleSheet } from "react-native";
-import Button from "../../components/atoms/Button";
-import CrossIcon from "../../components/icons/CrossIcon";
+import Button from "../../../components/atoms/Button";
+import CrossIcon from "../../../components/icons/CrossIcon";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { RootTabParamList } from "../../navigation/TabsNavigation";
+import { RootTabParamList } from "../../../navigation/TabsNavigation";
 import { Text } from "@react-navigation/elements";
 import { useGetWashById } from "./washQuery";
 import React from "react";
-import Counter from "../../components/atoms/Counter";
-import Subtitle from "../../components/atoms/Subtitle";
+import Counter from "../../../components/atoms/Counter";
+import Subtitle from "../../../components/atoms/Subtitle";
+import CarWashIcon from "../../../components/icons/CarWashIcon";
 
 type WashObject = {
   id: number;
@@ -49,13 +50,14 @@ export default function ActiveWashScreen() {
       <View style={styles.washList}>
         {wash && wash ? (
           <>
-          <View style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+          <View style={{display: "flex", flexDirection: "column", alignItems: "center", gap: 10}}>
             <Text style={styles.title}>{wash.programme.name}</Text>
             <View style={styles.row}>
             <Text style={styles.plus}>+</Text>
             <Subtitle variant="whiteCapital" title={wash.additionalProgramme.name}/>
             </View>
             </View>
+            <CarWashIcon color="#FFF"/>
             <Counter
             style={{fontSize: 58,}}
               number={wash.finishedTime}

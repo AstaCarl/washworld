@@ -17,13 +17,13 @@ export class Wash {
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   startedTimeDate: Date;
 
-  @ManyToOne(() => Programme, (programme) => programme.washes, {})
+  @ManyToOne(() => Programme, (programme) => programme.washes, {onDelete: 'CASCADE'})
   programme: Programme;
 
   @ManyToOne(
     () => AdditionalProgramme,
     (additionalProgramme) => additionalProgramme.washes,
-    { nullable: true },
+    { nullable: true, onDelete: 'CASCADE' },
   )
   additionalProgramme: AdditionalProgramme;
 

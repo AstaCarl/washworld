@@ -1,7 +1,6 @@
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import Paragraf from "./Paragraf";
-import Subtitle from "./Subtitle";
-import { useState } from "react";
+import Paragraf from "./atoms/Paragraf";
+import Subtitle from "./atoms/Subtitle";
 
 type ProgrammeTypeBannerProps = {
   bannerTextLeft: string;

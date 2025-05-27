@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import ProgrammeScreen from "../screens/programme/ProgrammeScreen";
-import AdditionalProgrammeScreen from "../screens/additionalProgramme/AddtionalProgrammeScreen";
-import AntennaDismountScreen from "../screens/antennaDismount/AntennaDismountScreen";
-import StartWashScreen from "../screens/startWash/StartWashScreen";
-import ActiveWashScreen from "../screens/startWash/ActiveWashScreen";
+import AdditionalProgrammeScreen from "../screens/startWashFlow/additionalProgramme/AddtionalProgrammeScreen";
+import AntennaDismountScreen from "../screens/startWashFlow/AntennaDismountScreen";
+import ProgrammeScreen from "../screens/startWashFlow/programme/ProgrammeScreen";
+import StartWashScreen from "../screens/startWashFlow/startWash/StartWashScreen";
+import ActiveWashScreen from "../screens/startWashFlow/startWash/ActiveWashScreen";
 
 // Define the types for the stack navigator
 export type RootStackParamList = {

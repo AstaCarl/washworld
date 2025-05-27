@@ -37,7 +37,9 @@ export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
     }
   }, [selectedHallId]);
 
-  console.log("Wash object:", washObject);
+  console.log("Wash object from location info:", washObject);
+  console.log("Wash object from location info with out programme:", washObject);
+
 
   if (!selectedLocation) return null;
   return (

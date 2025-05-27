@@ -1,20 +1,22 @@
 import { View, StyleSheet } from "react-native";
-import Button from "../../components/atoms/Button";
-import CrossIcon from "../../components/icons/CrossIcon";
+import Button from "../../../components/atoms/Button";
+import CrossIcon from "../../../components/icons/CrossIcon";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { Text } from "@react-navigation/elements";
-import { useCreateWash, useGetWashById } from "./washQuery";
+import { useCreateWash } from "./washQuery";
 import React, { useEffect } from "react";
-import { reloadJwtFromStorage } from "../auth/authSlice";
+import { reloadJwtFromStorage } from "../../auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch } from "../../store/store";
-import { RootState } from "../../store/store";
+import { AppDispatch } from "../../../store/store";
+import { RootState } from "../../../store/store";
 
 export default function StartWashScreen() {
   const navigation = useNavigation<any>();
   const route = useRoute();
   const params = route.params as any;
-  const washObject = params.washObject?.washObject || params.washObject;
+  const washObject = params.washObject?.washObject ?? params.washObject;
+  const setWashObject =
+    params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
   const [createdWashObject, setCreatedWashObject] = React.useState({});
   const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch<AppDispatch>();
