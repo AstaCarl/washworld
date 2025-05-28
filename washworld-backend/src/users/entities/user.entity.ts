@@ -21,8 +21,8 @@ export class User {
     @Column()
     password: string;
 
-    // @Column()
-    // license: string;
+    @Column()
+    license: string;
 
     @ManyToOne(() => Membership, (membership) => membership.users)
     membership: Membership;
