@@ -7,8 +7,7 @@ import { useState } from "react";
 
 export default function HallCard({ halls, selectedHallId, setSelectedHallId }: any) {
   
-  const [_, setRerender] = useState(false); // dummy state to force rerender
-  // const [selectedHallId, setSelectedHallId] = useState<number | null>(null);
+  const [_, setRerender] = useState(false); 
 
   const handleHallPress = (id: number) => {
     setSelectedHallId(id)
