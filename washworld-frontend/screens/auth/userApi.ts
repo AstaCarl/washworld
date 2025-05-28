@@ -18,6 +18,7 @@ export class UserApi {
   }
 
   static async login(username: string, password: string) {
+    console.log("calling", UserApi.baseUrl + "/auth/login");
     const respone = await fetch(UserApi.baseUrl + "/auth/login", {
       method: "POST",
       headers: {

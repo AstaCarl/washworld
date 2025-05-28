@@ -14,7 +14,7 @@ type AdditionalProgramme = {
 };
 export default function AdditionalProgrammeScreen() {
   const route = useRoute();
-    const params = route.params as any;
+  const params = route.params as any;
   const washObject = params.washObject?.washObject ?? params.washObject;
   const setWashObject =
     params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
@@ -64,7 +64,6 @@ export default function AdditionalProgrammeScreen() {
         <Button
           variant="iconButtonBlack"
           buttonText="Previous"
-          // onPress={() => navigation.navigate("Programme")}
           onPress={() => {
             const { additionalProgrammeId, ...washObjectWithoutAdditionalProgrammeId } =
               washObject;

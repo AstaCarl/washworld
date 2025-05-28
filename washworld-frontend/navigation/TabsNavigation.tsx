@@ -1,10 +1,8 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ProfileScreen from "../screens/profile/ProfileScreen";
-import MapScreen from "../screens/map/MapScreen";
 import MapIcon from "../components/icons/MapIcon";
 import HomeIcon from "../components/icons/HomeIcon";
 import ProfileIcon from "../components/icons/ProfileIcon";
-import HomeStackScreen from "./MapStackScreen";
 import HomeScreen from "../screens/HomeScreen";
 import MapStackScreen from "./MapStackScreen";
 
@@ -47,10 +45,13 @@ export const TabsNavigation = () => {
         component={HomeScreen}
       />
       <Tab.Screen
+        // unmountOnBlur={true} // Unmounts the screen when not focused
         options={{
           tabBarIcon: ({ focused }) => (
             <MapIcon color={focused ? "#0CE578" : "white"} />
           ),
+        popToTopOnBlur: true// Pop to top when navigating back to the Map tab
+
         }}
         name="Map"
         component={MapStackScreen}
