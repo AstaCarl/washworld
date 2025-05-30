@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateWashDto } from './dto/create-wash.dto';
-import { Wash } from './entities/wash.entity';
+import { Wash } from '../washes/entities/wash.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 

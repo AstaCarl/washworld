@@ -14,4 +14,8 @@ export class HallsService {
     return this.hallRepository.save(createHallDto);
   }
 
+
+  deleteMany() {
+    return this.hallRepository.delete({});
+  }
 }

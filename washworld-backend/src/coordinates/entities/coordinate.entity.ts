@@ -1,4 +1,4 @@
-import { Location } from 'src/locations/entities/location.entity';
+import { Location } from '../../../src/locations/entities/location.entity';
 import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Coordinate {

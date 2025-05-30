@@ -1,13 +1,13 @@
-import { AdditionalProgramme } from 'src/additional_programmes/entities/additional_programme.entity';
-import { Programme } from '../../programmes/entities/programme.entity';
+import { AdditionalProgramme } from '../../../src/additional_programmes/entities/additional_programme.entity';
+import { Programme } from '../../../src/programmes/entities/programme.entity';
 import {
   Column,
   Entity,
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { User } from 'src/users/entities/user.entity';
-import { Hall } from 'src/halls/entities/hall.entity';
+import { User } from '../../../src/users/entities/user.entity';
+import { Hall } from '../../../src/halls/entities/hall.entity';
 
 @Entity()
 export class Wash {

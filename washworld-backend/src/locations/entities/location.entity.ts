@@ -1,7 +1,7 @@
-import { Coordinate } from 'src/coordinates/entities/coordinate.entity';
-import { Hall } from 'src/halls/entities/hall.entity';
-import { OpeningHour } from 'src/opening_hours/entities/opening_hour.entity';
-import { User } from 'src/users/entities/user.entity';
+import { Coordinate } from '../../../src/coordinates/entities/coordinate.entity';
+import { Hall } from '../../../src/halls/entities/hall.entity';
+import { OpeningHour } from '../../../src/opening_hours/entities/opening_hour.entity';
+import { User } from '../../../src/users/entities/user.entity';
 import {
   Column,
   Entity,

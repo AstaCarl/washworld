@@ -1,9 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Programme } from '../../programmes/entities/programme.entity';
-import { AdditionalProgramme } from 'src/additional_programmes/entities/additional_programme.entity';
-import { Coordinate } from 'src/coordinates/entities/coordinate.entity';
-import { OpeningHour } from 'src/opening_hours/entities/opening_hour.entity';
-import { Hall } from 'src/halls/entities/hall.entity';
+import { AdditionalProgramme } from '../../../src/additional_programmes/entities/additional_programme.entity';
+import { Coordinate } from '../../../src/coordinates/entities/coordinate.entity';
+import { OpeningHour } from '../../../src/opening_hours/entities/opening_hour.entity';
+import { Hall } from '../../../src/halls/entities/hall.entity';
 
 // This DTO is used to represent the response structure for a wash operation for the documentation on swagger
 

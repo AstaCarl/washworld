@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { OpeningHour } from 'src/opening_hours/entities/opening_hour.entity';
+import { OpeningHour } from '../../../src/opening_hours/entities/opening_hour.entity';
 
 export class CreateLocationDto {
   @ApiProperty({ example: 'Lyngby Hovedgaade' })

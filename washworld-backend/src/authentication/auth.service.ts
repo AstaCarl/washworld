@@ -5,7 +5,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
+import { CreateUserDto } from '../../src/users/dto/create-user.dto';
 import { first } from 'rxjs';
 
 @Injectable()
@@ -34,7 +34,7 @@ export class AuthService {
     createUserDto.license = user.license;
     createUserDto.membership = user.membership;
     createUserDto.location = user.location;
-    createUserDto.currentLocation = user.currentLocation;
+    // createUserDto.currentLocation = user.currentLocation;
 
     const createdUser = await this.usersService.create(createUserDto);
 

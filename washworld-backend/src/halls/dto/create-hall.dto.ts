@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Location } from "src/locations/entities/location.entity";
+import { Location } from "../../../src/locations/entities/location.entity";
 
 export class CreateHallDto {
     @ApiProperty({ example: {"id": 1} })

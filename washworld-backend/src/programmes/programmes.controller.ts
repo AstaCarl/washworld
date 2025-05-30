@@ -3,8 +3,8 @@ import { ProgrammesService } from './programmes.service';
 import { CreateProgrammeDto } from './dto/create-programme.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ProgrammeResponseDto } from './dto/response-programme.dto';
-import { JwtAuthGuard } from 'src/authentication/jwt-auth.guard';
-import { AdminGuard } from 'src/authentication/admin-user.guard';
+import { JwtAuthGuard } from '../../src/authentication/jwt-auth.guard';
+import { AdminGuard } from '../../src/authentication/admin-user.guard';
 
 @Controller('programmes')
 export class ProgrammesController {

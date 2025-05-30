@@ -1,4 +1,4 @@
-import { Location } from "src/locations/entities/location.entity";
+import { Location } from "../../../src/locations/entities/location.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class OpeningHour {

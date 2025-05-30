@@ -1,7 +1,7 @@
-import { Membership } from "src/memberships/entities/membership.entity";
+import { Membership } from "../../../src/memberships/entities/membership.entity";
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Location } from "src/locations/entities/location.entity";
-import { Wash } from "src/washes/entities/wash.entity";
+import { Location } from "../../../src/locations/entities/location.entity";
+import { Wash } from "../../../src/washes/entities/wash.entity";
 import { Role } from "../Role";
 
 @Entity()
@@ -28,7 +28,7 @@ export class User {
     membership: Membership;
 
     @ManyToOne(() => Location, (location) => location.users)
-    location: Location;
+    location?: Location;
 
     @OneToMany(() => Wash, (wash) => wash.user)
     washes: Wash;

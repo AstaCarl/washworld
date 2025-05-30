@@ -7,8 +7,8 @@ import {
 import { OpeningHoursService } from './opening_hours.service';
 import { CreateOpeningHourDto } from './dto/create-opening_hour.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/authentication/jwt-auth.guard';
-import { AdminGuard } from 'src/authentication/admin-user.guard';
+import { JwtAuthGuard } from '../../src/authentication/jwt-auth.guard';
+import { AdminGuard } from '../../src/authentication/admin-user.guard';
 
 @Controller('opening-hours')
 export class OpeningHoursController {

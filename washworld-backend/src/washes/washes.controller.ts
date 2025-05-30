@@ -10,7 +10,7 @@ import {
 import { WashesService } from './washes.service';
 import { CreateWashDto } from './dto/create-wash.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { JwtAuthGuard } from 'src/authentication/jwt-auth.guard';
+import { JwtAuthGuard } from '../../src/authentication/jwt-auth.guard';
 import { WashResponseDto } from './dto/response-wash.dto';
 
 @Controller('washes')

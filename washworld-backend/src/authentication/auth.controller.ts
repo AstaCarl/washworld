@@ -8,8 +8,8 @@ import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './local-auth.guard';
 import { JwtAuthGuard } from './jwt-auth.guard';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { CreateUserDto } from 'src/users/dto/create-user.dto';
-import { LoginResponseDto } from 'src/users/dto/login-user.dto';
+import { CreateUserDto } from '../../src/users/dto/create-user.dto';
+import { LoginResponseDto } from '../../src/users/dto/login-user.dto';
 
 @Controller()
 export class AuthController {

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Location } from 'src/locations/entities/location.entity';
-import { Wash } from 'src/washes/entities/wash.entity';
+import { Location } from '../../../src/locations/entities/location.entity';
+import { Wash } from '../../../src/washes/entities/wash.entity';
 import {
   Column,
   Entity,

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { CreateMembershipDto } from './dto/create-membership.dto';
+import { CreateMembershipDto } from '../memberships/dto/create-membership.dto';
 import { Repository } from 'typeorm';
-import { Membership } from './entities/membership.entity';
+import { Membership } from '../memberships/entities/membership.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
@@ -18,5 +18,9 @@ export class MembershipsService {
 
   findAll() {
     return this.membershipRepository.find();
+  }
+
+  deleteMany() {
+    return this.membershipRepository.delete({});
   }
 }

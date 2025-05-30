@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Location } from 'src/locations/entities/location.entity';
-import { Membership } from 'src/memberships/entities/membership.entity';
+import { Location } from '../../../src/locations/entities/location.entity';
+import { Membership } from '../../../src/memberships/entities/membership.entity';
 
 export class CreateUserDto {
   @ApiProperty({ example: 'John' })
@@ -17,8 +17,8 @@ export class CreateUserDto {
   membership: Membership;
   @ApiProperty({ example: {"id": 1}  })
   location: Location;
-  @ApiProperty({ example: 2})
-  currentLocation: number;
+  // @ApiProperty({ example: 2})
+  // currentLocation: number;
   @ApiProperty({ example: '2023-10-01T12:00:00Z' })
   createdAt: Date;
 }
