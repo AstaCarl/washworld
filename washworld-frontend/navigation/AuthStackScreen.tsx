@@ -16,7 +16,7 @@ export const AuthStackScreen = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen options={{ headerShown: false }}  name="Login" component={LoginScreen} />
-      <Stack.Screen name="Signup" component={SignupScreen} />
+      <Stack.Screen options={{ headerShown: false }}  name="Signup" component={SignupScreen} />
     </Stack.Navigator>
   );
 };
