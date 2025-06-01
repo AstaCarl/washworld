@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserDto } from "./userDto";
 import { UserApi } from "./userApi";
 import * as SecureStore from "expo-secure-store";
-import { stat } from "fs";
 
 type LoginParams = {
   username: string;

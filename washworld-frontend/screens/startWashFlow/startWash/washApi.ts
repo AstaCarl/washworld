@@ -8,7 +8,7 @@ export class WashApi {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, // Assuming token is part of washObject
+          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify(washObject),
       });

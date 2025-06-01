@@ -6,10 +6,10 @@ import { useGetLocations } from "./mapQuery";
 import CustomTextInput from "../../components/atoms/TextInput";
 
 export default function MapScreen() {
-    const { data: locations } = useGetLocations();
+    const { data: locations, isLoading } = useGetLocations();
     console.log("Locations data:", locations);
 
-    if (!locations) {
+    if (isLoading) {
         return (
             <View>
                 <Text>Loading...</Text>

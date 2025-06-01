@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
 import { UserApi } from "./userApi";
-// import { useMutation, useQueryClient } from "@tanstack/react-query" 
 
 
 export const useGetMemberships = () => {

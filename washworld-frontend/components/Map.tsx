@@ -14,8 +14,8 @@ export default function Map({ mapData = []}: mapProps) {
   const initialRegion = {
     latitude: 55.6761,
     longitude: 10.5683,
-    latitudeDelta: 6, // Zoom level
-    longitudeDelta: 6, // Zoom level
+    latitudeDelta: 6,
+    longitudeDelta: 6, 
   }; 
 
   return (

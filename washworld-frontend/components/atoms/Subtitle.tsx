@@ -1,5 +1,4 @@
-import { Text } from "react-native";
-import { StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 
 type subtitleProps = {
   title: string | number;

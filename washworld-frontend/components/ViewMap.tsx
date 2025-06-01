@@ -4,7 +4,6 @@ import Button from "./atoms/Button";
 import QrIcon from "./icons/QrIcon";
 import LocationIcon from "./icons/LocationIcon";
 import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from "../navigation/WashFlowStackScreen";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";

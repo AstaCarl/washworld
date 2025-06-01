@@ -5,6 +5,7 @@ import CrossIcon from "../../../components/icons/CrossIcon";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useState } from "react";
 import { useGetAdditionalProgrammes } from "./AdditionalProgrammeQuery";
+import { Text } from "@react-navigation/elements";
 
 type AdditionalProgramme = {
   id: number;
@@ -12,15 +13,15 @@ type AdditionalProgramme = {
   price: number;
   description: string;
 };
+
 export default function AdditionalProgrammeScreen() {
   const route = useRoute();
   const params = route.params as any;
   const washObject = params.washObject?.washObject ?? params.washObject;
   const setWashObject =
     params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
-  const { data: additionalProgrammes } = useGetAdditionalProgrammes() as {
-    data: AdditionalProgramme[];
-  };
+  const { data: additionalProgrammes, isLoading } = useGetAdditionalProgrammes()
+
   console.log("Programmes data:", additionalProgrammes);
 
   console.log(
@@ -40,6 +41,14 @@ export default function AdditionalProgrammeScreen() {
     console.log("Selected additional programme id:", value);
   };
 
+      if (isLoading) {
+          return (
+              <View style={styles.container}>
+                  <Text>Loading...</Text>
+              </View>
+          )
+      }
+
   return (
     <View style={styles.container}>
       <CrossIcon
@@ -47,8 +56,8 @@ export default function AdditionalProgrammeScreen() {
         color="#fff"
       />
       <View style={styles.programmeList}>
-        {additionalProgrammes &&
-          additionalProgrammes.map((programme, index) => (
+        {
+          additionalProgrammes.map((programme: AdditionalProgramme, index: number) => (
             <AdditionalProgramme
               key={index}
               title={programme.name}

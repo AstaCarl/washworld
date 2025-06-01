@@ -7,7 +7,6 @@ export class UserDto {
     public license: string,
     public membership: number,
     public location: number,
-    public currentLocation: number,
     public createdAt: Date
   ) {}
 }

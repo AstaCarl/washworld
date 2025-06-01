@@ -7,7 +7,6 @@ export const useCreateWash = (onSuccessCallback?: (data: any) => void) => {
     mutationFn: ({ washObject, token }: { washObject: any; token: string }) =>
       WashApi.createWash(washObject, token),
     onSuccess: (data) => {
-      // Invalidate and refetch
       queryClient.invalidateQueries({ queryKey: ["washes"] });
       if (onSuccessCallback) onSuccessCallback(data);
     },

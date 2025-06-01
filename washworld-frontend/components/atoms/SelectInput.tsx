@@ -1,6 +1,5 @@
 import { Label } from "@react-navigation/elements";
-import { View, Text } from "react-native";
-import { StyleSheet } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import ChevronIcon from "../icons/ChevronIcon";

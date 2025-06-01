@@ -35,11 +35,19 @@ export default function ActiveWashScreen() {
   const params = route.params as any;
   const createdWashObject =
     params.createdWashObject?.createdWashObject || params.createdWashObject;
-  const { data: wash } = useGetWashById(createdWashObject.id) as {
+  const { data: wash, isLoading } = useGetWashById(createdWashObject.id) as {
     data: WashObject;
+    isLoading: boolean;
   };
 
-  console.log("Washes data11111111111111111111:", wash && wash);
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -48,31 +56,32 @@ export default function ActiveWashScreen() {
         color="#fff"
       />
       <View style={styles.washList}>
-        {wash && wash ? (
-          <>
-          <View style={{display: "flex", flexDirection: "column", alignItems: "center", gap: 10}}>
-            <Text style={styles.title}>{wash.programme.name}</Text>
-            <View style={styles.row}>
-            <Text style={styles.plus}>+</Text>
-            <Subtitle variant="whiteCapital" title={wash.additionalProgramme.name}/>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 10,
+              }}
+            >
+              <Text style={styles.title}>{wash.programme.name}</Text>
+              <View style={styles.row}>
+                <Text style={styles.plus}>+</Text>
+                <Subtitle
+                  variant="whiteCapital"
+                  title={wash.additionalProgramme.name}
+                />
+              </View>
             </View>
-            </View>
-            <CarWashIcon color="#FFF"/>
+            <CarWashIcon color="#FFF" />
             <Counter
-            style={{fontSize: 58,}}
+              style={{ fontSize: 58 }}
               number={wash.finishedTime}
               onFinish={() => navigation.navigate("Home")}
             />
-          </>
-        ) : (
-          <Text style={styles.title}>Loading...</Text>
-        )}
       </View>
       <View style={styles.buttonGroup}>
-        <Button
-          variant="danger"
-          buttonText="EMERGENCY STOP"
-        />
+        <Button variant="danger" buttonText="EMERGENCY STOP" />
       </View>
     </View>
   );
@@ -116,10 +125,10 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  row:{
+  row: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    gap: 10
-  }
+    gap: 10,
+  },
 });

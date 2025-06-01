@@ -14,8 +14,8 @@ import Button from "../../components/atoms/Button";
 import Paragraf from "../../components/atoms/Paragraf";
 import { RootTabParamList } from "../../navigation/TabsNavigation";
 import { useNavigation } from "@react-navigation/native";
-import { AppDispatch, RootState } from "../../store/store";
-import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../../store/store";
+import { useDispatch } from "react-redux";
 import { signup } from "./authSlice";
 import { useGetLocations, useGetMemberships } from "./userQuery";
 

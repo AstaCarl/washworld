@@ -32,6 +32,8 @@ export const TabsNavigation = () => {
           backgroundColor: "#000000",
           height: 85,
           paddingTop: 14,
+          borderTopColor: "#000",
+          borderTopWidth: 1,
         },
       }}
     >

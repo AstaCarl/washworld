@@ -5,6 +5,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import { useGetProgrammes } from "./ProgrammeQuery";
 import CrossIcon from "../../../components/icons/CrossIcon";
+import { Text } from "@react-navigation/elements";
 
 type Programme = {
   id: number;
@@ -19,7 +20,7 @@ export default function ProgrammeScreen() {
   const setWashObject =
     params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
 
-  const { data: programmes } = useGetProgrammes() as { data: Programme[] };
+  const { data: programmes, isLoading } = useGetProgrammes();
   const navigation = useNavigation<any>();
   const [selectedprogrammeId, setSelectedProgrammeId] = useState<number | null>(
     null
@@ -36,6 +37,14 @@ export default function ProgrammeScreen() {
     console.log("Selected additional programme id:", value);
   };
 
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <CrossIcon
@@ -43,17 +52,16 @@ export default function ProgrammeScreen() {
         color="#fff"
       />
       <View style={styles.programmeList}>
-        {programmes &&
-          programmes.map((programme, index) => (
-            <ProgrammeTypeBanner
-              onPress={handleProgrammePress}
-              value={programme.id}
-              key={index}
-              selected={selectedprogrammeId === programme.id}
-              bannerTextLeft={programme.name}
-              bannerTextRight={programme.price}
-            />
-          ))}
+        {programmes.map((programme: Programme, index: number) => (
+          <ProgrammeTypeBanner
+            onPress={handleProgrammePress}
+            value={programme.id}
+            key={index}
+            selected={selectedprogrammeId === programme.id}
+            bannerTextLeft={programme.name}
+            bannerTextRight={programme.price}
+          />
+        ))}
       </View>
       <View style={styles.buttonGroup}>
         <Button
