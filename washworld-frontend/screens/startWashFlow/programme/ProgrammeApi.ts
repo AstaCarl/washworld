@@ -1,3 +1,4 @@
+// Create a class to handle API requests for programmes
 export class ProgrammeApi {
   static baseUrl = `${process.env.EXPO_PUBLIC_API_URL}`;
 

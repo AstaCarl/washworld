@@ -4,6 +4,7 @@ import * as request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
 
+// This file contains end-to-end tests for the AppController in a NestJS application.
 describe('AppController (e2e)', () => {
   let app: INestApplication<App>;
 

@@ -4,21 +4,26 @@ import ChevronIcon from "../icons/ChevronIcon";
 type ButtonProps = {
   buttonText: string;
   disabled?: boolean;
-  variant:
-    | "primary"
+  variant: // Define the variant type
+  | "primary"
     | "secondary"
     | "danger"
     | "iconButtonGreen"
     | "iconButtonBlack"
     | "greenLink";
-    onPress?: () => void;
+  onPress?: () => void; // Optional onPress function
 };
 
-export default function Button({ buttonText, variant, onPress, disabled }: ButtonProps) {
+export default function Button({
+  buttonText,
+  variant,
+  onPress,
+  disabled,
+}: ButtonProps) {
   return (
     <TouchableOpacity
-    disabled={disabled}
-    onPress={onPress}
+      disabled={disabled}
+      onPress={onPress}
       style={[
         variant === "primary" && styles.primaryButton,
         variant === "secondary" && styles.secondaryButton,
@@ -39,6 +44,7 @@ export default function Button({ buttonText, variant, onPress, disabled }: Butto
       >
         {buttonText}
       </Text>
+      {/* If the variant is "iconButtonGreen" or "iconButtonBlack", render the ChevronIcon */}
       {variant === "iconButtonGreen" || variant === "iconButtonBlack" ? (
         <ChevronIcon
           style={
@@ -123,5 +129,5 @@ const styles = StyleSheet.create({
     color: "#06c167",
     fontSize: 16,
     fontWeight: "bold",
-  }
+  },
 });

@@ -11,7 +11,7 @@ export class ProgrammesController {
   constructor(private readonly programmesService: ProgrammesService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard, AdminGuard) // Ensure to use the correct guard for authentication
+  @UseGuards(JwtAuthGuard, AdminGuard) // Ensure that only authenticated admin users can create programmes
   @ApiOperation({ summary: 'POST a programme' })
   @ApiResponse({ status: 201, description: 'Programme created successfully.' })
   create(@Body() createProgrammeDto: CreateProgrammeDto) {

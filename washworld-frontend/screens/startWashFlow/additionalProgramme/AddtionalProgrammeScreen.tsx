@@ -20,34 +20,30 @@ export default function AdditionalProgrammeScreen() {
   const washObject = params.washObject?.washObject ?? params.washObject;
   const setWashObject =
     params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
-  const { data: additionalProgrammes, isLoading } = useGetAdditionalProgrammes()
 
-  console.log("Programmes data:", additionalProgrammes);
-
-  console.log(
-    "Selected wash object from additional programme screen:",
-    washObject
-  );
-
+  // Fetch additional programmes using the tanstack query
+  const { data: additionalProgrammes, isLoading } =
+    useGetAdditionalProgrammes();
   const navigation = useNavigation<any>();
   const [selectedValue, setSelectedValue] = useState<number | null>(null);
 
   const handleProgrammePress = (value: number) => {
     setSelectedValue(value);
+    // Update the washObject with the selected additional programme id
     setWashObject((prev: any) => ({
       ...prev,
       additionalProgrammeId: value,
     }));
-    console.log("Selected additional programme id:", value);
   };
 
-      if (isLoading) {
-          return (
-              <View style={styles.container}>
-                  <Text>Loading...</Text>
-              </View>
-          )
-      }
+  // If the data is loading, return a loading indicator
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -56,8 +52,8 @@ export default function AdditionalProgrammeScreen() {
         color="#fff"
       />
       <View style={styles.programmeList}>
-        {
-          additionalProgrammes.map((programme: AdditionalProgramme, index: number) => (
+        {additionalProgrammes.map(
+          (programme: AdditionalProgramme, index: number) => (
             <AdditionalProgramme
               key={index}
               title={programme.name}
@@ -67,22 +63,27 @@ export default function AdditionalProgrammeScreen() {
               onPress={handleProgrammePress}
               selected={selectedValue === programme.id}
             />
-          ))}
+          )
+        )}
       </View>
       <View style={styles.buttonGroup}>
         <Button
           variant="iconButtonBlack"
           buttonText="Previous"
+          // This button navigates back to the previous screen and passes the washObject
           onPress={() => {
-            const { additionalProgrammeId, ...washObjectWithoutAdditionalProgrammeId } =
-              washObject;
+            // Remove additionalProgrammeId from washObject if it exists
+            const {
+              additionalProgrammeId,
+              ...washObjectWithoutAdditionalProgrammeId
+            } = washObject;
 
             navigation.navigate("WashFlow", {
               screen: "Programme",
               params: {
                 washObject: {
-                  washObject: washObjectWithoutAdditionalProgrammeId,
-                  setWashObject,
+                  washObject: washObjectWithoutAdditionalProgrammeId, // Pass the modified washObject
+                  setWashObject, // Pass the setWashObject function
                 },
               },
             });
@@ -91,21 +92,23 @@ export default function AdditionalProgrammeScreen() {
         <Button
           variant="iconButtonGreen"
           buttonText="Next"
-        onPress={
-          selectedValue
-            ? () =>
-                navigation.navigate("WashFlow", {
-                  screen: "AntennaDismount",
-                  params: {
-                    washObject: {
-                      ...washObject,
-                      additionalProgrammeId: selectedValue,
-                      setWashObject,
+          // This button navigates to the AntennaDismount screen and passes the washObject
+          onPress={
+            selectedValue
+              ? () =>
+                  navigation.navigate("WashFlow", {
+                    screen: "AntennaDismount",
+                    params: {
+                      // Pass the modified washObject
+                      washObject: {
+                        ...washObject,
+                        additionalProgrammeId: selectedValue,
+                        setWashObject, // Pass the setWashObject function
+                      },
                     },
-                  },
-                })
-            : undefined
-        }
+                  })
+              : undefined
+          }
         />
       </View>
     </View>

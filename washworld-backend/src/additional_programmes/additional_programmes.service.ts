@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class AdditionalProgrammesService {
   constructor(
-    @InjectRepository(AdditionalProgramme)
+    @InjectRepository(AdditionalProgramme)  // repository makes it possible to interact with the database through the methods provided by TypeORM: find, save, delete...
     private additionalProgrammesRepository: Repository<AdditionalProgramme>,
   ) {}
   create(createAdditionalProgrammeDto: CreateAdditionalProgrammeDto) {

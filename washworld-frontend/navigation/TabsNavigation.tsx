@@ -47,13 +47,11 @@ export const TabsNavigation = () => {
         component={HomeScreen}
       />
       <Tab.Screen
-        // unmountOnBlur={true} // Unmounts the screen when not focused
         options={{
           tabBarIcon: ({ focused }) => (
             <MapIcon color={focused ? "#0CE578" : "white"} />
           ),
-        popToTopOnBlur: true// Pop to top when navigating back to the Map tab
-
+          popToTopOnBlur: true, // Pop to top when navigating back to the Map tab
         }}
         name="Map"
         component={MapStackScreen}

@@ -19,6 +19,7 @@ export default function ViewMap() {
     longitudeDelta: 0.01,
   });
 
+  // Request location permission and get the current location of the user
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -41,8 +42,7 @@ export default function ViewMap() {
         provider={PROVIDER_GOOGLE}
         region={region}
         showsUserLocation={true}
-      >
-      </MapView>
+      ></MapView>
       <View>
         <Paragraf variant="bold" text="Is this your current location?" />
         <View style={styles.locationContainer}>

@@ -7,10 +7,11 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class OpeningHoursService {
     constructor(
-      @InjectRepository(OpeningHour)
+      @InjectRepository(OpeningHour) // repository makes it possible to interact with the database through the methods provided by TypeORM: find, save, delete...
       private openingHourRepository: Repository<OpeningHour>,
     ) {}
   create(createOpeningHourDto: CreateOpeningHourDto) {
-    return this.openingHourRepository.save(createOpeningHourDto);
+    const newOpeningHour = this.openingHourRepository.create(createOpeningHourDto); 
+    return this.openingHourRepository.save(newOpeningHour);
   }
 }

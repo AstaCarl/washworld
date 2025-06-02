@@ -8,15 +8,14 @@ import { Coordinate } from '../../src/coordinates/entities/coordinate.entity';
 @Injectable()
 export class LocationsService {
   constructor(
-    @InjectRepository(Location)
+    @InjectRepository(Location) // repository makes it possible to interact with the database through the methods provided by TypeORM: find, save, delete...
     private locationRepository: Repository<Location>,
-    @InjectRepository(Coordinate)
+    @InjectRepository(Coordinate) // injecting the Coordinate repository to allow interaction with the coordinates table
     private coordinateRepository: Repository<Coordinate>,
   ) {}
 
   async create(createLocationDto: CreateLocationDto) {
-    const { coordinates, ...locationData } = createLocationDto;
-
+    const { coordinates, ...locationData } = createLocationDto; // extracting coordinates from the DTO
     const newCoordinate = this.coordinateRepository.create(coordinates);
     await this.coordinateRepository.save(newCoordinate);
 
@@ -38,6 +37,7 @@ export class LocationsService {
       ],
     });
 
+    // mapping each location to include its halls and washes with calculated fields
     const locationData = locations.map((location) => ({
       ...location,
       halls: Array.isArray(location.halls)
@@ -45,6 +45,7 @@ export class LocationsService {
             ...hall,
             washes: Array.isArray(hall.washes)
               ? hall.washes.map((wash) => {
+                  // calculating total run time in seconds and finished time for each wash
                   const totalRunTimeInSeconds =
                     (wash.programme?.runTimeInSeconds || 0) +
                     (wash.additionalProgramme?.runTimeInSeconds || 0);
@@ -56,6 +57,7 @@ export class LocationsService {
                       )
                     : null;
 
+                  // returning the wash object with additional calculated fields
                   return {
                     ...wash,
                     totalRunTimeInSeconds,
@@ -69,18 +71,4 @@ export class LocationsService {
 
     return locationData;
   }
-
-  // async findOne(id: number) {
-  //   const location = await this.locationRepository.findOne({
-  //     where: { id },
-  //     relations: ['coordinate', 'openingHours'],
-  //   });
-
-  //   const halls = await this.hallRepository.find({
-  //     where: { location: { id } },
-  //     relations: ['washes', 'washes.programme', 'washes.additionalProgramme'],
-  //   });
-
-  //   return { location, halls };
-  // }
 }

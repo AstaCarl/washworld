@@ -11,7 +11,7 @@ export type RootStackParamList = {
   // Create the stack navigator
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-// Create the AuthStackScreen component
+// Create the AuthStackScreen component fo rthe login and signup screens
 export const AuthStackScreen = () => {
   return (
     <Stack.Navigator>

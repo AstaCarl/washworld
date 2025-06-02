@@ -15,7 +15,7 @@ export class OpeningHoursController {
   constructor(private readonly openingHoursService: OpeningHoursService) {}
 
   @Post()
-  @UseGuards(JwtAuthGuard, AdminGuard) // Ensure to use the correct guard for authentication
+  @UseGuards(JwtAuthGuard, AdminGuard) // Ensure that only authenticated admin users can create opening hours
   @ApiOperation({ summary: 'POST opening hours' })
   @ApiResponse({ status: 201, description: 'Open hours created successfully.' })
   create(@Body() createOpeningHourDto: CreateOpeningHourDto) {

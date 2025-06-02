@@ -17,8 +17,7 @@ export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
   const [washObject, setWashObject] = useState({});
   const [selectedHallId, setSelectedHallId] = useState<number | null>(null);
 
-  console.log("Selected location:", selectedLocation);
-
+  // Update washObject with locationId when selectedLocation changes
   React.useEffect(() => {
     if (selectedLocation) {
       setWashObject((prev) => ({
@@ -28,6 +27,7 @@ export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
     }
   }, [selectedLocation]);
 
+  // Update washObject with hallId when selectedHallId changes
   React.useEffect(() => {
     if (selectedHallId) {
       setWashObject((prev) => ({
@@ -36,10 +36,6 @@ export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
       }));
     }
   }, [selectedHallId]);
-
-  console.log("Wash object from location info:", washObject);
-  console.log("Wash object from location info with out programme:", washObject);
-
 
   if (!selectedLocation) return null;
   return (
@@ -64,6 +60,7 @@ export default function LocationInfo({ selectedLocation }: LocationInfoProps) {
         setSelectedHallId={setSelectedHallId}
       />
       <Button
+        // Sends the washObject to the next screen when the button is pressed
         onPress={
           selectedHallId
             ? () =>

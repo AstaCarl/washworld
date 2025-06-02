@@ -20,23 +20,24 @@ export default function ProgrammeScreen() {
   const setWashObject =
     params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
 
+  // Fetching programmes data using a tanstack hook
   const { data: programmes, isLoading } = useGetProgrammes();
   const navigation = useNavigation<any>();
   const [selectedprogrammeId, setSelectedProgrammeId] = useState<number | null>(
     null
   );
-  console.log("Programmes data:", programmes);
-  console.log("Selected wash object from programmescreen:", washObject);
 
+  // Function to handle programme selection
   const handleProgrammePress = (value: number) => {
     setSelectedProgrammeId(value);
+    // Update the washObject with the selected programme id
     setWashObject((prev: any) => ({
       ...prev,
       programmeId: value,
     }));
-    console.log("Selected additional programme id:", value);
   };
 
+  // return loading state if programmes data is still being fetched
   if (isLoading) {
     return (
       <View style={styles.container}>
@@ -72,6 +73,7 @@ export default function ProgrammeScreen() {
         <Button
           variant="iconButtonGreen"
           buttonText="Next"
+          // This button navigates to the AdditionalProgramme screen and passes the washObject
           onPress={
             selectedprogrammeId
               ? () =>

@@ -4,9 +4,10 @@ import { Location } from "../../../src/locations/entities/location.entity";
 import { Wash } from "../../../src/washes/entities/wash.entity";
 import { Role } from "../Role";
 
+// entity to define the user shcema in the database
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn() // Autoincrementing primary key
     id: number;
 
     @Column()
@@ -36,8 +37,9 @@ export class User {
     @Column({ default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
 
+    // Enum to define user roles in the database
     @Column({
-        type: 'enum',
+        type: 'enum', // restricts the values to the ones defined in the Role enum
         enum: Role,
         default: [Role.User],
     })

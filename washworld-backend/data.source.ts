@@ -3,6 +3,7 @@ import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
+//loads database settings from environment variables and prepares TypeORM to connect to the PostgreSQL database.
 export const dbConfig: TypeOrmModuleOptions = {
   type: 'postgres',
   host: process.env.DB_HOST,
@@ -17,5 +18,6 @@ export const dbConfig: TypeOrmModuleOptions = {
   migrations: ['dist/src/migrations/*{.ts,.js}'], // Path to your migrations
 };
 
+// Create a new DataSource instance
 const datasource = new DataSource(dbConfig as DataSourceOptions);
 export default datasource;

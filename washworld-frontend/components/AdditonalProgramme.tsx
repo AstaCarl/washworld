@@ -19,7 +19,7 @@ export default function AdditionalProgramme({
   value,
   selected = false,
 }: AdditionalProgrammeProps) {
-
+  // Function to handle the press event and sets the value if onPress is provided
   const handlePress = () => {
     if (onPress) {
       onPress(value);

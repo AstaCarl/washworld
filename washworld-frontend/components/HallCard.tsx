@@ -5,28 +5,35 @@ import CrossIcon from "./icons/CrossIcon";
 import Counter from "./atoms/Counter";
 import { useState } from "react";
 
-export default function HallCard({ halls, selectedHallId, setSelectedHallId }: any) {
-  
-  const [_, setRerender] = useState(false); 
+export default function HallCard({
+  halls,
+  selectedHallId,
+  setSelectedHallId,
+}: any) {
+  const [_, setRerender] = useState(false); // State to trigger rerender when a wash finishes
 
+  // Function to handle hall selection
   const handleHallPress = (id: number) => {
-    setSelectedHallId(id)
-    console.log("Selected hall id:", id);
-  }
+    setSelectedHallId(id);
+  };
 
   return (
     <View style={styles.container}>
-      {halls.map((hall: any, index: number) => {
-        const now = new Date();
 
+      {halls.map((hall: any, index: number) => {
+        const now = new Date(); // Get the current date and time
+
+        // Check if any wash is currently running in the hall
         const isAnyWashRunning = hall.washes?.some(
           (wash: any) =>
             wash.startedTimeDate &&
             wash.finishedTime &&
+            // Check if the current time is between the started and finished times
             now >= new Date(wash.startedTimeDate) &&
             now < new Date(wash.finishedTime)
         );
 
+        // Find the currently running wash in the hall
         const runningWash = hall.washes.find(
           (wash: any) =>
             wash.startedTimeDate &&
@@ -38,7 +45,7 @@ export default function HallCard({ halls, selectedHallId, setSelectedHallId }: a
         return (
           <TouchableOpacity
             onPress={() => handleHallPress(hall.id)}
-            disabled={!hall.operationalStatus || isAnyWashRunning}
+            disabled={!hall.operationalStatus || isAnyWashRunning} // Disable if hall is not operational or if any wash is running
             key={index}
             style={selectedHallId === hall.id ? styles.boxSelected : styles.box}
           >
@@ -49,7 +56,7 @@ export default function HallCard({ halls, selectedHallId, setSelectedHallId }: a
               ) : isAnyWashRunning && runningWash ? (
                 <Counter
                   number={runningWash.finishedTime}
-                  onFinish={() => setRerender((r) => !r)}
+                  onFinish={() => setRerender((r) => !r)} // trigger rerender
                 />
               ) : (
                 <CheckIcon color="#0CE578" />

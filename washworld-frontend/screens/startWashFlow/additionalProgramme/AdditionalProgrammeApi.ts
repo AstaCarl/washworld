@@ -1,3 +1,5 @@
+
+// Create a class to handle API requests for additional programmes
 export class AdditionalProgrammeApi {
   static baseUrl = `${process.env.EXPO_PUBLIC_API_URL}`;
 

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -9,14 +8,13 @@ import { Role } from './Role';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(User)
+    @InjectRepository(User) // repository makes it possible to interact with the database through the methods provided by TypeORM: find, save, delete...
     private userRepository: Repository<User>,
   ) {}
 
   async create(createUserDto: CreateUserDto): Promise<User> {
     const newUser = this.userRepository.create(createUserDto); // Create a new user instance
-    console.log('new user', newUser);
-    return this.userRepository.save(newUser); // Never save passwords in clear text!
+    return this.userRepository.save(newUser); 
   }
 
   async findById(id: number): Promise<User> {

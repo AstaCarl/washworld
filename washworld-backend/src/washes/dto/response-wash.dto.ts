@@ -3,7 +3,6 @@ import { Programme } from '../../programmes/entities/programme.entity';
 import { AdditionalProgramme } from '../../../src/additional_programmes/entities/additional_programme.entity';
 
 // This DTO is used to represent the response structure for a wash operation for the documentation on swagger
-
 export class WashResponseDto {
   @ApiProperty()
   id: number;

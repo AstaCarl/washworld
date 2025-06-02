@@ -20,6 +20,7 @@ import { HallsModule } from './halls/halls.module';
     ConfigModule.forRoot({
       isGlobal: true
     }),
+    // Creates the connection to the database using TypeORM
     TypeOrmModule.forRoot(dbConfig),
     ProgrammesModule,
     AdditionalProgrammesModule,
