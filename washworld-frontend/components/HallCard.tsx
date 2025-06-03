@@ -7,7 +7,7 @@ import { useState } from "react";
 
 export default function HallCard({ halls, selectedHallId, setSelectedHallId }: any) {
   
-  const [_, setRerender] = useState(false); 
+  const [_, setRerender] = useState(false); // State to trigger rerender when a wash finishes
 
   const handleHallPress = (id: number) => {
     setSelectedHallId(id)
