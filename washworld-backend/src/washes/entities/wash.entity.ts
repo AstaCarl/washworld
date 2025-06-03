@@ -11,13 +11,13 @@ import { Hall } from '../../../src/halls/entities/hall.entity';
 
 @Entity()
 export class Wash {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn() // Autoincrementing primary key
   id: number;
 
   @Column({ default: () => 'CURRENT_TIMESTAMP' })
   startedTimeDate: Date;
 
-  @ManyToOne(() => Programme, (programme) => programme.washes, {onDelete: 'CASCADE'})
+  @ManyToOne(() => Programme, (programme) => programme.washes, {onDelete: 'CASCADE'}) //if programme is deleted, all washes with this programme will also be deleted
   programme: Programme;
 
   @ManyToOne(

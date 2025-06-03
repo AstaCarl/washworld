@@ -36,21 +36,20 @@ export default function CustomTextInput({
         placeholderTextColor="#666666"
         value={value}
         onChangeText={onChangeText}
-        secureTextEntry={password ? !isPasswordVisible : false}
+        secureTextEntry={password ? !isPasswordVisible : false} // If password is true, toggle visibility based on isPasswordVisible state
       />
+      {/* If the input field is a password field show the password icon */}
       {password ? (
         <View style={styles.icon}>
           <PasswordIcon
             color="#666666"
-            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+            onPress={() => setIsPasswordVisible(!isPasswordVisible)} // Toggle password visibility
           />
         </View>
       ) : null}
-            {search ? (
+      {search ? (
         <View style={styles.searchIcon}>
-          <SearchIcon
-            color="#666666"
-          />
+          <SearchIcon color="#666666" />
         </View>
       ) : null}
     </View>
@@ -84,7 +83,7 @@ const styles = StyleSheet.create({
     right: 12,
     top: 45,
   },
-    searchIcon: {
+  searchIcon: {
     position: "absolute",
     right: 12,
     top: 20,

@@ -1,5 +1,7 @@
 import { Location } from "../../../src/locations/entities/location.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+
+// Entity to define the opening hour schema in the database
 @Entity()
 export class OpeningHour {
         @PrimaryGeneratedColumn()

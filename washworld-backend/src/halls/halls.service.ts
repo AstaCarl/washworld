@@ -7,14 +7,16 @@ import { Hall } from './entities/hall.entity';
 @Injectable()
 export class HallsService {
   constructor(
-    @InjectRepository(Hall)
+    @InjectRepository(Hall)  // repository makes it possible to interact with the database through the methods provided by TypeORM: find, save, delete...
     private readonly hallRepository: Repository<Hall>,
   ) {}
   create(createHallDto: CreateHallDto) {
-    return this.hallRepository.save(createHallDto);
+    const newHall = this.hallRepository.create(createHallDto); 
+    return this.hallRepository.save(newHall);
   }
 
 
+  // method for testing purposes only
   deleteMany() {
     return this.hallRepository.delete({});
   }

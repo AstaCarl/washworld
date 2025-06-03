@@ -7,27 +7,46 @@ import ActiveWashScreen from "../screens/startWashFlow/startWash/ActiveWashScree
 
 // Define the types for the stack navigator
 export type RootStackParamList = {
-    navigate(arg0: string): void;
-    Programme: { washObject: any, setWashObject: any };
-    AdditionalProgramme: { washObject: any, setWashObject: any };
-    AntennaDismount: { washObject: any, setWashObject: any };
-    StartWash: { washObject: any, setWashObject: any };
-    ActiveWash: { washObject: any, setWashObject: any };
-  };
+  navigate(arg0: string): void;
+  Programme: { washObject: any; setWashObject: any };
+  AdditionalProgramme: { washObject: any; setWashObject: any };
+  AntennaDismount: { washObject: any; setWashObject: any };
+  StartWash: { washObject: any; setWashObject: any };
+  ActiveWash: { washObject: any; setWashObject: any };
+};
 
-  // Create the stack navigator
+// Create the stack navigator
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-// Create the AuthStackScreen component
+// Create the WashFlowStackScreen component
 export const WashFlowStackScreen = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen options={{ headerShown: false }}  name="Programme" component={ProgrammeScreen} />
-      <Stack.Screen options={{ headerShown: false }}  name="AdditionalProgramme" component={AdditionalProgrammeScreen} />
-      <Stack.Screen options={{ headerShown: false }}  name="AntennaDismount" component={AntennaDismountScreen} />
-      <Stack.Screen options={{ headerShown: false }}  name="StartWash" component={StartWashScreen} />
-      <Stack.Screen options={{ headerShown: false }}  name="ActiveWash" component={ActiveWashScreen} />
-
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Programme"
+        component={ProgrammeScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="AdditionalProgramme"
+        component={AdditionalProgrammeScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="AntennaDismount"
+        component={AntennaDismountScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="StartWash"
+        component={StartWashScreen}
+      />
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="ActiveWash"
+        component={ActiveWashScreen}
+      />
     </Stack.Navigator>
   );
 };

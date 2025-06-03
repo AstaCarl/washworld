@@ -13,12 +13,10 @@ const NavigationWrapper = () => {
   const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch<AppDispatch>();
 
-
-  
-useEffect(() => {
-  dispatch(reloadJwtFromStorage());
-}, [dispatch]);
-
+  // Reload JWT token from storage when the component mounts
+  useEffect(() => {
+    dispatch(reloadJwtFromStorage());
+  }, [dispatch]);
 
   return (
     <NavigationContainer>

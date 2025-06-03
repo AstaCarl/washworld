@@ -14,12 +14,11 @@ import { LoginResponseDto } from '../../src/users/dto/login-user.dto';
 @Controller()
 export class AuthController {
   constructor(private authService: AuthService) {
-    
   }
 
   @UseGuards(JwtAuthGuard)
   @Post('auth/upgrade')
-  upgrade(@Request2() req) {
+  upgrade(@Request2() req) { 
     return this.authService.upgrade(req.user.id);
   }
 
@@ -37,7 +36,6 @@ export class AuthController {
   })
   @ApiResponse({ status: 201, description: 'login successful.', type: LoginResponseDto})
   async login(@Request2() req) {
-    console.log('login', req.user);
     return this.authService.login(req.user);
   }
 
@@ -49,7 +47,6 @@ export class AuthController {
   })
   @ApiResponse({ status: 201, description: 'User created successfully.', type: LoginResponseDto})
   async signup(@Request2() req) {
-    console.log('body', req.body);
     return this.authService.signup(req.body);
   }
 }

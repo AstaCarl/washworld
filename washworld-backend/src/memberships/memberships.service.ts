@@ -7,7 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class MembershipsService {
   constructor(
-    @InjectRepository(Membership)
+    @InjectRepository(Membership) // repository makes it possible to interact with the database through the methods provided by TypeORM: find, save, delete...
     private membershipRepository: Repository<Membership>,
   ) {}
 
@@ -20,6 +20,7 @@ export class MembershipsService {
     return this.membershipRepository.find();
   }
 
+  // this method is for testing purposes only
   deleteMany() {
     return this.membershipRepository.delete({});
   }

@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+// DTO for creating an additional programme
 export class CreateAdditionalProgrammeDto {
   @ApiProperty({
     example: 'Extra Rinse',

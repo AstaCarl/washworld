@@ -6,7 +6,7 @@ type ProgrammeTypeBannerProps = {
   bannerTextLeft: string;
   bannerTextRight: number;
   value: number;
-  onPress?: (value: number) => void;
+  onPress?: (value: number) => void; 
   selected?: boolean;
 };
 
@@ -18,6 +18,7 @@ export default function ProgrammeTypeBanner({
   selected = false,
 }: ProgrammeTypeBannerProps) {
 
+  // Function to handle press event and sets the value if onPress is provided
     const handlePress = () => {
     if (onPress) {
       onPress(value);

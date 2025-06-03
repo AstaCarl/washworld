@@ -29,7 +29,9 @@ export default function AntennaDismountScreen() {
         <Button
           variant="iconButtonBlack"
           buttonText="Previous"
+          // This button navigates back to the previous screen and passes the washObject
           onPress={() => {
+            // Remove additionalProgrammeId from washObject if it exists
             const {
               additionalProgrammeId,
               ...washObjectWithoutAdditionalProgrammeId
@@ -39,8 +41,8 @@ export default function AntennaDismountScreen() {
               screen: "AdditionalProgramme",
               params: {
                 washObject: {
-                  washObject: washObjectWithoutAdditionalProgrammeId,
-                  setWashObject,
+                  washObject: washObjectWithoutAdditionalProgrammeId, // Pass the modified washObject
+                  setWashObject, // Pass the setWashObject function
                 },
               },
             });
@@ -49,6 +51,7 @@ export default function AntennaDismountScreen() {
         <Button
           variant="iconButtonGreen"
           buttonText="Next"
+          // This button navigates to the StartWash screen and passes the washObject
           onPress={() =>
             navigation.navigate("WashFlow", {
               screen: "StartWash",

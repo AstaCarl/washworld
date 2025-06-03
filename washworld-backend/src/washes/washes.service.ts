@@ -7,22 +7,17 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class WashesService {
   constructor(
-    @InjectRepository(Wash)
+    @InjectRepository(Wash) // repository makes it possible to interact with the database through the methods provided by TypeORM: find, save, delete...
     private washRepository: Repository<Wash>,
   ) {}
 
-  async create(req: any, createWashDto: CreateWashDto) {
-    console.log('Received DTO:', createWashDto);
-    const user = req.user;
-    console.log('User from request:', user);
-
+  async create(userId: number, createWashDto: CreateWashDto) {
     const wash = this.washRepository.save({
       ...createWashDto,
-      user: { id: user.id },
+      user: { id: userId },
     });
     return wash;
   }
-
 
   async findOne(id: number) {
     const wash = await this.washRepository.findOne({
@@ -30,10 +25,12 @@ export class WashesService {
       relations: ['programme', 'additionalProgramme'],
     });
 
+    // calculate total run time for programme and additional programme
     const totalRunTimeInSeconds =
       (wash?.programme?.runTimeInSeconds || 0) +
       (wash?.additionalProgramme?.runTimeInSeconds || 0);
 
+    // calculate finished time based on started time and total run time
     const finishedTime = wash?.startedTimeDate
       ? new Date(
           new Date(wash.startedTimeDate).getTime() +
@@ -41,6 +38,7 @@ export class WashesService {
         )
       : null;
 
+    // Create a new object with the calculated fields to return
     const washData = {
       ...wash,
       totalRunTimeInSeconds,
@@ -49,5 +47,4 @@ export class WashesService {
 
     return washData;
   }
-
 }

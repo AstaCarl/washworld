@@ -6,7 +6,6 @@ import {
 import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { CreateUserDto } from '../../src/users/dto/create-user.dto';
-import { first } from 'rxjs';
 
 @Injectable()
 export class AuthService {
@@ -15,17 +14,19 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  // This method is used to upgrade a user's role
   async upgrade(userId: number) {
     return this.usersService.upgrade(userId);
   }
 
+  // This method is used to sign up a new user and return a JWT token
   async signup(user: any) {
     const existingUser = await this.usersService.findOne(user.email);
     if (existingUser) {
       throw new ConflictException('User already exists');
     }
 
-    // Map the incoming user data to the CreateUserDto
+    // Create a new user DTO to pass to the service
     const createUserDto = new CreateUserDto();
     createUserDto.firstname = user.firstname;
     createUserDto.lastname = user.lastname;
@@ -34,10 +35,10 @@ export class AuthService {
     createUserDto.license = user.license;
     createUserDto.membership = user.membership;
     createUserDto.location = user.location;
-    // createUserDto.currentLocation = user.currentLocation;
 
     const createdUser = await this.usersService.create(createUserDto);
 
+    // Create a payload for the JWT token
     const payload = {
       email: createdUser.email,
       id: createdUser.id,
@@ -52,6 +53,7 @@ export class AuthService {
     };
   }
 
+  // This method is used to validate a user's credentials and return the user without the password
   async validateUser(email: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(email);
 
@@ -63,6 +65,7 @@ export class AuthService {
     return null;
   }
 
+  // This method is used to log in a user and return a JWT token
   async login(user: any) {
     const userFromDb = await this.usersService.findOne(user.email);
 

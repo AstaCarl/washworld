@@ -20,10 +20,11 @@ export class WashesController {
   // Endpoint to create a wash, protected by JWT authentication
   @UseGuards(JwtAuthGuard)
   @Post()
-  @ApiOperation({ summary: 'POST a wash' })
+  @ApiOperation({ summary: 'POST a wash' }) // Summary for Swagger documentation
   @ApiResponse({ status: 201, description: 'Wash created successfully.' })
   create(@Req() req, @Body() createWashDto: CreateWashDto) {
-    return this.washesService.create(req, createWashDto);
+    const userId = req.user.id;
+    return this.washesService.create(userId, createWashDto);
   }
 
 
