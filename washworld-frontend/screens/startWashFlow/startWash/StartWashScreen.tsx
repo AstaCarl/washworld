@@ -13,21 +13,24 @@ import { RootState } from "../../../store/store";
 export default function StartWashScreen() {
   const navigation = useNavigation<any>();
   const route = useRoute();
-  const params = route.params as any;
-  const washObject = params.washObject?.washObject ?? params.washObject;
-  const setWashObject =
-    params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
+  const params = route.params as any; // Extract the parameters from the route object
+  const washObject = params.washObject?.washObject ?? params.washObject; // Extract the washObject from params, handling both cases where it might be nested
   const [createdWashObject, setCreatedWashObject] = React.useState({});
   const token = useSelector((state: RootState) => state.auth.token);
   const dispatch = useDispatch<AppDispatch>();
 
+
+  // Reload JWT from storage when the component mounts
   useEffect(() => {
     dispatch(reloadJwtFromStorage());
   }, []);
 
+
+  // Function to handle the creation of a wash
   const { mutate } = useCreateWash((data) => {
-    console.log("Wash started successfully:", data);
-    setCreatedWashObject(data);
+    setCreatedWashObject(data); // Set the created wash object in state
+
+    // Navigate to the ActiveWash screen with the created wash object in the params
     navigation.navigate("WashFlow", {
       screen: "ActiveWash",
       params: {
@@ -36,18 +39,19 @@ export default function StartWashScreen() {
     });
   });
 
+  // Function to handle starting the wash
   const handleStartWash = () => {
+
+    //Format the wash object to match the expected structure
     const formattedWashObject = {
       hall: { id: washObject.hallId },
       programme: { id: washObject.programmeId },
       additionalProgramme: { id: washObject.additionalProgrammeId },
     };
-    console.log("Wash object before sending", formattedWashObject);
 
-    mutate({ washObject: formattedWashObject, token });
+    mutate({ washObject: formattedWashObject, token }); // Call the mutation to create the wash
   };
 
-  console.log("Selected wash object from start wash:", washObject);
 
   return (
     <View style={styles.container}>
@@ -62,7 +66,7 @@ export default function StartWashScreen() {
         <Button
           variant="primary"
           buttonText="Start Wash"
-          onPress={handleStartWash}
+          onPress={handleStartWash} // Function to handle starting the wash
         />
       </View>
     </View>

@@ -11,6 +11,7 @@ export default function ProfileScreen() {
   const dispatch = useDispatch();
 
 
+  // Function to handle logout calling the logout action from the authSlice
   const handleLogout = async () => {
     await dispatch(logout());
     console.log("Logout successful");

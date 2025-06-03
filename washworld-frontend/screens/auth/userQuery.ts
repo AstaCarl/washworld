@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query"
 import { UserApi } from "./userApi";
 
 
+// Custom hook to fetch all memberships using the UserApi
 export const useGetMemberships = () => {
     return useQuery({
       queryKey: ["memberships"],
@@ -17,6 +18,7 @@ export const useGetMemberships = () => {
     });
   };
 
+// Custom hook to fetch all locations using the UserApi
   export const useGetLocations = () => {
     return useQuery({
       queryKey: ["locations"],

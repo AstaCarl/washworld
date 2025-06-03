@@ -6,8 +6,8 @@ import { useGetLocations } from "./mapQuery";
 import CustomTextInput from "../../components/atoms/TextInput";
 
 export default function MapScreen() {
+  // Fetch locations using the custom hook
     const { data: locations, isLoading } = useGetLocations();
-    console.log("Locations data:", locations);
 
     if (isLoading) {
         return (
@@ -26,7 +26,7 @@ export default function MapScreen() {
       />
       </View>
       <Map
-      mapData={locations}
+      mapData={locations} // Pass the fetched locations to the Map component
       />
     </View>
   );

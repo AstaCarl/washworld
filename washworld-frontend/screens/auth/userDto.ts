@@ -1,3 +1,4 @@
+// User Data Transfer Object (DTO) to define the structure of user data
 export class UserDto {
   constructor(
     public firstname: string,

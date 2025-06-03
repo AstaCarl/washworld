@@ -32,14 +32,17 @@ type WashObject = {
 export default function ActiveWashScreen() {
   const navigation = useNavigation<RootTabParamList>();
   const route = useRoute();
-  const params = route.params as any;
+  const params = route.params as any; // Extract the parameters from the route object
+
+  // Extract the createdWashObject from params, handling both cases where it might be nested
   const createdWashObject =
     params.createdWashObject?.createdWashObject || params.createdWashObject;
+
+    // Fetch the wash object using the tanstack query
   const { data: wash, isLoading } = useGetWashById(createdWashObject.id) as {
     data: WashObject;
-    isLoading: boolean;
+    isLoading: boolean; // Loading state for the query
   };
-
 
   if (isLoading) {
     return (

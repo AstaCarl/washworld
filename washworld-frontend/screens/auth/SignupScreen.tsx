@@ -30,8 +30,8 @@ export default function SignupScreen() {
   const navigation = useNavigation<RootTabParamList>();
   const dispatch = useDispatch<AppDispatch>();
 
-  const { data: memberships } = useGetMemberships();
-  const { data: locations } = useGetLocations();
+  const { data: memberships } = useGetMemberships(); // Fetch memberships using the custom hook
+  const { data: locations } = useGetLocations(); // Fetch locations using the custom hook
 
   const handleSignup = async () => {
     const newUser = {
@@ -42,7 +42,6 @@ export default function SignupScreen() {
       lastname: lastName,
       membership: membership,
       location: location,
-      currentLocation: 1,
       createdAt: new Date(),
     };
     const response = await dispatch(signup(newUser));
@@ -55,6 +54,7 @@ export default function SignupScreen() {
         payload?.statusCode === 409 &&
         payload?.message === "User already exists"
       ) {
+        // Show an alert for user already exists
         Alert.alert(
           "Sign up failed",
           "User already exists. Please try a different email.",

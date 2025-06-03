@@ -15,6 +15,7 @@ export default function LoginScreen() {
   const navigation = useNavigation<RootTabParamList>();
   const dispatch = useDispatch<AppDispatch>();
 
+  // Function to handle login, dispatching the login action with user credentials
   const handleLogin = async () => {
     const user = {
       username: email,
@@ -22,7 +23,6 @@ export default function LoginScreen() {
     };
     const response = await dispatch(login(user));
     console.log(response);
-    // navigation.navigate("Home");
   };
 
   return (

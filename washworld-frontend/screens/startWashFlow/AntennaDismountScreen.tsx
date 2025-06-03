@@ -9,7 +9,8 @@ export default function AntennaDismountScreen() {
   const navigation = useNavigation<any>();
   const route = useRoute();
   const params = route.params as any;
-  const washObject = params.washObject?.washObject ?? params.washObject;
+  // const washObject = params.washObject?.washObject ?? params.washObject;
+  const washObject = params.washObject;
   const setWashObject =
     params.setWashObject ?? params.washObject?.setWashObject ?? (() => {});
 

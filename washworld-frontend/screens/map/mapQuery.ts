@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { MapApi } from "./mapApi";
 
+
+  // Custom hook to fetch locations using the MapApi
 export const useGetLocations = () => {
   return useQuery({
-    queryKey: ["locations"],
+    queryKey: ["locations"], // Unique key for the query to identify it
     queryFn: async () => {
       try {
         return await MapApi.getLocations();
