@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, TextStyle, StyleProp } from "react-native";
 
 type counterProps = {
-  number: string;
+  finishedTimeString: string;
   onFinish?: () => void; // Callback function when the counter reaches zero
   style?: StyleProp<TextStyle>;
 };
 
-export default function Counter({ number, onFinish, style }: counterProps) {
+export default function Counter({
+  finishedTimeString,
+  onFinish,
+  style,
+}: counterProps) {
   // Function to calculate the remaining time in seconds
   const getTimeRemaining = (finishedTimeString: string) => {
     if (!finishedTimeString) return 0;
@@ -19,7 +23,9 @@ export default function Counter({ number, onFinish, style }: counterProps) {
     // Otherwise, return the difference in seconds
   };
 
-  const [secondsLeft, setSecondsLeft] = useState(getTimeRemaining(number));
+  const [secondsLeft, setSecondsLeft] = useState(
+    getTimeRemaining(finishedTimeString)
+  );
 
   useEffect(() => {
     // If seconds left is 0, call the onFinish callback and stop the interval
@@ -29,10 +35,10 @@ export default function Counter({ number, onFinish, style }: counterProps) {
     }
     // Update the seconds left every second
     const interval = setInterval(() => {
-      setSecondsLeft(getTimeRemaining(number));
+      setSecondsLeft(getTimeRemaining(finishedTimeString));
     }, 1000);
     return () => clearInterval(interval); // cleanup function to clear the interval anytime the component unmounts or updates
-  }, [number, secondsLeft, onFinish]);
+  }, [finishedTimeString, secondsLeft, onFinish]);
 
   if (secondsLeft === 0) return null;
 

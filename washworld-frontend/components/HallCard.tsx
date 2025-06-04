@@ -19,7 +19,6 @@ export default function HallCard({
 
   return (
     <View style={styles.container}>
-
       {halls.map((hall: any, index: number) => {
         const now = new Date(); // Get the current date and time
 
@@ -55,7 +54,7 @@ export default function HallCard({
                 <CrossIcon color="#FF6B06" />
               ) : isAnyWashRunning && runningWash ? (
                 <Counter
-                  number={runningWash.finishedTime}
+                  finishedTimeString={runningWash.finishedTime}
                   onFinish={() => setRerender((r) => !r)} // trigger rerender
                 />
               ) : (

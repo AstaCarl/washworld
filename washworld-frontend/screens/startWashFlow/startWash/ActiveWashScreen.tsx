@@ -38,7 +38,7 @@ export default function ActiveWashScreen() {
   const createdWashObject =
     params.createdWashObject?.createdWashObject || params.createdWashObject;
 
-    // Fetch the wash object using the tanstack query
+  // Fetch the wash object using the tanstack query
   const { data: wash, isLoading } = useGetWashById(createdWashObject.id) as {
     data: WashObject;
     isLoading: boolean; // Loading state for the query
@@ -59,29 +59,29 @@ export default function ActiveWashScreen() {
         color="#fff"
       />
       <View style={styles.washList}>
-            <View
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
-              <Text style={styles.title}>{wash.programme.name}</Text>
-              <View style={styles.row}>
-                <Text style={styles.plus}>+</Text>
-                <Subtitle
-                  variant="whiteCapital"
-                  title={wash.additionalProgramme.name}
-                />
-              </View>
-            </View>
-            <CarWashIcon color="#FFF" />
-            <Counter
-              style={{ fontSize: 58 }}
-              number={wash.finishedTime}
-              onFinish={() => navigation.navigate("Home")}
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 10,
+          }}
+        >
+          <Text style={styles.title}>{wash.programme.name}</Text>
+          <View style={styles.row}>
+            <Text style={styles.plus}>+</Text>
+            <Subtitle
+              variant="whiteCapital"
+              title={wash.additionalProgramme.name}
             />
+          </View>
+        </View>
+        <CarWashIcon color="#FFF" />
+        <Counter
+          style={{ fontSize: 58 }}
+          finishedTimeString={wash.finishedTime}
+          onFinish={() => navigation.navigate("Home")}
+        />
       </View>
       <View style={styles.buttonGroup}>
         <Button variant="danger" buttonText="EMERGENCY STOP" />
